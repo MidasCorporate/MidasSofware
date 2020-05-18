@@ -1,9 +1,18 @@
 import User from '../models/User';
 import Product from '../models/Product';
+import File from '../models/File';
 
 class ProductController {
   async index(req, res) {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include: [
+        {
+          model: File,
+          as: 'image',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     return res.json(products);
   }
@@ -17,13 +26,14 @@ class ProductController {
       return res.status(401).json({ error: 'You are not is administrador' });
     }
 
-    const { image_id, name, description, price } = req.body;
+    const { image_id, name, description, price, category } = req.body;
 
     const product = await Product.create({
       image_id,
       name,
       description,
       price,
+      category,
     });
 
     return res.json(product);
@@ -38,7 +48,7 @@ class ProductController {
       return res.status(401).json({ error: 'You are not is administrador' });
     }
 
-    const { id, image_id, name, description, price } = req.body;
+    const { id, image_id, name, description, price, category } = req.body;
 
     const product = await Product.findByPk(id);
 
@@ -51,6 +61,7 @@ class ProductController {
       name,
       description,
       price,
+      category,
     });
 
     return res.json(product);

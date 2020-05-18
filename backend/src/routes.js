@@ -9,6 +9,7 @@ import ProductController from './app/controllers/ProductController';
 import OrderController from './app/controllers/OrderController';
 import StockController from './app/controllers/StockController';
 import NotificationController from './app/controllers/NotificationController';
+import ProductFilterController from './app/controllers/ProductFilterController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -36,6 +37,8 @@ routes.get('/products', ProductController.index);
 routes.post('/products', ProductController.store);
 routes.put('/products', ProductController.update);
 routes.delete('/products/:id', ProductController.delete);
+
+routes.get('/product', ProductFilterController.index);
 
 routes.get('/stock', StockController.index);
 routes.post('/stock', StockController.store);
