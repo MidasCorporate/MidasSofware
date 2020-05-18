@@ -1,3 +1,4 @@
+import User from '../models/User';
 import Product from '../models/Product';
 
 class ProductController {
@@ -8,11 +9,21 @@ class ProductController {
   }
 
   async store(req, res) {
-    // const { image_id, name, description, price } = req.body;
+    const isAdmin = await User.findOne({
+      where: { id: req.userId, admin: false },
+    });
+
+    if (isAdmin) {
+      return res.status(401).json({ error: 'You are not is administrador' });
+    }
 
     const product = await Product.create(req.body);
 
     return res.json(product);
+  }
+
+  async update(req, res) {
+    return res.json();
   }
 }
 
