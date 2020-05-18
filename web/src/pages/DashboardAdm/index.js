@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function index() {
-  return <div />;
+  return <h1>Dasboard</h1>;
 }
