@@ -7,6 +7,7 @@ import FileController from './app/controllers/FileController';
 import SessionController from './app/controllers/SessionController';
 import ProductController from './app/controllers/ProductController';
 import OrderController from './app/controllers/OrderController';
+import StockController from './app/controllers/StockController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -32,5 +33,11 @@ routes.delete('/orders/:id', OrderController.delete);
 routes.get('/products', ProductController.index);
 routes.post('/products', ProductController.store);
 routes.put('/products', ProductController.update);
+routes.delete('/products/:id', ProductController.delete);
+
+routes.get('/stock', StockController.index);
+routes.post('/stock', StockController.store);
+routes.put('/stock', StockController.update);
+routes.delete('/stock/:id', StockController.delete);
 
 export default routes;
