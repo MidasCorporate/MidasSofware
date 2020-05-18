@@ -7,6 +7,7 @@ import FileController from './app/controllers/FileController';
 import SessionController from './app/controllers/SessionController';
 import ProductController from './app/controllers/ProductController';
 import OrderController from './app/controllers/OrderController';
+import NotificationController from './app/controllers/NotificationController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -28,6 +29,9 @@ routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
 routes.put('/orders', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
+
+routes.get('/notifications', NotificationController.index);
+routes.put('/notifications/:id', NotificationController.update);
 
 routes.get('/products', ProductController.index);
 routes.post('/products', ProductController.store);
