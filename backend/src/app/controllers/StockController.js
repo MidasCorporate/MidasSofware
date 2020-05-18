@@ -4,9 +4,9 @@ import Stock from '../models/Stock';
 
 class StockController {
   async index(req, res) {
-    await Stock.findAll();
+    const stocks = await Stock.findAll();
 
-    return res.json();
+    return res.json(stocks);
   }
 
   async store(req, res) {

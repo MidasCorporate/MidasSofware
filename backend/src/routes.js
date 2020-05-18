@@ -19,6 +19,8 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
+routes.get('/products', ProductController.index);
+
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
@@ -33,7 +35,6 @@ routes.delete('/orders', OrderController.delete);
 routes.get('/notifications', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
 
-routes.get('/products', ProductController.index);
 routes.post('/products', ProductController.store);
 routes.put('/products', ProductController.update);
 routes.delete('/products/:id', ProductController.delete);
