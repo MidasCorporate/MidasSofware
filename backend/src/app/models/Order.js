@@ -5,6 +5,7 @@ class Order extends Model {
     super.init(
       {
         amount: Sequelize.INTEGER,
+        status: Sequelize.STRING,
       },
       {
         sequelize,

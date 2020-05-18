@@ -7,18 +7,13 @@ import FileController from './app/controllers/FileController';
 import SessionController from './app/controllers/SessionController';
 import ProductController from './app/controllers/ProductController';
 import OrderController from './app/controllers/OrderController';
-<<<<<<< HEAD
 import StockController from './app/controllers/StockController';
-=======
 import NotificationController from './app/controllers/NotificationController';
->>>>>>> 191a9145ff291819555364e355eabc4e95cec5d5
 
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 const upload = multer(multerConfig);
-
-// Verificar as rotas das Orders que o usuario precisa estar logado na app
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
@@ -32,7 +27,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
 routes.put('/orders', OrderController.update);
-routes.delete('/orders/:id', OrderController.delete);
+routes.delete('/orders', OrderController.delete);
 
 routes.get('/notifications', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);

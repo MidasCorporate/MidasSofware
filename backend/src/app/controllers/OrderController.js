@@ -15,7 +15,7 @@ class OderController {
     }
 
     const order = await Order.findAll({
-      attributes: ['id', 'amount'],
+      attributes: ['id', 'amount', 'status'],
       include: [
         {
           model: Product,
@@ -79,7 +79,7 @@ class OderController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { id, user_id, product_id, amount } = req.body;
+    const { id, user_id, product_id, amount, status } = req.body;
 
     const order = await Order.findByPk(id);
 
@@ -90,25 +90,22 @@ class OderController {
       user_id,
       product_id,
       amount,
+      status,
     });
   }
 
   async delete(req, res) {
-    const isAdmin = await User.findOne({
-      where: { id: req.userId, admin: true },
-    });
+    const id = req.body.orderId;
 
-    if (!isAdmin) {
-      return res.status(400).json({ error: 'You are not is administrador' });
-    }
-
-    const order = await Order.findByPk(req.params.id);
+    const order = await Order.findByPk(id);
 
     if (!order) {
-      return res.status(400).json({ error: 'This id already exists' });
+      return res.status(401).json({ error: 'Order not exist' });
     }
 
-    await order.destroy();
+    await order.update({
+      status: req.body.newStatus,
+    });
 
     return res.json(order);
   }
