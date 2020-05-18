@@ -7,11 +7,9 @@ import FileController from './app/controllers/FileController';
 import SessionController from './app/controllers/SessionController';
 import ProductController from './app/controllers/ProductController';
 import OrderController from './app/controllers/OrderController';
-<<<<<<< HEAD
 import StockController from './app/controllers/StockController';
-=======
 import NotificationController from './app/controllers/NotificationController';
->>>>>>> 191a9145ff291819555364e355eabc4e95cec5d5
+import ProductFilterController from './app/controllers/ProductFilterController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -41,6 +39,8 @@ routes.get('/products', ProductController.index);
 routes.post('/products', ProductController.store);
 routes.put('/products', ProductController.update);
 routes.delete('/products/:id', ProductController.delete);
+
+routes.get('/product', ProductFilterController.index);
 
 routes.get('/stock', StockController.index);
 routes.post('/stock', StockController.store);
