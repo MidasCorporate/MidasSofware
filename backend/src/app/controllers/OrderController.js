@@ -2,6 +2,7 @@ import User from '../models/User';
 import Order from '../models/Order';
 import Product from '../models/Product';
 import File from '../models/File';
+import Notification from '../schemas/Notification';
 
 class OderController {
   async index(req, res) {
@@ -61,6 +62,11 @@ class OderController {
       amount,
     });
 
+    const user = await User.findByPk(req.userId);
+    await Notification.create({
+      content: `Novo pedido de compras de ${user.name}`,
+    });
+
     return res.json(order);
   }
 
@@ -88,19 +94,11 @@ class OderController {
   }
 
   async delete(req, res) {
-    const isClient = await User.findOne({
+    const isAdmin = await User.findOne({
       where: { id: req.userId, admin: true },
     });
 
-    if (!isClient) {
-      return res.status(400).json({ error: 'You are not is client' });
-    }
-
-    const isAdmin = await User.findOne({
-      where: { id: req.userId, admin: false },
-    });
-
-    if (isAdmin) {
+    if (!isAdmin) {
       return res.status(400).json({ error: 'You are not is administrador' });
     }
 
