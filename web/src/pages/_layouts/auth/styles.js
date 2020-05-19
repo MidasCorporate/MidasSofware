@@ -16,7 +16,7 @@ export const Content = styled.div`
   form {
     display: flex;
     width: 360px;
-    height: 400px;
+    height: 420px;
     flex-direction: column;
     background: #fff;
     border-radius: 4px;
@@ -25,8 +25,8 @@ export const Content = styled.div`
   img {
     width: 86px;
     height: 98px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin-top: 23px;
+    margin-bottom: 10px;
   }
   input {
     margin-top: 15px;
@@ -56,6 +56,17 @@ export const Content = styled.div`
     transition: background 0.6s;
     &:hover {
       background: ${darken(0.1, '#b80404')};
+    }
+  }
+
+  a {
+    color: #b80404;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
     }
   }
 `;
