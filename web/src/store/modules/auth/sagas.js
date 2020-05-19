@@ -9,14 +9,13 @@ import { signInSuccess, signFailure } from './actions';
 export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
-    const profile = {
+
+    const response = yield call(api.post, 'sessions', {
       email,
       password,
-    };
+    });
 
-    const response = yield call(api.post, 'sessions', profile);
-
-    console.tron.log(response);
+    console.tron.log(response.data);
     const { token, user } = response.data;
 
     // VALIDAÇÃO PARA TROCAR AS DASHBOARDS
@@ -45,7 +44,6 @@ export function* signUp({ payload }) {
       name,
       email,
       password,
-      provider: true,
     });
 
     history.push('/');
