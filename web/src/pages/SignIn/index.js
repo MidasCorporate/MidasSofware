@@ -1,9 +1,21 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
+
+import book from '../../assets/book.svg';
 
 // import { Container } from './styles';
 
-function SignIn() {
-  return <h1>SingIn</h1>;
-}
+export default function SignIn() {
+  return (
+    <>
+      <form>
+        <img src={book} alt="GoBarber" />
 
-export default SignIn;
+        <input type="email" name="" placeholder="E-mail" />
+        <input type="password" name="" placeholder="Senha" />
+
+        <button type="submit">Acessar</button>
+      </form>
+    </>
+  );
+}
