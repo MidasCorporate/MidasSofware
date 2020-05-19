@@ -9,17 +9,19 @@ import { signInSuccess, signFailure } from './actions';
 export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
-
-    const response = yield call(api.post, 'sessions', {
+    const profile = {
       email,
       password,
-    });
+    };
 
+    const response = yield call(api.post, 'sessions', profile);
+
+    console.tron.log(response);
     const { token, user } = response.data;
 
     // VALIDAÇÃO PARA TROCAR AS DASHBOARDS
 
-    if (!user.provider) {
+    if (!user.admin) {
       toast.error('Usuário não é prestador');
       return;
     }
@@ -28,7 +30,7 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
+    history.push('/dashboardadmin');
   } catch (err) {
     toast.error('Falha na autenticação, verifique seus dados');
     yield put(signFailure());
