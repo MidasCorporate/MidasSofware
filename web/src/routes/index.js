@@ -6,6 +6,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import DashboardAdm from '../pages/DashboardAdm';
 import Profile from '../pages/Profile';
+import Products from '../pages/Products';
 
 export default function Routes() {
   return (
@@ -15,6 +16,7 @@ export default function Routes() {
 
       <Route path="/dashboardadmin" component={DashboardAdm} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
+      <Route path="/products" component={Products} isPrivate />
     </Switch>
   );
 }
