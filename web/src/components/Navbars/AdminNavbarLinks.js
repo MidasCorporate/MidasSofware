@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
 
 import { Link } from 'react-router-dom';
@@ -22,45 +22,90 @@ import Poppers from '@material-ui/core/Popper';
 import { Person, Notifications, Dashboard, Search } from '@material-ui/icons';
 
 // core components
+import { parseISO, formatDistance } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import CustomInput from '~/components/CustomInput/CustomInput';
 import Button from '~/components/CustomButtons/Button';
 
 import styles from '~/assets/jss/material-dashboard-react/components/headerLinksStyle';
 
+import api from '~/services/api';
+
 const useStyles = makeStyles(styles);
 
 export default function AdminNavbarLinks() {
-  // DESTINADOS ESPECIFICAMENTE PARA A LOGICA DE ABRIR E FECHAR AS CAIXAS
   const classes = useStyles();
+  // DESTINADOS ESPECIFICAMENTE PARA A LOGICA DE ABRIR E FECHAR AS CAIXAS
   const [openNotification, setOpenNotification] = useState(null);
   const [openProfile, setOpenProfile] = useState(null);
+  const [notifications, setNotification] = useState([]);
+
+  // CARREGANDO MSG DO MONGO
+  useEffect(() => {
+    async function load() {
+      const response = await api.get('notifications');
+      const data = response.data.map((notification) => ({
+        ...notification,
+        timeDistance: formatDistance(
+          parseISO(notification.createdAt),
+          new Date(),
+          { addSuffix: true, locale: pt }
+        ),
+      }));
+
+      setNotification(data);
+    }
+    load();
+  }, []);
+  // RESPONSAVEL ICONE DE MSG NÃO LIDA
+  const hasUnread = useMemo(
+    () => !!notifications.find((notification) => notification.read === false),
+    [notifications]
+  );
+
+  // VERIFICA QUANTIDADE DE MSG NÃO LIDAS
+  const hasUnreadQuant = useMemo(
+    () =>
+      notifications.filter((notification) => notification.read === false).length
+  );
+
+  // COLOCA NOTIFICAÇÃO COMO LIDA
+  async function handleMarkAsRead(id) {
+    await api.put(`notifications/${id}`);
+
+    setNotification(
+      notifications.map((notification) =>
+        notification._id === id ? { ...notification, read: true } : notification
+      )
+    );
+  }
 
   // ABRE A CAIXA DE NOTIFICAÇÃO
-  const handleClickNotification = (event) => {
+  function handleClickNotification(event) {
     if (openNotification && openNotification.contains(event.target)) {
       setOpenNotification(null);
     } else {
       setOpenNotification(event.currentTarget);
     }
-  };
+  }
 
   // FECHA A CAIXA DE NOTIFICAÇÕES AO EVENTO CLIK
-  const handleCloseNotification = () => {
+  function handleCloseNotification() {
     setOpenNotification(null);
-  };
+  }
 
   // ABRE A CAIXA DE SELEÇÃO DO PERFIL
-  const handleClickProfile = (event) => {
+  function handleClickProfile(event) {
     if (openProfile && openProfile.contains(event.target)) {
       setOpenProfile(null);
     } else {
       setOpenProfile(event.currentTarget);
     }
-  };
+  }
   // FECHA A CAIXA DE NOTIFICAÇÃO
-  const handleCloseProfile = () => {
+  function handleCloseProfile() {
     setOpenProfile(null);
-  };
+  }
 
   return (
     <div>
@@ -109,10 +154,16 @@ export default function AdminNavbarLinks() {
           className={classes.buttonLink}
         >
           <Notifications className={classes.icons} />
-          <span className={classes.notifications}>5</span>
+          {hasUnread ? (
+            <>
+              <span className={classes.notifications}>{hasUnreadQuant}</span>
+            </>
+          ) : (
+            ''
+          )}
           <Hidden mdUp implementation="css">
             <p onClick={handleCloseNotification} className={classes.linkText}>
-              Notification
+              NOTIFICAÇÕES
             </p>
           </Hidden>
         </Button>
@@ -138,36 +189,23 @@ export default function AdminNavbarLinks() {
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseNotification}>
                   <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      Mike John responded to your email
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      You have 5 new tasks
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      You re now friend with Andrew
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      Another Notification
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      Another One
-                    </MenuItem>
+                    {notifications.map((notification) =>
+                      notification.read === false ? (
+                        <>
+                          <MenuItem
+                            key={notification._id}
+                            onClick={() => handleMarkAsRead(notification._id)}
+                            className={classes.dropdownItem}
+                          >
+                            <div>{notification.content}</div>
+
+                            <span>{notification.timeDistance}</span>
+                          </MenuItem>
+                        </>
+                      ) : (
+                        ''
+                      )
+                    )}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

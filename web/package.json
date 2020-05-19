@@ -13,6 +13,7 @@
     "@unform/web": "^2.1.0",
     "axios": "^0.19.2",
     "classnames": "2.2.6",
+    "date-fns": "^2.0.0-beta.5",
     "history": "^4.10.1",
     "immer": "^6.0.5",
     "perfect-scrollbar": "1.4.0",
