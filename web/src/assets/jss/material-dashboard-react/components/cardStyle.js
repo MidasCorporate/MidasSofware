@@ -1,40 +1,49 @@
+// import styled from 'styled-components';
+
+// export const Container = styled.div`
+//   text-align: end;
+//   margin-right
+// `;
+
 import {
   blackColor,
   whiteColor,
-  hexToRgb
-} from "assets/jss/material-dashboard-react.js";
+  hexToRgb,
+} from '~/assets/jss/material-dashboard-react';
 
 const cardStyle = {
   card: {
-    border: "0",
-    marginBottom: "30px",
-    marginTop: "30px",
-    borderRadius: "6px",
-    color: "rgba(" + hexToRgb(blackColor) + ", 0.87)",
+    border: '0',
+    marginBottom: '30px',
+    marginTop: '30px',
+    padding: '10px',
+    borderRadius: '6px',
+    color: `rgba(${hexToRgb(blackColor)}, 0.87)`,
     background: whiteColor,
-    width: "100%",
-    boxShadow: "0 1px 4px 0 rgba(" + hexToRgb(blackColor) + ", 0.14)",
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    minWidth: "0",
-    wordWrap: "break-word",
-    fontSize: ".875rem"
+    width: '100%',
+    boxShadow: `0 1px 4px 0 rgba(${hexToRgb(blackColor)}, 0.14)`,
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'end',
+    minWidth: '0',
+    wordWrap: 'break-word',
+    fontSize: '.875rem',
   },
   cardPlain: {
-    background: "transparent",
-    boxShadow: "none"
+    background: 'transparent',
+    boxShadow: 'none',
   },
   cardProfile: {
-    marginTop: "30px",
-    textAlign: "center"
+    marginTop: '30px',
+    textAlign: 'center',
   },
   cardChart: {
-    "& p": {
-      marginTop: "0px",
-      paddingTop: "0px"
-    }
-  }
+    '& p': {
+      marginTop: '0px',
+      paddingTop: '0px',
+    },
+  },
 };
 
 export default cardStyle;

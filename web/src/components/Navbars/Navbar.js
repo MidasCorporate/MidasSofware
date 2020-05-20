@@ -23,13 +23,7 @@ export default function Header(props) {
   const classes = useStyles();
   // PEGA NOME DA WINDOW LOGADA E COLOCA NO BUTTON
   function makeBrand() {
-    let name;
-    // props.routes.map((prop) => {
-    //   if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-    //     name = props.rtlActive ? prop.rtlName : prop.name;
-    //   }
-    //   return null;
-    // });
+    const name = 'Dashboard';
     return name;
   }
   const { color } = props;

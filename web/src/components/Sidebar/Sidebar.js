@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { MdDashboard, MdStore, MdPerson, MdAssignment } from 'react-icons/md';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +12,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Icon from '@material-ui/core/Icon';
+
 // core components
 import AdminNavbarLinks from '~/components/Navbars/AdminNavbarLinks';
 
@@ -30,21 +31,27 @@ export default function Sidebar(props) {
     <List>
       <Link to="/dashboardadmin">
         <ListItem button className={classes.itemLink}>
-          <Icon />
+          <MdDashboard className={classes.itemIcon} />
           <Text>DASHBOARD</Text>
         </ListItem>
       </Link>
 
       <Link to="/products">
         <ListItem button className={classes.itemLink}>
-          <Icon />
+          <MdStore className={classes.itemIcon} />
           <Text>PRODUTOS</Text>
+        </ListItem>
+      </Link>
+      <Link to="/requests">
+        <ListItem button className={classes.itemLink}>
+          <MdAssignment className={classes.itemIcon} />
+          <Text>PEDIDOS</Text>
         </ListItem>
       </Link>
 
       <Link to="/profile">
         <ListItem button className={classes.itemLink}>
-          <Icon />
+          <MdPerson className={classes.itemIcon} />
           <Text>PERFIL</Text>
         </ListItem>
       </Link>
