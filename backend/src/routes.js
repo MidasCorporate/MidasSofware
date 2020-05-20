@@ -31,7 +31,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
 routes.put('/orders', OrderController.update);
-routes.delete('/orders', OrderController.delete);
+routes.delete('/orders/:id/:newStatus', OrderController.delete);
 
 routes.get('/notifications', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);

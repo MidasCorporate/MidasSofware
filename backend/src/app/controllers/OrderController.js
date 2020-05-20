@@ -95,7 +95,7 @@ class OderController {
   }
 
   async delete(req, res) {
-    const id = req.body.orderId;
+    const { id, newStatus } = req.params;
 
     const order = await Order.findByPk(id);
 
@@ -104,7 +104,7 @@ class OderController {
     }
 
     await order.update({
-      status: req.body.newStatus,
+      status: newStatus,
     });
 
     return res.json(order);
