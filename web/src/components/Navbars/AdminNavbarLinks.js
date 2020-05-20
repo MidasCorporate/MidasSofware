@@ -111,8 +111,11 @@ export default function AdminNavbarLinks() {
   }
   // FECHA A CAIXA DE NOTIFICAÇÃO
   function handleCloseProfile() {
+    setOpenProfile(null);
+  }
+
+  function handleLogOut() {
     dispatch(signOut());
-    // setOpenProfile(null);
   }
 
   return (
@@ -274,7 +277,7 @@ export default function AdminNavbarLinks() {
                     </MenuItem>
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={handleLogOut}
                       className={classes.dropdownItem}
                     >
                       Logout
