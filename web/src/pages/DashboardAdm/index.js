@@ -132,8 +132,8 @@ export default function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="info">
-              <CardIcon color="info">
+            <CardHeader color="danger">
+              <CardIcon color="danger">
                 <MdAttachMoney size={45} color="#fff" />
               </CardIcon>
               <p className={classes.cardCategoryMoney}>
@@ -151,8 +151,8 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="info">
-              <CardIcon color="info">
+            <CardHeader color="danger">
+              <CardIcon color="danger">
                 <MdWeb size={45} color="#fff" />
               </CardIcon>
               <p className={classes.cardCategory}>Pedidos pendentes</p>
@@ -172,8 +172,8 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="info">
-              <CardIcon color="info">
+            <CardHeader color="danger">
+              <CardIcon color="danger">
                 <MdStore size={45} color="#fff" />
               </CardIcon>
               <p className={classes.cardCategory}>Produtos Estoque</p>
@@ -193,8 +193,8 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="info">
-              <CardIcon color="info">
+            <CardHeader color="danger">
+              <CardIcon color="danger">
                 <MdSupervisorAccount size={45} color="#fff" />
               </CardIcon>
               <p className={classes.cardCategoryMoney}>
@@ -214,7 +214,7 @@ export default function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardIcon color="info">
+            <CardIcon color="danger">
               <h4 className={classes.cardTitleWhite}>Ultimas Vendas</h4>
               <p className={classes.cardCategoryWhite}>
                 Ultima venda realizada há 2 horas
@@ -222,7 +222,7 @@ export default function Dashboard() {
             </CardIcon>
             <CardBody>
               <Table
-                tableHeaderColor="info"
+                tableHeaderColor="danger"
                 tableHead={['ID', 'Nome', 'Valor', 'Produto']}
                 tableData={latestSales}
               />
@@ -231,7 +231,7 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardIcon color="info">
+            <CardIcon color="danger">
               <h4 className={classes.cardTitleWhite}>Membros da Equipe</h4>
               <p className={classes.cardCategoryWhite}>
                 Ultimo cadastro há 2 horas
@@ -239,7 +239,7 @@ export default function Dashboard() {
             </CardIcon>
             <CardBody>
               <Table
-                tableHeaderColor="info"
+                tableHeaderColor="danger"
                 tableHead={['ID', 'Nome', 'Email', 'Ordenação']}
                 tableData={workers}
               />

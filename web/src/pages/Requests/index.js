@@ -68,7 +68,7 @@ export default function Request() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            <CardIcon color="info">
+            <CardIcon color="danger">
               <h4 className={classes.cardTitleTable}>Ultimas Vendas</h4>
               <p className={classes.cardCategoryTable}>
                 Ultima venda realizada há 2 horas

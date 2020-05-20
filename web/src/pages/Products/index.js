@@ -23,7 +23,7 @@ export default function Produto() {
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
-          <CardIcon color="info">
+          <CardIcon color="danger">
             <h4 className={classes.cardTitleTable}>Cadastro de Produtos</h4>
             <p className={classes.cardCategoryTable}>
               Ultimo produto cadastrado há 2 horas

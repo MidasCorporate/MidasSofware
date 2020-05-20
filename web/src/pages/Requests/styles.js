@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Theade = styled.thead`
-  color: #4ebfd3;
+  color: #ec5244;
+  /* color: #4ebfd3; */
   font-weight: 100;
   font-size: 16px;
   font-family: "'Roboto', 'Helvetica', 'Arial', sans-serif";
