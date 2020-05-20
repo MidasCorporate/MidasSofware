@@ -132,6 +132,7 @@ const dashboardStyle = {
     marginBottom: '3px',
     textDecoration: 'none',
     display: 'flex',
+    fontWeight: 'bold',
     textAlign: 'initial',
     fontSize: '18px',
   },

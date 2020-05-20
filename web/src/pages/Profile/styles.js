@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
+  /* display: flex; */
+  width: 100%;
   max-width: 600px;
-  margin: 50px auto;
+  margin: 10px auto 60px;
 
   form {
     display: flex;
@@ -41,7 +43,7 @@ export const Container = styled.div`
     }
 
     button {
-      margin: 5px 0 0;
+      margin: 15px 0 0;
       height: 44px;
       background: #cb2304;
       font-weight: bold;
