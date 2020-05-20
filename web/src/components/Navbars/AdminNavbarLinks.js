@@ -2,9 +2,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
 import { Link } from 'react-router-dom';
+
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -25,6 +27,7 @@ import { Person, Notifications, Dashboard, Search } from '@material-ui/icons';
 // core components
 import { parseISO, formatDistance } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { signOut } from '~/store/modules/auth/actions';
 import CustomInput from '~/components/CustomInput/CustomInput';
 import Button from '~/components/CustomButtons/Button';
 
@@ -40,6 +43,7 @@ export default function AdminNavbarLinks() {
   const [openNotification, setOpenNotification] = useState(null);
   const [openProfile, setOpenProfile] = useState(null);
   const [notifications, setNotification] = useState([]);
+  const dispatch = useDispatch();
 
   // CARREGANDO MSG DO MONGO
   useEffect(() => {
@@ -107,7 +111,8 @@ export default function AdminNavbarLinks() {
   }
   // FECHA A CAIXA DE NOTIFICAÇÃO
   function handleCloseProfile() {
-    setOpenProfile(null);
+    dispatch(signOut());
+    // setOpenProfile(null);
   }
 
   return (
