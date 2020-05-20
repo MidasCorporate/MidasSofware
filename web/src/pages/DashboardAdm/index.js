@@ -79,6 +79,7 @@ export default function Dashboard() {
   const valueSold = useMemo(
     () =>
       orders
+        .filter((order) => order.status === 'finished')
         .reduce((total, value) => total + value.products.price, 0)
         .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
     [orders]
