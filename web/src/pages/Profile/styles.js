@@ -4,61 +4,56 @@ import { darken } from 'polished';
 export const Container = styled.div`
   max-width: 600px;
   margin: 50px auto;
-  position: absolute;
 
   form {
     display: flex;
-    /* width: 360px; */
-    /* height: 420px; */
     flex-direction: column;
-    /* background: #eee; */
-    /* border-radius: 4px; */
-    /* align-items: center; */
     margin-top: 30px;
-  }
-  img {
-    width: 86px;
-    height: 98px;
-    margin-top: 23px;
-    margin-bottom: 10px;
-  }
-  input {
-    /* margin-top: 15px; */
-    /* width: 300px; */
-    height: 44px;
-    /* border: 1px solid #eee; */
-    border: 0;
-    font-weight: bold;
-    color: #666;
-    border-radius: 4px;
-    padding: 0 0 10px;
-  }
-  span {
-    color: #b80404;
-    font-weight: bold;
-    margin-top: 10px;
-    align-self: center;
-  }
 
-  hr {
-    border: 0;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-    margin-bottom: 10px;
-  }
+    input {
+      background: rgba(0, 0, 0, 0.1);
+      border: 0;
+      border-radius: 4px;
+      height: 44px;
+      padding: 0 15px;
+      color: #cb2304;
+      margin: 0 0 10px;
+      font-weight: bold;
 
-  button {
-    margin-top: 30px;
-    background: #b80404;
-    border: none;
-    width: 300px;
-    height: 40px;
-    color: #fff;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background 0.6s;
-    &:hover {
-      background: ${darken(0.1, '#b80404')};
+      &::placeholder {
+        color: #cb2304;
+        /* color: rgba(255, 255, 255, 0.7); */
+      }
+    }
+
+    span {
+      color: #cb2304;
+      align-self: flex-start;
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 10px 0 20px;
+    }
+
+    button {
+      margin: 5px 0 0;
+      height: 44px;
+      background: #cb2304;
+      font-weight: bold;
+      color: #eee;
+      border: 0;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background 0.5s;
+
+      &:hover {
+        background: ${darken(0.1, '#cb2304')};
+      }
     }
   }
 `;

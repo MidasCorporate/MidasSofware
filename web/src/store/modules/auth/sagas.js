@@ -10,8 +10,6 @@ export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
 
-    toast.success('ok');
-
     const response = yield call(api.post, 'sessions', {
       email,
       password,
