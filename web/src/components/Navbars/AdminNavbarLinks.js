@@ -16,6 +16,7 @@ import {
   Hidden,
   Divider,
 } from '@material-ui/core';
+
 import Poppers from '@material-ui/core/Popper';
 
 // @material-ui/icons
@@ -66,7 +67,9 @@ export default function AdminNavbarLinks() {
   // VERIFICA QUANTIDADE DE MSG NÃO LIDAS
   const hasUnreadQuant = useMemo(
     () =>
-      notifications.filter((notification) => notification.read === false).length
+      notifications.filter((notification) => notification.read === false)
+        .length,
+    [notifications]
   );
 
   // COLOCA NOTIFICAÇÃO COMO LIDA
