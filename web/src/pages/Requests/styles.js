@@ -20,7 +20,7 @@ export const Tbody = styled.tbody`
     td {
       border-bottom: 1px solid #eee;
 
-      padding: 15px;
+      padding: 5px;
     }
   }
 `;

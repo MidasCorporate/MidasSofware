@@ -1,7 +1,8 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -27,17 +28,27 @@ import Button from '~/components/CustomButtons/Button';
 // import { store } from '~/store';
 
 // import history from '~/services/history';
-// import api from '~/services/api';
 
 // import Actions from '~/components/Actions';
 import { Theade, Tbody } from './styles';
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
+import api from '~/services/api';
 
 const useStyles = makeStyles(styles);
 
 export default function Request() {
   const classes = useStyles();
   const [openProfile, setOpenProfile] = useState(null);
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    async function loadOrders() {
+      const response = await api.get('orders');
+      const { data } = response;
+      setOrders(data);
+    }
+    loadOrders();
+  }, []);
 
   // ABRE A CAIXA DE SELEÇÃO DO PERFIL
   function handleClickProfile(event) {
@@ -78,42 +89,26 @@ export default function Request() {
                 </tr>
               </Theade>
               <Tbody>
-                <tr>
-                  <td>#ID</td>
-                  <td>Bruno Luiz</td>
-                  <td>Paulinho veloster</td>
-                  <td>SGO</td>
-                  <td>MS</td>
-                  <td>Concluido</td>
-                  <td>R$250,00</td>
-                  <td>
-                    <Button
-                      onClick={handleClickProfile}
-                      color="transparent"
-                      className={classes.buttonLink}
-                    >
-                      <MdInfo color="#999" size={30} />
-                    </Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>#ID</td>
-                  <td>Bruno Luiz</td>
-                  <td>Paulinho veloster</td>
-                  <td>SGO</td>
-                  <td>MS</td>
-                  <td>Concluido</td>
-                  <td>R$250,00</td>
-                  <td>
-                    <Button
-                      onClick={handleClickProfile}
-                      color="transparent"
-                      className={classes.buttonLink}
-                    >
-                      <MdInfo color="#999" size={30} />
-                    </Button>
-                  </td>
-                </tr>
+                {orders.map((order) => (
+                  <tr key={order.id}>
+                    <td>#{order.id}</td>
+                    <td>{order.amount}</td>
+                    <td>{order.products.name}</td>
+                    <td>{order.products.price}</td>
+                    <td>{order.user.name}</td>
+                    <td>{order.status}</td>
+                    <td>{order.products.price}</td>
+                    <td>
+                      <Button
+                        onClick={handleClickProfile}
+                        color="transparent"
+                        className={classes.buttonLink}
+                      >
+                        <MdInfo color="#999" size={30} />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
               </Tbody>
             </table>
           </Card>
