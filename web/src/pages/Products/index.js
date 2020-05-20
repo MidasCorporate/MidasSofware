@@ -1,8 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
-import { Form } from '@unform/core';
+import { Form } from '@unform/web';
 
 import { makeStyles } from '@material-ui/core/styles';
+
+import api from '~/services/api';
+import history from '~/services/history';
 
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
@@ -19,6 +22,19 @@ const useStyles = makeStyles(styles);
 export default function Produto() {
   const classes = useStyles();
 
+  async function handleSubmit(data) {
+    const { image_id, name, description, price, category } = data;
+    await api.post('products', {
+      image_id,
+      name,
+      description,
+      price,
+      category,
+    });
+
+    console.log(data);
+  }
+
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -31,16 +47,18 @@ export default function Produto() {
           </CardIcon>
 
           <Container>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Image />
               <Input name="name" placeholder="Nome do produto" />
               <Input name="description" placeholder="Descrição do produto" />
-              <Input
-                name="price"
-                type="number"
-                placeholder="Preço do produto"
-              />
-              <Input name="category" placeholder="Categoria do produto" />
+              <div className="form-div-1">
+                <Input
+                  name="price"
+                  type="text"
+                  placeholder="Preço do produto"
+                />
+                <Input name="category" placeholder="Categoria do produto" />
+              </div>
               <button type="submit">Salvar</button>
             </Form>
           </Container>
