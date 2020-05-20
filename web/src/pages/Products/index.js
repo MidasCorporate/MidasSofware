@@ -8,9 +8,12 @@ import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
 import Card from '~/components/Card/Card';
 import CardIcon from '~/components/Card/CardIcon';
+<<<<<<< HEAD
 import { Input } from '~/components/Form';
 import Image from './Image';
 
+=======
+>>>>>>> c399804b6d3897173d694462ae4b2ea02f1c447c
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 import { Container } from './styles';
 

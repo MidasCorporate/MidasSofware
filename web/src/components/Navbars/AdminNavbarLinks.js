@@ -47,7 +47,7 @@ export default function AdminNavbarLinks() {
 
   // CARREGANDO MSG DO MONGO
   useEffect(() => {
-    async function load() {
+    async function loadNotification() {
       const response = await api.get('notifications');
       const data = response.data.map((notification) => ({
         ...notification,
@@ -60,7 +60,7 @@ export default function AdminNavbarLinks() {
 
       setNotification(data);
     }
-    load();
+    loadNotification();
   }, []);
   // RESPONSAVEL ICONE DE MSG NÃO LIDA
   const hasUnread = useMemo(
