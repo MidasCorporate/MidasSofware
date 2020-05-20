@@ -18,7 +18,7 @@ const customInputStyle = {
       borderWidth: '1px !important',
     },
     '&:after': {
-      borderColor: infoColor[0],
+      borderColor: dangerColor[0],
     },
   },
   underlineError: {

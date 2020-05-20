@@ -4,8 +4,10 @@ import {
   blackColor,
   grayColor,
   hexToRgb,
-  infoColor,
-  infoBoxShadow,
+  // infoColor,
+  // infoBoxShadow,
+  dangerBoxShadow,
+  dangerColor,
 } from '~/assets/jss/material-dashboard-react.js';
 
 const dropdownStyle = (theme) => ({
@@ -109,14 +111,14 @@ const dropdownStyle = (theme) => ({
     clear: 'both',
     fontWeight: '400',
     lineHeight: '1.42857143',
-    color: infoColor,
+    color: dangerColor,
     whiteSpace: 'nowrap',
     height: 'unset',
     minHeight: 'unset',
     '&:hover': {
-      backgroundColor: infoColor[0],
+      backgroundColor: dangerColor[0],
       color: whiteColor,
-      ...infoBoxShadow,
+      ...dangerBoxShadow,
     },
   },
 });
