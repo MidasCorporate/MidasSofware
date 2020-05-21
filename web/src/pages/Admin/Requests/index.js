@@ -6,7 +6,7 @@ import { MdAssessment, MdShoppingCart, MdSubject } from 'react-icons/md';
 
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
-import Card from '~/components/Card/Card';
+import CardMenu from '~/components/Card/CardMenu';
 import CardIcon from '~/components/Card/CardIcon';
 
 import Button from '~/components/CustomButtons/Button';
@@ -29,9 +29,9 @@ export default function Request() {
     <>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <Card>
+          <CardMenu>
             <CardIcon color="danger">
-              <h4 className={classes.cardTitleTable}>Gerenciando Vendas</h4>
+              <h4 className={classes.cardTitleTable}>Gerenciar Solicitações</h4>
               <p className={classes.cardCategoryTable}>
                 Ultima venda realizada há 2 horas
               </p>
@@ -63,7 +63,7 @@ export default function Request() {
                 Área de vendas
               </Button>
             </OpButon>
-          </Card>
+          </CardMenu>
         </GridItem>
       </GridContainer>
     </>

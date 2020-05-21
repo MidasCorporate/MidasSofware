@@ -138,20 +138,21 @@ export default function AdminNavbarLinks() {
         </Button>
       </div>
       {/* {BOTÃO DASHBOARD} */}
-      <Link to="/dashboardadmin">
-        <Button
-          color={window.innerWidth > 959 ? 'transparent' : 'white'}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
-          aria-label="Dashboard"
-          className={classes.buttonLink}
-        >
-          <Dashboard className={classes.icons} />
-          <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Dashboard</p>
-          </Hidden>
-        </Button>
-      </Link>
+
+      {/* <Link to="/dashboardadmin"> */}
+      <Button
+        color={window.innerWidth > 959 ? 'transparent' : 'white'}
+        justIcon={window.innerWidth > 959}
+        simple={!(window.innerWidth > 959)}
+        aria-label="Dashboard"
+        className={classes.buttonLink}
+      >
+        <Dashboard className={classes.icons} />
+        <Hidden mdUp implementation="css">
+          <p className={classes.linkText}>Dashboard</p>
+        </Hidden>
+      </Button>
+      {/* </Link> */}
       {/* {IDENTIFICAR A FUNÇÃO DESSAS classes} */}
       <div className={classes.manager}>
         {/* { BOTÃO DAS NOTIFICAÇÕES } */}
@@ -242,7 +243,7 @@ export default function AdminNavbarLinks() {
         </Button>
         <Poppers
           open={Boolean(openProfile)}
-          anchorEl={openProfile}
+          // anchorEl={openProfile}
           transition
           disablePortal
           className={`${classNames({ [classes.popperClose]: !openProfile })} ${

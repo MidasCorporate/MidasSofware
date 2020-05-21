@@ -42,7 +42,8 @@ export default function Header(props) {
         <Hidden smDown implementation="css">
           {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
         </Hidden>
-        <Hidden mdUp implementation="css">
+        {/* {BOTÃO ABRE SIDEBAR} */}
+        <Hidden smDown implementation="css">
           <IconButton
             color="inherit"
             aria-label="open drawer"

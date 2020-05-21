@@ -14,7 +14,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 // core components
-import AdminNavbarLinks from '~/components/Navbars/AdminNavbarLinks';
+// import AdminNavbarLinks from '~/components/Navbars/AdminNavbarLinks';
 
 import styles from '~/assets/jss/material-dashboard-react/components/sidebarStyle';
 
@@ -26,8 +26,6 @@ export default function Sidebar(props) {
   const classes = useStyles();
 
   const { logo, image, logoText } = props;
-
-  console.log(AdminNavbarLinks);
 
   const links = (
     <List>
@@ -74,7 +72,7 @@ export default function Sidebar(props) {
       <Hidden mdUp implementation="css">
         <Drawer
           variant="temporary"
-          anchor={props.rtlActive ? 'left' : 'right'}
+          anchor={props.rtlActive ? 'right' : 'left'}
           open={props.open}
           onClose={props.handleDrawerToggle}
           ModalProps={{
@@ -83,7 +81,7 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>
-            <AdminNavbarLinks />
+            {/* { <AdminNavbarLinks />} */}
             {links}
           </div>
           {image !== undefined ? (
@@ -94,7 +92,8 @@ export default function Sidebar(props) {
           ) : null}
         </Drawer>
       </Hidden>
-      <Hidden smDown implementation="css">
+      {/* {BARRA ESTATICA} */}
+      {/* <Hidden smDown implementation="css">
         <Drawer
           anchor={props.rtlActive ? 'right' : 'left'}
           variant="permanent"
@@ -109,7 +108,7 @@ export default function Sidebar(props) {
             />
           ) : null}
         </Drawer>
-      </Hidden>
+      </Hidden> */}
     </div>
   );
 }

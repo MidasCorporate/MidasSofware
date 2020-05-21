@@ -28,6 +28,7 @@ import Table from '~/components/Table/Table';
 // emailsSubscriptionChart,
 // completedTasksChart
 // } from '~/variables/charts';
+import Teste from '~/pages/Admin/Requests';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 
@@ -211,7 +212,8 @@ export default function Dashboard() {
           </Card>
         </GridItem>
       </GridContainer>
-      <GridContainer>
+      <Teste />
+      {/* <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardIcon color="danger">
@@ -246,7 +248,7 @@ export default function Dashboard() {
             </CardBody>
           </Card>
         </GridItem>
-      </GridContainer>
+      </GridContainer> */}
     </div>
   );
 }

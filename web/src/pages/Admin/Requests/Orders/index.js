@@ -50,6 +50,11 @@ export default function Request() {
 
   async function tagleFinished() {
     const { status } = orders.find((order) => order.id === component);
+    if (status === 'Aguardando') {
+      await api.delete(`orders/${component}/Preparando`);
+      // document.location.reload(true);
+      toast.info('Ordem está em Preparo!');
+    }
     if (status === 'Preparando') {
       await api.delete(`orders/${component}/Finalizada`);
       // document.location.reload(true);
@@ -86,7 +91,7 @@ export default function Request() {
   }
 
   function handleTableRequest() {
-    history.push('requests');
+    history.push('dashboardadmin');
   }
 
   function handleOpenDetals() {
@@ -100,7 +105,9 @@ export default function Request() {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardIcon color="danger">
-              <h4 className={classes.cardTitleTable}>Gerenciando Vendas</h4>
+              <h4 className={classes.cardTitleTable}>
+                Gerenciando Socilitações
+              </h4>
               <p className={classes.cardCategoryTable}>
                 Ultima venda realizada há 2 horas
               </p>
@@ -120,12 +127,11 @@ export default function Request() {
               <Theade>
                 <tr>
                   <th>ID</th>
-                  <th>Quantidade</th>
-                  <th>Produto</th>
-                  <th>Valor Unt</th>
-                  <th>Cliente</th>
+                  <th>Data</th>
+                  <th>Usuário</th>
+                  <th>Seguimento</th>
+                  <th>Documento</th>
                   <th>Status</th>
-                  <th>Valor Total</th>
                   <th>Detalhes</th>
                 </tr>
               </Theade>
@@ -133,10 +139,10 @@ export default function Request() {
                 {orders.map((order) => (
                   <Tr status={order.status} key={order.id}>
                     <td>#{order.id}</td>
-                    <td>{order.amount}</td>
-                    <td>{order.products.name}</td>
-                    <td>{order.products.price}</td>
-                    <td>{order.user.name}</td>
+                    <td>25/03/2020</td>
+                    <td>Bruno Luiz</td>
+                    <td>Materiais para construção</td>
+                    <td>PDF</td>
                     <td>
                       <div>
                         <span>
@@ -144,7 +150,6 @@ export default function Request() {
                         </span>
                       </div>
                     </td>
-                    <td>{order.products.price}</td>
                     <td>
                       <Button
                         onClick={handleClickProfile}

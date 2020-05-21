@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useEffect, useState, useMemo } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
-import { MdArrowBack } from 'react-icons/md';
+import { MdArrowBack, MdDone, MdClear } from 'react-icons/md';
 
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
@@ -12,35 +13,66 @@ import CardIcon from '~/components/Card/CardIcon';
 import CardBody from '~/components/Card/CardBody';
 import Table from '~/components/Table/Table';
 
+import Decodifiq from '~/components/Decodifiq';
+
 import Button from '~/components/CustomButtons/Button';
 
 import { OpButon } from './styles';
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 
 import history from '~/services/history';
+import api from '~/services/api';
 
 const useStyles = makeStyles(styles);
-
 export default function Request(props) {
   const classes = useStyles();
+  const [orderDetals, setOrderDetals] = useState([]);
 
-  // useEffect(() => {
-  //   async function
-  //   const { match } = props;
-  //   const orderId = decodeURIComponent(match.params.id);
+  useEffect(() => {
+    async function loadUsersOrder() {
+      const { match } = props;
+      const orderId = parseInt(decodeURIComponent(match.params.id), 10);
+      const response = await api.get('orders');
+      const data = response.data.find((order) => order.id === orderId);
 
-  // })
+      setOrderDetals(data);
+    }
+    loadUsersOrder();
+  }, []);
 
   function handleTableOrders() {
     history.push('/requestsorders');
   }
+
+  const buttonCancel = (
+    <Button
+      onClick={handleTableOrders}
+      // onClick={() => handleClickProfile(order.id)}
+      color="danger"
+      className={classes.buttonLink}
+    >
+      <MdClear color="#fff" size={30} />
+      Cancelar
+    </Button>
+  );
+  const buttonFinished = (
+    <Button
+      onClick={handleTableOrders}
+      // onClick={() => handleClickProfile(order.id)}
+      color="success"
+      className={classes.buttonLink}
+    >
+      <MdDone color="#fff" size={30} />
+      Atender
+    </Button>
+  );
 
   return (
     <>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            <CardIcon color="warning">
+            <CardIcon color={Decodifiq(orderDetals)}>
               <h4 className={classes.cardTitleTable}>
                 Detalhes da solicitação de compra #ID
               </h4>
@@ -58,6 +90,20 @@ export default function Request(props) {
                 <MdArrowBack color="#fff" size={30} />
                 Voltar
               </Button>
+
+              {orderDetals.status === 'Cancelado' ? (
+                <>
+                  {buttonCancel}
+                  {buttonFinished}
+                </>
+              ) : orderDetals.status === 'Preparando' ? (
+                <>
+                  {buttonCancel}
+                  {buttonFinished}
+                </>
+              ) : (
+                ''
+              )}
             </OpButon>
           </Card>
         </GridItem>
@@ -66,36 +112,18 @@ export default function Request(props) {
       <GridContainer>
         <GridItem xs={12} sm={6} md={5}>
           <Card>
-            <CardIcon color="warning">
-              <h4 className={classes.cardTitleTable}>Produto</h4>
+            <CardIcon color={Decodifiq(orderDetals)}>
+              <h4 className={classes.cardTitleTable}>
+                Informações da Solicitação
+              </h4>
             </CardIcon>
             <CardBody>
               <Table
-                tableHeaderColor="warning"
-                tableHead={[
-                  'ID',
-                  'Nome',
-                  'Valor',
-                  'Categoria',
-                  'Cadastro',
-                  'Descrição',
-                ]}
+                tableHeaderColor={Decodifiq(orderDetals)}
+                tableHead={['Descrição']}
                 tableData={[
                   [
-                    '1',
-                    'Dakota Rice',
-                    '$36,738',
-                    'Niger',
-                    'hdgveded',
-                    'qrweyfvbyelrfbvadcnejjsdkanckjdsnkjancdjkncjksdn',
-                  ],
-                  [
-                    '1',
-                    'Dakota Rice',
-                    '$36,738',
-                    'Niger',
-                    'hdgveded',
-                    'qrweyfvbyelrfbvadcnejjsdkanckjdsnkjancdjkncjksdn',
+                    'Solicito a compra de 22 canetas cores aleátórias, preciso deste produto com extrema urgência ',
                   ],
                 ]}
               />
@@ -105,37 +133,15 @@ export default function Request(props) {
 
         <GridItem xs={12} sm={6} md={5}>
           <Card>
-            <CardIcon color="warning">
+            <CardIcon color={Decodifiq(orderDetals)}>
               <h4 className={classes.cardTitleTable}>Transacionador</h4>
             </CardIcon>
             <CardBody>
               <Table
-                tableHeaderColor="warning"
+                tableHeaderColor={Decodifiq(orderDetals)}
                 tableHead={['ID', 'Nome', 'Email', 'Cadastro']}
                 tableData={[
                   ['1', 'Dakota Rice', 'teste@teste.com', '27/05/2020'],
-                ]}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={6} md={5}>
-          <Card>
-            <CardIcon color="warning">
-              <h4 className={classes.cardTitleTable}>
-                Informações da Solicitação
-              </h4>
-            </CardIcon>
-            <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={['Descrição']}
-                tableData={[
-                  [
-                    'Solicito a compra de 22 canetas cores aleátórias, preciso deste produto com extrema urgência ',
-                  ],
                 ]}
               />
             </CardBody>
