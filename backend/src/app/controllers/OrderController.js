@@ -15,7 +15,7 @@ class OderController {
     }
 
     const order = await Order.findAll({
-      attributes: ['id', 'amount', 'status'],
+      attributes: ['id', 'amount', 'status', 'created_at'],
       include: [
         {
           model: Product,
