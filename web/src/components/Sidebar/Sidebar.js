@@ -45,7 +45,7 @@ export default function Sidebar(props) {
       <Link to="/requests">
         <ListItem button className={classes.itemLink}>
           <MdAssignment className={classes.itemIcon} />
-          <Text>PEDIDOS</Text>
+          <Text>VENDAS</Text>
         </ListItem>
       </Link>
 
