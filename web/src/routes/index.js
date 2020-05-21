@@ -8,9 +8,9 @@ import DashboardAdm from '../pages/Admin/DashboardAdm';
 import Profile from '../pages/Admin/Profile';
 import Products from '../pages/Admin/Products';
 import ProductCreate from '../pages/Admin/Products/Create';
-import Requests from '../pages/Admin/DashboardAdm/Requests';
-import RequestsOrders from '../pages/Admin/DashboardAdm/Requests/Orders';
-import RequestsDetals from '../pages/Admin/DashboardAdm/Requests/Detals';
+import Requests from '../pages/Admin/Requests';
+import RequestsOrders from '../pages/Admin/Requests/Orders';
+import RequestsDetals from '../pages/Admin/Requests/Detals';
 
 export default function Routes() {
   return (

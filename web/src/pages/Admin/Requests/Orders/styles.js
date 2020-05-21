@@ -8,7 +8,7 @@ export const Theade = styled.thead`
   font-family: "'Roboto', 'Arial', 'sans-serif'";
   text-align: initial;
   th {
-    padding-top: 50px;
+    padding-top: 30px;
     font-weight: 100;
   }
 `;
@@ -40,11 +40,14 @@ export const Tr = styled.tr`
         background: ${(props) =>
           props.status === 'Finalizada' ? '#c5fcb3' : ''};
         background: ${(props) =>
-          props.status === 'Preparando' ? '#fcf6b3' : ''};
+          props.status === 'Preparando' ? '#6baaff' : ''};
+        background: ${(props) =>
+          props.status === 'Aguardando' ? '#fcf6b3' : ''};
         background: ${(props) =>
           props.status === 'Cancelada' ? '#fcb3b3' : ''};
         color: ${(props) => (props.status === 'Finalizada' ? '#409800' : '')};
-        color: ${(props) => (props.status === 'Preparando' ? '#c4c000' : '')};
+        color: ${(props) => (props.status === 'Preparando' ? '#0045a0' : '')};
+        color: ${(props) => (props.status === 'Aguardando' ? '#c4c000' : '')};
         color: ${(props) => (props.status === 'Cancelada' ? '#fc5757' : '')};
         border-radius: 32px;
         max-width: 200px;
@@ -54,7 +57,8 @@ export const Tr = styled.tr`
 
       svg {
         color: ${(props) => (props.status === 'Finalizada' ? '#409800' : '')};
-        color: ${(props) => (props.status === 'Preparando' ? '#c4c000' : '')};
+        color: ${(props) => (props.status === 'Preparando' ? '#0045a0' : '')};
+        color: ${(props) => (props.status === 'Aguardando' ? '#c4c000' : '')};
         color: ${(props) => (props.status === 'Cancelada' ? '#fc5757' : '')};
       }
     }
@@ -63,8 +67,11 @@ export const Tr = styled.tr`
     background: #eee;
   } */
 `;
-
 export const OpButon = styled.div`
   margin-top: 10px;
   margin-right: 12px;
+
+  button {
+    margin-left: 10px;
+  }
 `;
