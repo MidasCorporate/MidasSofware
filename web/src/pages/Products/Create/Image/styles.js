@@ -29,7 +29,7 @@ export const Container = styled.div`
 
     strong {
       display: flex;
-      color: #e63a36;
+      color: #ee524e;
       justify-content: center;
       text-align: center;
 
