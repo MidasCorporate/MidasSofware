@@ -38,7 +38,6 @@ import logo from '~/assets/img/reactlogo.png';
 const useStyles = makeStyles(styles);
 
 export default function Admin({ children }) {
-  console.log(children);
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices

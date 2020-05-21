@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/require-default-props */
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdDashboard, MdStore, MdPerson, MdAssignment } from 'react-icons/md';
@@ -24,10 +25,11 @@ const useStyles = makeStyles(styles);
 
 export default function Sidebar(props) {
   const classes = useStyles();
+  const profile = useSelector((state) => state.user.profile);
 
   const { logo, image, logoText } = props;
 
-  const links = (
+  const linksAdmin = (
     <List>
       <Link to="/dashboardadmin">
         <ListItem button className={classes.itemLink}>
@@ -42,12 +44,6 @@ export default function Sidebar(props) {
           <Text>SOLICITAÇÕES parte adm</Text>
         </ListItem>
       </Link>
-      <Link to="/products">
-        <ListItem button className={classes.itemLink}>
-          <MdStore className={classes.itemIcon} />
-          <Text>PRODUTOS solicitações parte client </Text>
-        </ListItem>
-      </Link>
 
       <Link to="/profile">
         <ListItem button className={classes.itemLink}>
@@ -55,6 +51,29 @@ export default function Sidebar(props) {
           <Text>PERFIL</Text>
         </ListItem>
       </Link>
+    </List>
+  );
+  const linksClient = (
+    <List>
+      <Link to="/dashboardclient">
+        <ListItem button className={classes.itemLink}>
+          <MdDashboard className={classes.itemIcon} />
+          <Text>DASHBOARD</Text>
+        </ListItem>
+      </Link>
+      <Link to="/products">
+        <ListItem button className={classes.itemLink}>
+          <MdStore className={classes.itemIcon} />
+          <Text>PRODUTOS solicitações parte client </Text>
+        </ListItem>
+      </Link>
+
+      {/* <Link to="/profile">
+        <ListItem button className={classes.itemLink}>
+          <MdPerson className={classes.itemIcon} />
+          <Text>PERFIL</Text>
+        </ListItem>
+      </Link> */}
     </List>
   );
   const brand = (
@@ -82,7 +101,7 @@ export default function Sidebar(props) {
           {brand}
           <div className={classes.sidebarWrapper}>
             {/* { <AdminNavbarLinks />} */}
-            {links}
+            {profile.admin ? linksAdmin : linksClient}
           </div>
           {image !== undefined ? (
             <div

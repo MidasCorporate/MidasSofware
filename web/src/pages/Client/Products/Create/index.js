@@ -31,8 +31,6 @@ export default function ProductCreate() {
       price,
       category,
     });
-
-    console.log(data);
   }
 
   function handleBack() {
