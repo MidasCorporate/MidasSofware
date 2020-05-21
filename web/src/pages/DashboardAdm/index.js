@@ -71,7 +71,7 @@ export default function Dashboard() {
 
   // QUANTIDADE ORDES PENDENTES
   const hasStatusNull = useMemo(
-    () => orders.filter((order) => order.status === null).length,
+    () => orders.filter((order) => order.status === 'Preparando').length,
     [orders]
   );
 
@@ -79,7 +79,7 @@ export default function Dashboard() {
   const valueSold = useMemo(
     () =>
       orders
-        .filter((order) => order.status === 'finished')
+        .filter((order) => order.status === 'Finalizada')
         .reduce((total, value) => total + value.products.price, 0)
         .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
     [orders]
@@ -87,7 +87,7 @@ export default function Dashboard() {
 
   // QUANTIDADE ORDES FINALIZADAS
   const hasStatusFinished = useMemo(
-    () => orders.filter((order) => order.status === 'finished').length,
+    () => orders.filter((order) => order.status === 'Finalizada').length,
     [orders]
   );
 
@@ -107,7 +107,7 @@ export default function Dashboard() {
   const latestSales = useMemo(
     () =>
       orders
-        .filter((order) => order.status === 'finished')
+        .filter((order) => order.status === 'Finalizada')
         .map((order) => {
           const value = order.products.price.toLocaleString('pt-BR', {
             style: 'currency',
