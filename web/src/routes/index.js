@@ -5,9 +5,10 @@ import Route from './Route';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import DashboardAdm from '../pages/Admin/DashboardAdm';
+import DashboardClient from '../pages/Client/Dashboard';
 import Profile from '../pages/Admin/Profile';
-import Products from '../pages/Admin/Products';
-import ProductCreate from '../pages/Admin/Products/Create';
+import Products from '../pages/Client/Products';
+import ProductCreate from '../pages/Client/Products/Create';
 import Requests from '../pages/Admin/DashboardAdm/Requests';
 import RequestsOrders from '../pages/Admin/DashboardAdm/Requests/Orders';
 import RequestsDetals from '../pages/Admin/DashboardAdm/Requests/Detals';
@@ -19,6 +20,7 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/dashboardadmin" component={DashboardAdm} isPrivate />
+      <Route path="/dashboardclient" component={DashboardClient} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/products" component={Products} isPrivate />
       <Route path="/productcreate" component={ProductCreate} isPrivate />

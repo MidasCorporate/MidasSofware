@@ -21,7 +21,9 @@ export function* signIn({ payload }) {
     // VALIDAÇÃO PARA TROCAR AS DASHBOARDS
 
     if (!user.admin) {
-      toast.error('Usuário não é prestador');
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+      yield put(signInSuccess(token, user));
+      history.push('/dashboardclient');
       return;
     }
 

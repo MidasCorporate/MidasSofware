@@ -6,6 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import AuthLayout from '~/pages/_layouts/auth';
 import DefaultLayout from '~/pages/_layouts/default';
+import LayoutClient from '~/pages/_layouts/LayoutClient';
 
 import { store } from '~/store';
 
@@ -15,16 +16,27 @@ export default function RouteWrapper({
   ...rest
 }) {
   const { signed } = store.getState().auth;
+  const { profile } = store.getState().user;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/dashboardadmin" />;
+    if (profile.admin) {
+      return <Redirect to="/dashboardadmin" />;
+    }
+
+    return <Redirect to="/dashboardclient" />;
   }
 
-  const Layout = signed ? DefaultLayout : AuthLayout;
+  const Layout =
+    // eslint-disable-next-line no-nested-ternary
+    signed && profile.admin
+      ? DefaultLayout
+      : signed && !profile.admin
+      ? LayoutClient
+      : AuthLayout;
 
   return (
     <Route
