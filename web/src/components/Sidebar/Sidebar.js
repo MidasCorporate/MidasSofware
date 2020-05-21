@@ -27,6 +27,8 @@ export default function Sidebar(props) {
 
   const { logo, image, logoText } = props;
 
+  console.log(AdminNavbarLinks);
+
   const links = (
     <List>
       <Link to="/dashboardadmin">
@@ -36,16 +38,16 @@ export default function Sidebar(props) {
         </ListItem>
       </Link>
 
+      <Link to="/requests">
+        <ListItem button className={classes.itemLink}>
+          <MdAssignment className={classes.itemIcon} />
+          <Text>SOLICITAÇÕES</Text>
+        </ListItem>
+      </Link>
       <Link to="/products">
         <ListItem button className={classes.itemLink}>
           <MdStore className={classes.itemIcon} />
           <Text>PRODUTOS</Text>
-        </ListItem>
-      </Link>
-      <Link to="/requests">
-        <ListItem button className={classes.itemLink}>
-          <MdAssignment className={classes.itemIcon} />
-          <Text>VENDAS</Text>
         </ListItem>
       </Link>
 

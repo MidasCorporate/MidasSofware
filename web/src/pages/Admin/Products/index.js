@@ -4,7 +4,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { MdAdd } from 'react-icons/md';
 
-import api from '~/services/api';
+// import api from '~/services/api';
 import history from '~/services/history';
 
 import GridContainer from '~/components/Grid/GridContainer';

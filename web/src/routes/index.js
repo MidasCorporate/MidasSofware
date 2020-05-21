@@ -4,13 +4,13 @@ import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
-import DashboardAdm from '../pages/DashboardAdm';
-import Profile from '../pages/Profile';
-import Products from '../pages/Products';
-import ProductCreate from '../pages/Products/Create';
-import Requests from '../pages/Requests';
-import RequestsOrders from '../pages/Requests/Orders';
-import RequestsDetals from '../pages/Requests/Detals';
+import DashboardAdm from '../pages/Admin/DashboardAdm';
+import Profile from '../pages/Admin/Profile';
+import Products from '../pages/Admin/Products';
+import ProductCreate from '../pages/Admin/Products/Create';
+import Requests from '../pages/Admin/DashboardAdm/Requests';
+import RequestsOrders from '../pages/Admin/DashboardAdm/Requests/Orders';
+import RequestsDetals from '../pages/Admin/DashboardAdm/Requests/Detals';
 
 export default function Routes() {
   return (
