@@ -48,7 +48,7 @@ class OderController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { user_id, product_id, amount } = req.body;
+    const { user_id, product_id, amount, status } = req.body;
 
     const product = await Product.findByPk(product_id);
 
@@ -60,6 +60,7 @@ class OderController {
       user_id,
       product_id,
       amount,
+      status,
     });
 
     const user = await User.findByPk(req.userId);
@@ -95,7 +96,7 @@ class OderController {
   }
 
   async delete(req, res) {
-    const id = req.body.orderId;
+    const { id, newStatus } = req.params;
 
     const order = await Order.findByPk(id);
 
@@ -104,7 +105,7 @@ class OderController {
     }
 
     await order.update({
-      status: req.body.newStatus,
+      status: newStatus,
     });
 
     return res.json(order);
