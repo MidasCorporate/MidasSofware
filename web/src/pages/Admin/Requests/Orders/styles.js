@@ -5,7 +5,7 @@ export const Theade = styled.thead`
   /* color: #4ebfd3; */
   font-weight: 100;
   font-size: 16px;
-  font-family: "'Roboto', 'Arial', 'sans-serif'";
+  /* font-family: "'Roboto', 'Arial', 'sans-serif'"; */
   text-align: initial;
   th {
     padding-top: 30px;
@@ -14,7 +14,7 @@ export const Theade = styled.thead`
 `;
 export const Tbody = styled.tbody`
   font-size: 15px;
-  font-family: "'Roboto', 'Arial', 'sans-serif'";
+  /* font-family: "'Roboto', 'Arial', 'sans-serif'"; */
   text-align: center;
   td {
     border-bottom: 1px solid #eee;
