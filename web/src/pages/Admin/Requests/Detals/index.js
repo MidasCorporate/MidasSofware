@@ -120,19 +120,8 @@ export default function Request(props) {
                 Voltar
               </Button>
 
-              {orderDetals.status === 'Cancelado' ? (
-                <>
-                  {buttonCancel}
-                  {buttonFinished}
-                </>
-              ) : orderDetals.status === 'Finalizada' ? (
-                ''
-              ) : (
-                <>
-                  {buttonCancel}
-                  {buttonFinished}
-                </>
-              )}
+              {buttonCancel}
+              {buttonFinished}
             </OpButon>
           </Card>
         </GridItem>
@@ -177,20 +166,26 @@ export default function Request(props) {
             </CardBody>
           </Card>
         </GridItem>
-        <Add>
-          <Button
-            onClick={handleResponseRequest}
-            // onClick={() => handleClickProfile(order.id)}
-            color="info"
-            aria-label="edit"
-            justIcon
-            round
-          >
-            <MdAdd size={30} color="#fff" />
-          </Button>
-        </Add>
+        {orderDetals.status === 'Cancelado' ? (
+          <>
+            <Add>
+              <Button
+                onClick={handleResponseRequest}
+                // onClick={() => handleClickProfile(order.id)}
+                color="info"
+                aria-label="edit"
+                justIcon
+                round
+              >
+                <MdAdd size={30} color="#fff" />
+              </Button>
+              <Response color={Decodifiq(orderDetals)} tag={situation} />
+            </Add>
+          </>
+        ) : (
+          ''
+        )}
       </GridContainer>
-      <Response color={Decodifiq(orderDetals)} tag={situation} />
     </>
   );
 }
