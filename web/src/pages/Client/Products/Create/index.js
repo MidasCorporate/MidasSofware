@@ -61,14 +61,6 @@ export default function ProductCreate() {
                   <MdDone size={30} color="#fff" />
                   Salvar
                 </CustomButtons>
-                {/* <ButtonComeBack onClick={handleBack} type="button">
-                  <MdRotateLeft size={26} color="#fff" />
-                  VOLTAR
-                </ButtonComeBack>
-                <ButtonDone type="submit">
-                  <MdDoneAll size={26} color="#fff" />
-                  SALVAR
-                </ButtonDone> */}
               </Actions>
               <Image />
               <Input name="name" placeholder="Nome do produto" />

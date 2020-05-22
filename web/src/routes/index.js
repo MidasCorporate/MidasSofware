@@ -7,6 +7,7 @@ import SignUp from '../pages/SignUp';
 import DashboardAdm from '../pages/Admin/DashboardAdm';
 import DashboardClient from '../pages/Client/Dashboard';
 import Profile from '../pages/Admin/Profile';
+import ProfileClient from '../pages/Client/Profile ';
 import ProductsClient from '../pages/Client/Products';
 import ProductCreate from '../pages/Client/Products/Create';
 // import Requests from '../pages/Admin/DashboardAdm/Requests';
@@ -25,6 +26,7 @@ export default function Routes() {
       <Route path="/dashboardadmin" component={DashboardAdm} isPrivate />
       <Route path="/dashboardclient" component={DashboardClient} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
+      <Route path="/profileclient" component={ProfileClient} isPrivate />
       <Route path="/productsclient" component={ProductsClient} isPrivate />
       <Route path="/productcreate" component={ProductCreate} isPrivate />
       <Route path="/requests" component={Requests} isPrivate />

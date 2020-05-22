@@ -68,12 +68,12 @@ export default function Sidebar(props) {
         </ListItem>
       </Link>
 
-      {/* <Link to="/profile">
+      <Link to="/profileclient">
         <ListItem button className={classes.itemLink}>
           <MdPerson className={classes.itemIcon} />
           <Text>PERFIL</Text>
         </ListItem>
-      </Link> */}
+      </Link>
     </List>
   );
   const brand = (

@@ -43,10 +43,6 @@ export const Container = styled.div`
 `;
 
 export const Actions = styled.div`
-  /* display: flex;
-  width: 222px;
-  height: 30px;
-  float: right; */
   margin: 10px 0;
   svg {
     margin-right: 5px;
