@@ -40,7 +40,7 @@ export default function Request(props) {
     async function loadUsersOrder() {
       const { match } = props;
       const orderId = parseInt(decodeURIComponent(match.params.id), 10);
-      const response = await api.get('orders');
+      const response = await api.get('ordersres');
       const dataOrder = response.data.find((order) => order.id === orderId);
       const dateDetalsOrder = formatDistance(
         parseISO(dataOrder.created_at),
@@ -139,7 +139,7 @@ export default function Request(props) {
               <Table
                 tableHeaderColor={Decodifiq(orderDetals)}
                 tableHead={['Descrição']}
-                tableData={[[`${orderDetals.body}`]]}
+                tableData={[[`${orderDetals.request}`]]}
               />
             </CardBody>
           </Card>
@@ -166,7 +166,7 @@ export default function Request(props) {
             </CardBody>
           </Card>
         </GridItem>
-        {orderDetals.status === 'Cancelado' ? (
+        {orderDetals.status !== 'Cancelado' ? (
           <>
             <Add>
               <Button

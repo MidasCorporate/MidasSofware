@@ -39,94 +39,94 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
   const [orders, setOrders] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [stock, setStock] = useState([]);
-  const [users, setUsers] = useState([]);
+  // const [products, setProducts] = useState([]);
+  // const [stock, setStock] = useState([]);
+  // const [users, setUsers] = useState([]);
 
   useEffect(() => {
     async function loadOrders() {
-      const response = await api.get('orders');
+      const response = await api.get('ordersres');
       const { data } = response;
       setOrders(data);
     }
-    async function loadProducts() {
-      const response = await api.get('products');
-      const { data } = response;
-      setProducts(data);
-    }
-    async function loadStock() {
-      const response = await api.get('stock');
-      const { data } = response;
-      setStock(data);
-    }
-    async function loadUsers() {
-      const response = await api.get('users');
-      const data = response.data.filter((user) => user.admin === true);
-      setUsers(data);
-    }
+    // async function loadProducts() {
+    //   const response = await api.get('products');
+    //   const { data } = response;
+    //   setProducts(data);
+    // }
+    // async function loadStock() {
+    //   const response = await api.get('stock');
+    //   const { data } = response;
+    //   setStock(data);
+    // }
+    // async function loadUsers() {
+    //   const response = await api.get('users');
+    //   const data = response.data.filter((user) => user.admin === true);
+    //   setUsers(data);
+    // }
     loadOrders();
-    loadProducts();
-    loadStock();
-    loadUsers();
+    // loadProducts();
+    // loadStock();
+    // loadUsers();
   }, []);
 
-  // QUANTIDADE ORDES PENDENTES
+  // QUANTIDADE ORDEN NÃO ATENDIDAS
   const hasStatusNull = useMemo(
-    () => orders.filter((order) => order.status === 'Preparando').length,
+    () => orders.filter((order) => order.status === 'Aguardando').length,
     [orders]
   );
 
   // QUANTIDADE VENDIDO NA PLATAFORMA
-  const valueSold = useMemo(
-    () =>
-      orders
-        .filter((order) => order.status === 'Finalizada')
-        .reduce((total, value) => total + value.products.price, 0)
-        .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-    [orders]
-  );
+  // const valueSold = useMemo(
+  //   () =>
+  //     orders
+  //       .filter((order) => order.status === 'Finalizada')
+  //       .reduce((total, value) => total + value.products.price, 0)
+  //       .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+  //   [orders]
+  // );
 
   // QUANTIDADE ORDES FINALIZADAS
   const hasStatusFinished = useMemo(
-    () => orders.filter((order) => order.status === 'Finalizada').length,
+    () => orders.filter((order) => order.status === 'Finalizado').length,
     [orders]
   );
 
   // QUANTIDADE DE PRODUTOS
-  const amountStock = useMemo(
-    () => stock.reduce((total, deposit) => total + deposit.amount, 0),
-    [stock]
-  );
+  // const amountStock = useMemo(
+  //   () => stock.reduce((total, deposit) => total + deposit.amount, 0),
+  //   [stock]
+  // );
 
   // QUANTIDADE PRODUTOS INATIVOS
-  const amountProduct = useMemo(
-    () => products.filter((product) => product.active === false).length,
-    [products]
-  );
+  // const amountProduct = useMemo(
+  //   () => products.filter((product) => product.active === false).length,
+  //   [products]
+  // );
 
   // GERA TABELA COM INFO DE VENDAS REALIZADAS
-  const latestSales = useMemo(
-    () =>
-      orders
-        .filter((order) => order.status === 'Finalizada')
-        .map((order) => {
-          const value = order.products.price.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          });
-          return [order.user.id, order.user.name, value, order.products.name];
-        }),
-    [orders]
-  );
+  // const latestSales = useMemo(
+  //   () =>
+  //     orders
+  //       .filter((order) => order.status === 'Finalizada')
+  //       .map((order) => {
+  //         const value = order.products.price.toLocaleString('pt-BR', {
+  //           style: 'currency',
+  //           currency: 'BRL',
+  //         });
+  //         return [order.user.id, order.user.name, value, order.products.name];
+  //       }),
+  //   [orders]
+  // );
 
   // GERA TABELA COM MEBROS DA EQUIPE
-  const workers = useMemo(
-    () =>
-      users.map((user) => {
-        return [user.id, user.name, user.email, 'Administrador'];
-      }),
-    [users]
-  );
+  // const workers = useMemo(
+  //   () =>
+  //     users.map((user) => {
+  //       return [user.id, user.name, user.email, 'Administrador'];
+  //     }),
+  //   [users]
+  // );
 
   return (
     <div>
@@ -140,7 +140,8 @@ export default function Dashboard() {
               <p className={classes.cardCategoryMoney}>
                 Todas as vendas realizadas dentro da plataforma
               </p>
-              <h1 className={classes.cardTitleMoney}>{valueSold}</h1>
+              {/* <h1 className={classes.cardTitleMoney}>{valueSold}</h1> */}
+              <h1 className={classes.cardTitleMoney}>0</h1>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -178,9 +179,11 @@ export default function Dashboard() {
                 <MdStore size={45} color="#fff" />
               </CardIcon>
               <p className={classes.cardCategory}>Produtos Estoque</p>
-              <h2 className={classes.cardTitle}>{amountStock}</h2>
+              {/* <h2 className={classes.cardTitle}>{amountStock}</h2> */}
+              <h2 className={classes.cardTitle}>0</h2>
               <p className={classes.cardCategory}>Produtos Inativos</p>
-              <h2 className={classes.cardTitle}>{amountProduct}</h2>
+              <h2 className={classes.cardTitle}>0</h2>
+              {/* <h2 className={classes.cardTitle}>{amountProduct}</h2> */}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -200,7 +203,7 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategoryMoney}>
                 Usuários cadastrados na plataforma
-                <h1 className={classes.cardTitleUser}>{hasStatusNull}</h1>
+                <h1 className={classes.cardTitleUser}>0</h1>
               </p>
             </CardHeader>
             <CardFooter stats>

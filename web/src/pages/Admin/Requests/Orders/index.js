@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { Confirm } from 'semantic-ui-react';
 
 // import { Link } from 'react-router-dom';
 import classNames from 'classnames';
@@ -37,7 +38,9 @@ export default function Request() {
   const classes = useStyles();
   const [openDetals, setOpenDetals] = useState(null);
   const [orders, setOrders] = useState([]);
-  const [component, setComponent] = useState(0);
+  const [OrderUnit, setOrderUnit] = useState(0);
+  const [statusOrder, setStatusOrder] = useState(null);
+  // const [openConfirm, setOpenConfirm] = useState(false);
 
   useEffect(() => {
     async function loadOrders() {
@@ -49,39 +52,58 @@ export default function Request() {
   }, []);
 
   async function tagleFinished() {
-    const { status } = orders.find((order) => order.id === component);
-    if (status === 'Aguardando') {
-      await api.delete(`orders/${component}/Preparando`);
-      // document.location.reload(true);
+    if (statusOrder === 'Preparar') {
+      await api.delete(`ordersreq/${OrderUnit}/Preparando`);
+
       toast.info('Ordem está em Preparo!');
+      return;
     }
-    if (status === 'Preparando') {
-      await api.delete(`orders/${component}/Finalizada`);
-      // document.location.reload(true);
+
+    if (statusOrder === 'Finalizar') {
+      await api.delete(`ordersreq/${OrderUnit}/Finalizado`);
+
       toast.success('Ordem finalizada com sucesso!');
     } else {
-      toast.warn(`Orderm já está ${status}`);
+      toast.warn(`Orderm já está ${statusOrder}`);
     }
   }
   async function tagleCanceled() {
-    const { status } = orders.find((order) => order.id === component);
-    if (status === 'Preparando') {
-      await api.delete(`orders/${component}/Cancelada`);
-      // document.location.reload(true);
-      toast.success('Ordem cancelada com sucesso!');
+    if (statusOrder === 'Preparar' || statusOrder === 'Finalizar') {
+      await api.delete(`ordersreq/${OrderUnit}/Cancelada`);
+
+      toast.dark('Ordem cancelada com sucesso!');
     } else {
-      toast.warn(`Orderm já está ${status}`);
+      toast.warn(`Orderm já está ${statusOrder}`);
     }
   }
 
   // ABRE A CAIXA DE SELEÇÃO
   function handleClickProfile(event) {
-    // console.log(event.target.id);
     if (openDetals && openDetals.contains(event.target)) {
       setOpenDetals(null);
     } else if (event.target.id !== '') {
-      setComponent(parseInt(event.target.id, 10));
+      setOrderUnit(parseInt(event.target.id, 10));
       setOpenDetals(event.currentTarget);
+
+      // DEFINE OPÇÕES DE DETALHES
+      if (event.target.name === 'Aguardando') {
+        // console.log(event.target.name);
+        setStatusOrder('Preparar');
+        return;
+      }
+      if (event.target.name === 'Preparando') {
+        // console.log(event.target.name);
+        setStatusOrder('Finalizar');
+        return;
+      }
+      if (event.target.name === 'Cancelada') {
+        // console.log(event.target.name);
+        setStatusOrder('Cancelada');
+      }
+      if (event.target.name === 'Finalizar') {
+        // console.log(event.target.name);
+        setStatusOrder(null);
+      }
     }
   }
 
@@ -95,11 +117,25 @@ export default function Request() {
   }
 
   function handleOpenDetals() {
-    history.push(`requestsordetal/${encodeURIComponent(component)}/`);
+    history.push(`requestsordetal/${encodeURIComponent(OrderUnit)}/`);
   }
+
+  // function openBoxConfirm() {
+  //   setOpenConfirm(true);
+  // }
+  // function closeBoxConfirm() {
+  //   setOpenConfirm(false);
+  // }
 
   return (
     <>
+      {/* <Confirm
+        open={openConfirm}
+        onCancel={closeBoxConfirm}
+        onConfirm={closeBoxConfirm}
+        className={classes.popperClose}
+      /> */}
+
       <GridContainer>
         <ToastContainer />
         <GridItem xs={12} sm={12} md={12}>
@@ -124,7 +160,7 @@ export default function Request() {
               </Button>
             </OpButon>
             <table cellSpacing="0">
-              <Theade>
+              <Theade className={classes.cardTitleUser}>
                 <tr>
                   <th>ID</th>
                   <th>Data</th>
@@ -157,6 +193,7 @@ export default function Request() {
                         color="transparent"
                         className={classes.buttonLink}
                         id={order.id}
+                        name={order.status}
                       >
                         <MdInfo color="#999" size={30} />
                       </Button>
@@ -190,26 +227,43 @@ export default function Request() {
             <Paper>
               <ClickAwayListener onClickAway={handleCloseProfile}>
                 <MenuList role="menu">
-                  <MenuItem
-                    onClick={tagleFinished}
-                    className={classes.dropdownItem}
-                  >
-                    Finalizar
-                  </MenuItem>
+                  {statusOrder !== 'Cancelada' ? (
+                    <>
+                      <MenuItem
+                        type="button"
+                        onClick={tagleFinished}
+                        className={classes.dropdownItem}
+                      >
+                        {statusOrder}
+                      </MenuItem>
+                      <Divider light />
+                    </>
+                  ) : (
+                    ''
+                  )}
 
                   <MenuItem
+                    type="button"
                     onClick={handleOpenDetals}
                     className={classes.dropdownItem}
                   >
                     Visualizar
                   </MenuItem>
-                  <Divider light />
-                  <MenuItem
-                    onClick={tagleCanceled}
-                    className={classes.dropdownItem}
-                  >
-                    Cancelar
-                  </MenuItem>
+
+                  {statusOrder === 'Cancelada' ? (
+                    ''
+                  ) : (
+                    <>
+                      <Divider light />
+                      <MenuItem
+                        type="button"
+                        onClick={tagleCanceled}
+                        className={classes.dropdownItem}
+                      >
+                        Cancelar
+                      </MenuItem>
+                    </>
+                  )}
                 </MenuList>
               </ClickAwayListener>
             </Paper>

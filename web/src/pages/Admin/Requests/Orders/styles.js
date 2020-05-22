@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const Theade = styled.thead`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,400;1,700&display=swap');
   color: #ec5244;
   /* color: #4ebfd3; */
   font-weight: 100;
   font-size: 16px;
   /* font-family: "'Roboto', 'Arial', 'sans-serif'"; */
+  font-family: 'Roboto', sans-serif;
   text-align: initial;
   th {
     padding-top: 30px;
@@ -14,8 +16,9 @@ export const Theade = styled.thead`
 `;
 export const Tbody = styled.tbody`
   font-size: 15px;
-  /* font-family: "'Roboto', 'Arial', 'sans-serif'"; */
+  font-weight: 300;
   text-align: center;
+
   td {
     border-bottom: 1px solid #eee;
     padding: 5px;
@@ -38,14 +41,14 @@ export const Tr = styled.tr`
       span {
         text-align: center;
         background: ${(props) =>
-          props.status === 'Finalizada' ? '#c5fcb3' : ''};
+          props.status === 'Finalizado' ? '#c5fcb3' : ''};
         background: ${(props) =>
           props.status === 'Preparando' ? '#6baaff' : ''};
         background: ${(props) =>
           props.status === 'Aguardando' ? '#fcf6b3' : ''};
         background: ${(props) =>
           props.status === 'Cancelada' ? '#fcb3b3' : ''};
-        color: ${(props) => (props.status === 'Finalizada' ? '#409800' : '')};
+        color: ${(props) => (props.status === 'Finalizado' ? '#409800' : '')};
         color: ${(props) => (props.status === 'Preparando' ? '#0045a0' : '')};
         color: ${(props) => (props.status === 'Aguardando' ? '#c4c000' : '')};
         color: ${(props) => (props.status === 'Cancelada' ? '#fc5757' : '')};
@@ -56,7 +59,7 @@ export const Tr = styled.tr`
       }
 
       svg {
-        color: ${(props) => (props.status === 'Finalizada' ? '#409800' : '')};
+        color: ${(props) => (props.status === 'Finalizado' ? '#409800' : '')};
         color: ${(props) => (props.status === 'Preparando' ? '#0045a0' : '')};
         color: ${(props) => (props.status === 'Aguardando' ? '#c4c000' : '')};
         color: ${(props) => (props.status === 'Cancelada' ? '#fc5757' : '')};
