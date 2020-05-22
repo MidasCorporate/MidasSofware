@@ -61,7 +61,7 @@ export default function Sidebar(props) {
           <Text>DASHBOARD</Text>
         </ListItem>
       </Link>
-      <Link to="/products">
+      <Link to="/productsclient">
         <ListItem button className={classes.itemLink}>
           <MdStore className={classes.itemIcon} />
           <Text>PRODUTOS solicitações parte client </Text>

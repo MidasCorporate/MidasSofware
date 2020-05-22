@@ -62,7 +62,7 @@ export default function Admin({ children }) {
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
       />
-      <div className={classes.mainPanel} ref={mainPanel}>
+      <div className={classes.container} ref={mainPanel}>
         <Navbar routes={() => {}} handleDrawerToggle={handleDrawerToggle} />
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (

@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { parseISO, formatDistance } from 'date-fns';
 import pt from 'date-fns/locale/pt';
