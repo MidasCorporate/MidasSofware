@@ -67,9 +67,9 @@ class OrderResponseController {
 
     const {
       id,
-      user_id,
-      product_id,
-      amount,
+      // user_id,
+      // product_id,
+      // amount,
       status,
       response,
       file_res_id,

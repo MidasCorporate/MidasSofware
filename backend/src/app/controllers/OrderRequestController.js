@@ -15,7 +15,14 @@ class OrderRequestController {
     }
 
     const order = await Order.findAll({
-      attributes: ['id', 'amount', 'status', 'request', 'created_at'],
+      attributes: [
+        'id',
+        'amount',
+        'status',
+        'request',
+        'response',
+        'created_at',
+      ],
       include: [
         // {
         //   model: Product,
