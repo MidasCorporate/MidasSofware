@@ -42,21 +42,6 @@ export const Container = styled.div`
   }
 `;
 
-export const Actions = styled.div`
-  /* display: flex;
-  width: 222px;
-  height: 30px;
-  float: right; */
-  margin: 10px 0;
-  svg {
-    margin-right: 5px;
-  }
-
-  button {
-    margin-left: 10px;
-  }
-`;
-
 export const ButtonComeBack = styled.button`
   display: flex;
   flex: 1;
@@ -91,5 +76,19 @@ export const ButtonDone = styled.button`
 
   &:hover {
     background: ${darken(0.2, '#e63a36')};
+  }
+`;
+export const Actions = styled.div`
+  /* display: flex;
+  width: 222px;
+  height: 30px;
+  float: right; */
+  margin: 10px 0;
+  svg {
+    margin-right: 5px;
+  }
+
+  button {
+    margin-left: 10px;
   }
 `;

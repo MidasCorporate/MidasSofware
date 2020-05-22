@@ -1,13 +1,13 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 
-import { parseISO, formatDistance } from 'date-fns';
+import { parseISO, formatDistance, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
-import { MdArrowBack, MdDone, MdClear } from 'react-icons/md';
+import { MdArrowBack, MdDone, MdClear, MdAdd } from 'react-icons/md';
 
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
@@ -17,10 +17,11 @@ import CardBody from '~/components/Card/CardBody';
 import Table from '~/components/Table/Table';
 
 import Decodifiq from '~/components/Decodifiq';
+import Response from '../Response';
 
 import Button from '~/components/CustomButtons/Button';
 
-import { OpButon } from './styles';
+import { OpButon, Add } from './styles';
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 
 import history from '~/services/history';
@@ -31,26 +32,45 @@ export default function Request(props) {
   const classes = useStyles();
   const [orderDetals, setOrderDetals] = useState([]);
   const [dateOrder, setDateOrder] = useState('');
+  const [dateUser, setDateUser] = useState('');
+  const [userDetals, setDetalsUser] = useState([]);
+  const [situation, setSituation] = useState(false);
 
   useEffect(() => {
     async function loadUsersOrder() {
       const { match } = props;
       const orderId = parseInt(decodeURIComponent(match.params.id), 10);
       const response = await api.get('orders');
-      const data = response.data.find((order) => order.id === orderId);
-      const date = formatDistance(parseISO(data.created_at), new Date(), {
-        addSuffix: false,
-        locale: pt,
-      });
+      const dataOrder = response.data.find((order) => order.id === orderId);
+      const dateDetalsOrder = formatDistance(
+        parseISO(dataOrder.created_at),
+        new Date(),
+        {
+          addSuffix: false,
+          locale: pt,
+        }
+      );
+      const formatdateUser = parseISO(dataOrder.user.created_at);
 
-      setDateOrder(date);
-      setOrderDetals(data);
+      const formattedDateUser = format(
+        formatdateUser,
+        "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
+      );
+
+      setDetalsUser(dataOrder.user);
+      setDateUser(formattedDateUser);
+      setDateOrder(dateDetalsOrder);
+      setOrderDetals(dataOrder);
     }
     loadUsersOrder();
   }, []);
 
   function handleTableOrders() {
     history.push('/requestsorders');
+  }
+
+  function handleResponseRequest() {
+    setSituation(!situation);
   }
 
   const buttonCancel = (
@@ -86,7 +106,7 @@ export default function Request(props) {
                 Detalhes da solicitação de orçamento #ID {orderDetals.id}
               </h4>
               <p className={classes.cardCategoryTable}>
-                Venda realizada há {dateOrder}
+                Solicitação realizada há {dateOrder}
               </p>
             </CardIcon>
             <OpButon>
@@ -130,11 +150,7 @@ export default function Request(props) {
               <Table
                 tableHeaderColor={Decodifiq(orderDetals)}
                 tableHead={['Descrição']}
-                tableData={[
-                  [
-                    'Solicito a compra de 22 canetas cores aleátórias, preciso deste produto com extrema urgência ',
-                  ],
-                ]}
+                tableData={[[`${orderDetals.body}`]]}
               />
             </CardBody>
           </Card>
@@ -150,13 +166,31 @@ export default function Request(props) {
                 tableHeaderColor={Decodifiq(orderDetals)}
                 tableHead={['ID', 'Nome', 'Email', 'Cadastro']}
                 tableData={[
-                  ['1', 'Dakota Rice', 'teste@teste.com', '27/05/2020'],
+                  [
+                    `${userDetals.id}`,
+                    `${userDetals.name}`,
+                    `${userDetals.email}`,
+                    `${dateUser}`,
+                  ],
                 ]}
               />
             </CardBody>
           </Card>
         </GridItem>
+        <Add>
+          <Button
+            onClick={handleResponseRequest}
+            // onClick={() => handleClickProfile(order.id)}
+            color="info"
+            aria-label="edit"
+            justIcon
+            round
+          >
+            <MdAdd size={30} color="#fff" />
+          </Button>
+        </Add>
       </GridContainer>
+      <Response color={Decodifiq(orderDetals)} tag={situation} />
     </>
   );
 }

@@ -17,7 +17,7 @@ import CustomButtons from '~/components/CustomButtons/Button';
 import Image from './Image';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
-import { Container, Actions, ButtonComeBack, ButtonDone } from './styles';
+import { Container, ButtonComeBack, ButtonDone, Actions } from './styles';
 
 const useStyles = makeStyles(styles);
 
