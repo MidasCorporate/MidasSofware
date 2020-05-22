@@ -11,6 +11,7 @@ import OrderResponseController from './app/controllers/OrderResponseController';
 import StockController from './app/controllers/StockController';
 import NotificationController from './app/controllers/NotificationController';
 import ProductFilterController from './app/controllers/ProductFilterController';
+import SegmentController from './app/controllers/SegmentController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -52,5 +53,10 @@ routes.get('/stock', StockController.index);
 routes.post('/stock', StockController.store);
 routes.put('/stock', StockController.update);
 routes.delete('/stock/:id', StockController.delete);
+
+routes.get('/segments', SegmentController.index);
+routes.post('/segments', SegmentController.store);
+routes.put('/segments', SegmentController.update);
+routes.delete('/segments/:id', SegmentController.delete);
 
 export default routes;
