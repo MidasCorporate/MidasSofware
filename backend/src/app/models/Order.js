@@ -6,7 +6,8 @@ class Order extends Model {
       {
         amount: Sequelize.INTEGER,
         status: Sequelize.STRING,
-        body: Sequelize.STRING,
+        request: Sequelize.STRING,
+        response: Sequelize.STRING,
       },
       {
         sequelize,
@@ -24,6 +25,14 @@ class Order extends Model {
     this.belongsTo(models.User, {
       foreignKey: 'user_id',
       as: 'user',
+    });
+    this.belongsTo(models.File, {
+      foreignKey: 'file_req_id',
+      as: 'fileRequest',
+    });
+    this.belongsTo(models.File, {
+      foreignKey: 'file_res_id',
+      as: 'fileResponse',
     });
   }
 }

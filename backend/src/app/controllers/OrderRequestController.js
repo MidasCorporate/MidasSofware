@@ -4,7 +4,7 @@ import Product from '../models/Product';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
-class OderController {
+class OrderRequestController {
   async index(req, res) {
     const isClient = await User.findOne({
       where: { id: req.userId },
@@ -15,7 +15,7 @@ class OderController {
     }
 
     const order = await Order.findAll({
-      attributes: ['id', 'amount', 'status', 'body', 'created_at'],
+      attributes: ['id', 'amount', 'status', 'request', 'created_at'],
       include: [
         {
           model: Product,
@@ -32,7 +32,12 @@ class OderController {
         {
           model: User,
           as: 'user',
-          attributes: ['id', 'name', 'email', 'created_at'],
+          attributes: ['id', 'name'],
+        },
+        {
+          model: File,
+          as: 'fileResquest',
+          attributes: ['id', 'path', 'url'],
         },
       ],
     });
@@ -48,20 +53,28 @@ class OderController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { user_id, product_id, amount, status, body } = req.body;
+    const {
+      user_id,
+      product_id,
+      amount,
+      status,
+      request,
+      file_req_id,
+    } = req.body;
 
-    const product = await Product.findByPk(product_id);
+    // const product = await Product.findByPk(product_id);
 
-    if (!product) {
-      return res.status(400).json({ error: 'Product does not exist!' });
-    }
+    // if (!product) {
+    //   return res.status(400).json({ error: 'Product does not exist!' });
+    // }
 
     const order = await Order.create({
       user_id,
       product_id,
       amount,
       status,
-      body,
+      request,
+      file_req_id,
     });
 
     const user = await User.findByPk(req.userId);
@@ -81,19 +94,32 @@ class OderController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { id, user_id, product_id, amount, status } = req.body;
-
-    const order = await Order.findByPk(id);
-
-    await order.update(req.body);
-
-    return res.json({
+    const {
       id,
       user_id,
       product_id,
       amount,
       status,
+      request,
+      file_req_id,
+    } = req.body;
+
+    const order = await Order.findByPk(id);
+
+    if (!order) {
+      return res.status(400).json({ error: 'Order not exists' });
+    }
+
+    await order.update({
+      user_id,
+      product_id,
+      amount,
+      status,
+      request,
+      file_req_id,
     });
+
+    return res.json(order);
   }
 
   async delete(req, res) {
@@ -113,4 +139,4 @@ class OderController {
   }
 }
 
-export default new OderController();
+export default new OrderRequestController();
