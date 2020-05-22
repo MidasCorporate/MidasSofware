@@ -20,8 +20,8 @@ import Card from '~/components/Card/Card';
 import CardHeader from '~/components/Card/CardHeader';
 import CardIcon from '~/components/Card/CardIcon';
 import CardFooter from '~/components/Card/CardFooter';
-import CardBody from '~/components/Card/CardBody';
-import Table from '~/components/Table/Table';
+// import CardBody from '~/components/Card/CardBody';
+// import Table from '~/components/Table/Table';
 
 // import {
 //   dailySalesChart,

@@ -42,6 +42,20 @@ export const Container = styled.div`
   }
 `;
 
+<<<<<<< HEAD
+=======
+export const Actions = styled.div`
+  margin: 10px 0;
+  svg {
+    margin-right: 5px;
+  }
+
+  button {
+    margin-left: 10px;
+  }
+`;
+
+>>>>>>> 9e06406d1b61a254a8326b56704a1711e48f682b
 export const ButtonComeBack = styled.button`
   display: flex;
   flex: 1;

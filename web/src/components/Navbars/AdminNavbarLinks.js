@@ -124,7 +124,7 @@ export default function AdminNavbarLinks() {
     if (profile.admin) {
       return '/profile';
     }
-    return '/dashboardclient';
+    return '/profileclient';
   }
 
   return (
