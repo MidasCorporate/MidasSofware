@@ -1,6 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState, useMemo } from 'react';
 
+import { parseISO, formatDistance } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
@@ -27,6 +30,7 @@ const useStyles = makeStyles(styles);
 export default function Request(props) {
   const classes = useStyles();
   const [orderDetals, setOrderDetals] = useState([]);
+  const [dateOrder, setDateOrder] = useState('');
 
   useEffect(() => {
     async function loadUsersOrder() {
@@ -34,7 +38,12 @@ export default function Request(props) {
       const orderId = parseInt(decodeURIComponent(match.params.id), 10);
       const response = await api.get('orders');
       const data = response.data.find((order) => order.id === orderId);
+      const date = formatDistance(parseISO(data.created_at), new Date(), {
+        addSuffix: false,
+        locale: pt,
+      });
 
+      setDateOrder(date);
       setOrderDetals(data);
     }
     loadUsersOrder();
@@ -74,10 +83,10 @@ export default function Request(props) {
           <Card>
             <CardIcon color={Decodifiq(orderDetals)}>
               <h4 className={classes.cardTitleTable}>
-                Detalhes da solicitação de compra #ID
+                Detalhes da solicitação de orçamento #ID {orderDetals.id}
               </h4>
               <p className={classes.cardCategoryTable}>
-                Ultima venda realizada há 2 horas
+                Venda realizada há {dateOrder}
               </p>
             </CardIcon>
             <OpButon>
@@ -96,13 +105,13 @@ export default function Request(props) {
                   {buttonCancel}
                   {buttonFinished}
                 </>
-              ) : orderDetals.status === 'Preparando' ? (
+              ) : orderDetals.status === 'Finalizada' ? (
+                ''
+              ) : (
                 <>
                   {buttonCancel}
                   {buttonFinished}
                 </>
-              ) : (
-                ''
               )}
             </OpButon>
           </Card>

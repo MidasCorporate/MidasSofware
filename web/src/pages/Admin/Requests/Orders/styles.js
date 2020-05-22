@@ -51,7 +51,7 @@ export const Tr = styled.tr`
         color: ${(props) => (props.status === 'Cancelada' ? '#fc5757' : '')};
         border-radius: 32px;
         max-width: 200px;
-        font-weight: 800;
+        font-weight: 700;
         padding: 0 7px;
       }
 
