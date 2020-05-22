@@ -15,7 +15,7 @@ class OderController {
     }
 
     const order = await Order.findAll({
-      attributes: ['id', 'amount', 'status', 'created_at'],
+      attributes: ['id', 'amount', 'status', 'body', 'created_at'],
       include: [
         {
           model: Product,
@@ -48,7 +48,7 @@ class OderController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { user_id, product_id, amount, status } = req.body;
+    const { user_id, product_id, amount, status, body } = req.body;
 
     const product = await Product.findByPk(product_id);
 
@@ -61,6 +61,7 @@ class OderController {
       product_id,
       amount,
       status,
+      body,
     });
 
     const user = await User.findByPk(req.userId);

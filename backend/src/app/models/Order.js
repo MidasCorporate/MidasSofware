@@ -6,6 +6,7 @@ class Order extends Model {
       {
         amount: Sequelize.INTEGER,
         status: Sequelize.STRING,
+        body: Sequelize.STRING,
       },
       {
         sequelize,
