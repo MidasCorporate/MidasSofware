@@ -17,18 +17,18 @@ class OrderRequestController {
     const order = await Order.findAll({
       attributes: ['id', 'amount', 'status', 'request', 'created_at'],
       include: [
-        {
-          model: Product,
-          as: 'products',
-          attributes: ['id', 'name', 'description', 'price', 'active'],
-          include: [
-            {
-              model: File,
-              as: 'image',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
-        },
+        // {
+        //   model: Product,
+        //   as: 'products',
+        //   attributes: ['id', 'name', 'description', 'price', 'active'],
+        //   include: [
+        //     {
+        //       model: File,
+        //       as: 'image',
+        //       attributes: ['id', 'path', 'url'],
+        //     },
+        //   ],
+        // },
         {
           model: User,
           as: 'user',

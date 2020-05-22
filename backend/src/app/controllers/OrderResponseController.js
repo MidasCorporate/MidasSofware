@@ -15,24 +15,29 @@ class OrderResponseController {
     }
 
     const order = await Order.findAll({
-      attributes: ['id', 'amount', 'status', 'body', 'created_at'],
+      attributes: ['id', 'amount', 'status', 'response', 'created_at'],
       include: [
-        {
-          model: Product,
-          as: 'products',
-          attributes: ['id', 'name', 'description', 'price', 'active'],
-          include: [
-            {
-              model: File,
-              as: 'image',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
-        },
+        // {
+        //   model: Product,
+        //   as: 'products',
+        //   attributes: ['id', 'name', 'description', 'price', 'active'],
+        //   include: [
+        //     {
+        //       model: File,
+        //       as: 'image',
+        //       attributes: ['id', 'path', 'url'],
+        //     },
+        //   ],
+        // },
         {
           model: User,
           as: 'user',
           attributes: ['id', 'name', 'email', 'created_at'],
+        },
+        {
+          model: File,
+          as: 'fileResponse',
+          attributes: ['id', 'path', 'url'],
         },
       ],
     });
