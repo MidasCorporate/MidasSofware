@@ -36,7 +36,7 @@ class OrderRequestController {
         },
         {
           model: File,
-          as: 'fileResquest',
+          as: 'fileRequest',
           attributes: ['id', 'path', 'url'],
         },
       ],
