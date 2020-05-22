@@ -1,6 +1,6 @@
 import User from '../models/User';
 import Order from '../models/Order';
-import Product from '../models/Product';
+// import Product from '../models/Product';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
@@ -37,6 +37,11 @@ class OrderRequestController {
         {
           model: File,
           as: 'fileRequest',
+          attributes: ['id', 'path', 'url'],
+        },
+        {
+          model: File,
+          as: 'fileResponse',
           attributes: ['id', 'path', 'url'],
         },
       ],

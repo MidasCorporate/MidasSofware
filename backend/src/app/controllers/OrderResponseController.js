@@ -1,6 +1,6 @@
 import User from '../models/User';
 import Order from '../models/Order';
-import Product from '../models/Product';
+// import Product from '../models/Product';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
@@ -15,7 +15,14 @@ class OrderResponseController {
     }
 
     const order = await Order.findAll({
-      attributes: ['id', 'amount', 'status', 'response', 'created_at'],
+      attributes: [
+        'id',
+        'amount',
+        'status',
+        'request',
+        'response',
+        'created_at',
+      ],
       include: [
         // {
         //   model: Product,
@@ -33,6 +40,11 @@ class OrderResponseController {
           model: User,
           as: 'user',
           attributes: ['id', 'name', 'email', 'created_at'],
+        },
+        {
+          model: File,
+          as: 'fileRequest',
+          attributes: ['id', 'path', 'url'],
         },
         {
           model: File,
