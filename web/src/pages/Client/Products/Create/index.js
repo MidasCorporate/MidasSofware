@@ -3,6 +3,7 @@ import React from 'react';
 import { Form } from '@unform/web';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { MdArrowBack, MdDone, MdClear } from 'react-icons/md';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -12,10 +13,11 @@ import GridItem from '~/components/Grid/GridItem';
 import Card from '~/components/Card/Card';
 import CardIcon from '~/components/Card/CardIcon';
 import { Input } from '~/components/Form';
+import CustomButtons from '~/components/CustomButtons/Button';
 import Image from './Image';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
-import { Container } from './styles';
+import { Container, Actions, ButtonComeBack, ButtonDone } from './styles';
 
 const useStyles = makeStyles(styles);
 
@@ -34,7 +36,7 @@ export default function ProductCreate() {
   }
 
   function handleBack() {
-    history.push('products');
+    history.push('productsclient');
   }
 
   return (
@@ -50,6 +52,24 @@ export default function ProductCreate() {
 
           <Container>
             <Form onSubmit={handleSubmit}>
+              <Actions>
+                <CustomButtons onClick={handleBack} size={43} color="info">
+                  <MdArrowBack size={30} color="#fff" />
+                  Voltar
+                </CustomButtons>
+                <CustomButtons type="submit" color="success">
+                  <MdDone size={30} color="#fff" />
+                  Salvar
+                </CustomButtons>
+                {/* <ButtonComeBack onClick={handleBack} type="button">
+                  <MdRotateLeft size={26} color="#fff" />
+                  VOLTAR
+                </ButtonComeBack>
+                <ButtonDone type="submit">
+                  <MdDoneAll size={26} color="#fff" />
+                  SALVAR
+                </ButtonDone> */}
+              </Actions>
               <Image />
               <Input name="name" placeholder="Nome do produto" />
               <Input name="description" placeholder="Descrição do produto" />
@@ -61,10 +81,6 @@ export default function ProductCreate() {
                 />
                 <Input name="category" placeholder="Categoria do produto" />
               </div>
-              <button type="submit">Salvar</button>
-              <button type="button" onClick={handleBack}>
-                Voltar
-              </button>
             </Form>
           </Container>
         </Card>

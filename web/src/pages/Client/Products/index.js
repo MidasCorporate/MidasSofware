@@ -11,9 +11,10 @@ import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
 import Card from '~/components/Card/Card';
 import CardIcon from '~/components/Card/CardIcon';
+import CustomButton from '~/components/CustomButtons/Button';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
-import { Container, Add } from './styles';
+import { Container } from './styles';
 
 const useStyles = makeStyles(styles);
 
@@ -36,10 +37,15 @@ export default function Products() {
           </CardIcon>
 
           <Container>
-            <Add onClick={handleCreate} type="button">
-              <MdAdd size={26} color="#FFF" />
+            <CustomButton
+              size={30}
+              color="danger"
+              onClick={handleCreate}
+              type="button"
+            >
+              <MdAdd size={30} color="#FFF" />
               <strong>CADASTRAR</strong>
-            </Add>
+            </CustomButton>
           </Container>
         </Card>
       </GridItem>

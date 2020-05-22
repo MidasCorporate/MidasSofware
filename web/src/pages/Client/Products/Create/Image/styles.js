@@ -5,7 +5,7 @@ export const Container = styled.div`
   text-align: center;
   width: 120px;
   height: 120px;
-  margin: 30px 0;
+  margin: 0 0 30px 0;
   border: 1px dashed #dddddd;
   border-radius: 50%;
 
@@ -17,8 +17,8 @@ export const Container = styled.div`
     }
 
     img {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background: #eee;
     }
@@ -29,7 +29,7 @@ export const Container = styled.div`
 
     strong {
       display: flex;
-      color: #ee524e;
+      color: #e63a36;
       justify-content: center;
       text-align: center;
 

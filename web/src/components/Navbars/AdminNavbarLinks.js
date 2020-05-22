@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import { Link } from 'react-router-dom';
@@ -44,6 +44,7 @@ export default function AdminNavbarLinks() {
   const [openProfile, setOpenProfile] = useState(null);
   const [notifications, setNotification] = useState([]);
   const dispatch = useDispatch();
+  const profile = useSelector((state) => state.user.profile);
 
   // CARREGANDO MSG DO MONGO
   useEffect(() => {
@@ -116,6 +117,14 @@ export default function AdminNavbarLinks() {
 
   function handleLogOut() {
     dispatch(signOut());
+  }
+
+  // NAVEGAÇÃO PARA PÁGINA PROFILE
+  function handleTonavigate() {
+    if (profile.admin) {
+      return '/profile';
+    }
+    return '/dashboardclient';
   }
 
   return (
@@ -262,7 +271,7 @@ export default function AdminNavbarLinks() {
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <Link to="/profile">
+                    <Link to={handleTonavigate}>
                       <MenuItem
                         onClick={handleCloseProfile}
                         className={classes.dropdownItem}
