@@ -42,8 +42,6 @@ export const Container = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-=======
 export const Actions = styled.div`
   margin: 10px 0;
   svg {
@@ -55,7 +53,6 @@ export const Actions = styled.div`
   }
 `;
 
->>>>>>> 9e06406d1b61a254a8326b56704a1711e48f682b
 export const ButtonComeBack = styled.button`
   display: flex;
   flex: 1;
@@ -90,19 +87,5 @@ export const ButtonDone = styled.button`
 
   &:hover {
     background: ${darken(0.2, '#e63a36')};
-  }
-`;
-export const Actions = styled.div`
-  /* display: flex;
-  width: 222px;
-  height: 30px;
-  float: right; */
-  margin: 10px 0;
-  svg {
-    margin-right: 5px;
-  }
-
-  button {
-    margin-left: 10px;
   }
 `;

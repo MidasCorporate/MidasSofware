@@ -8,11 +8,11 @@ function Decodifiq(props) {
   if (props.status === 'Finalizada') {
     return 'success';
   }
-  if (props.status === 'Aguandando') {
+  if (props.status === 'Aguardando') {
     return 'warning';
   }
 
-  return 'sss';
+  return 'primary';
 }
 
 export default Decodifiq;

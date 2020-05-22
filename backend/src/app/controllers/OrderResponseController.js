@@ -32,7 +32,7 @@ class OrderResponseController {
         {
           model: User,
           as: 'user',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'email', 'created_at'],
         },
       ],
     });

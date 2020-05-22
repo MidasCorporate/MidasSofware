@@ -13,6 +13,7 @@ export const HeaderOption = styled.div`
 export const Text = styled.div`
   flex-direction: row;
   svg {
+    cursor: pointer;
     margin-left: 30px;
     :hover {
       background: #eee;

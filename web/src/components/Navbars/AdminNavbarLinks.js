@@ -162,7 +162,7 @@ export default function AdminNavbarLinks() {
         </Hidden>
       </Button>
       {/* </Link> */}
-      {/* {IDENTIFICAR A FUNÇÃO DESSAS classes} */}
+
       <div className={classes.manager}>
         {/* { BOTÃO DAS NOTIFICAÇÕES } */}
         <Button
