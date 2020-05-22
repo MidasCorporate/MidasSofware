@@ -4,7 +4,7 @@ import Product from '../models/Product';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
-class OderController {
+class OrderResponseController {
   async index(req, res) {
     const isClient = await User.findOne({
       where: { id: req.userId },
@@ -48,20 +48,32 @@ class OderController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { user_id, product_id, amount, status, body } = req.body;
-
-    const product = await Product.findByPk(product_id);
-
-    if (!product) {
-      return res.status(400).json({ error: 'Product does not exist!' });
-    }
-
-    const order = await Order.create({
+    const {
+      id,
       user_id,
       product_id,
       amount,
       status,
-      body,
+      response,
+      file_res_id,
+    } = req.body;
+
+    // const product = await Product.findByPk(product_id);
+
+    // if (!product) {
+    //   return res.status(400).json({ error: 'Product does not exist!' });
+    // }
+
+    const order = await Order.findByPk(id);
+
+    if (!order) {
+      return res.status(400).json({ error: 'Order not exists' });
+    }
+
+    await order.update({
+      status,
+      response,
+      file_res_id,
     });
 
     const user = await User.findByPk(req.userId);
@@ -81,11 +93,23 @@ class OderController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { id, user_id, product_id, amount, status } = req.body;
+    const {
+      id,
+      user_id,
+      product_id,
+      amount,
+      status,
+      response,
+      file_res_id,
+    } = req.body;
 
     const order = await Order.findByPk(id);
 
-    await order.update(req.body);
+    await order.update({
+      status,
+      response,
+      file_res_id,
+    });
 
     return res.json({
       id,
@@ -93,6 +117,8 @@ class OderController {
       product_id,
       amount,
       status,
+      response,
+      file_res_id,
     });
   }
 
@@ -113,4 +139,4 @@ class OderController {
   }
 }
 
-export default new OderController();
+export default new OrderResponseController();
