@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { Form } from '@unform/web';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { MdAttachFile, MdFormatBold, MdSend } from 'react-icons/md';
+import { MdFormatBold, MdSend } from 'react-icons/md';
 import { Textarea } from '~/components/Form';
 
-import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
 import CardMenu from '~/components/Card/CardMenu';
 import CardIcon from '~/components/Card/CardIcon';
@@ -126,3 +127,9 @@ export default function Request(props) {
   }
   return <></>;
 }
+Request.propTypes = {
+  tag: PropTypes.bool.isRequired,
+  color: PropTypes.string.isRequired,
+  user_id: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+};

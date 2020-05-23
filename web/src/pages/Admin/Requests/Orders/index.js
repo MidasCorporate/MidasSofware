@@ -3,10 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import { parseISO, format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import { format } from 'date-fns';
 
-// import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import Poppers from '@material-ui/core/Popper';
@@ -153,7 +151,7 @@ export default function Request() {
 
       <GridContainer>
         <ToastContainer />
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardIcon color="danger">
               <h4 className={classes.cardTitleTable}>
