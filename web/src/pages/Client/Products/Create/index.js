@@ -14,10 +14,10 @@ import Card from '~/components/Card/Card';
 import CardIcon from '~/components/Card/CardIcon';
 import { Input } from '~/components/Form';
 import CustomButtons from '~/components/CustomButtons/Button';
-import Image from './Image';
+// import Image from './Image';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
-import { Container, ButtonComeBack, ButtonDone, Actions } from './styles';
+import { Container, Actions } from './styles';
 
 const useStyles = makeStyles(styles);
 
@@ -62,7 +62,7 @@ export default function ProductCreate() {
                   Salvar
                 </CustomButtons>
               </Actions>
-              <Image />
+              {/* <Image /> */}
               <Input name="name" placeholder="Nome do produto" />
               <Input name="description" placeholder="Descrição do produto" />
               <div className="form-div-1">

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Confirm } from 'semantic-ui-react';
+// import { Confirm } from 'semantic-ui-react';
 
 // import { Link } from 'react-router-dom';
 import classNames from 'classnames';
