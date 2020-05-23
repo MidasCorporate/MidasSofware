@@ -5,7 +5,7 @@ function Decodifiq(props) {
   if (props.status === 'Preparando') {
     return 'info';
   }
-  if (props.status === 'Finalizado') {
+  if (props.status === 'Finalizado' || props.status === 'Finalizar') {
     return 'success';
   }
   if (props.status === 'Aguardando') {
