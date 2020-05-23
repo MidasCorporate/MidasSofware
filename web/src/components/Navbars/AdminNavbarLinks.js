@@ -5,6 +5,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
+import socketio from 'socket.io-client';
+
 import { Link } from 'react-router-dom';
 
 // @material-ui/core components
@@ -45,6 +47,22 @@ export default function AdminNavbarLinks() {
   const [notifications, setNotification] = useState([]);
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.user.profile);
+
+  const socket = useMemo(
+    () =>
+      socketio('http://localhost:3333', {
+        query: {
+          user_id: profile.id,
+        },
+      }),
+    [profile.id]
+  );
+
+  useEffect(() => {
+    socket.on('notification', (notification) => {
+      setNotification([notification, ...notifications]);
+    });
+  }, [socket, notifications]);
 
   // CARREGANDO MSG DO MONGO
   useEffect(() => {

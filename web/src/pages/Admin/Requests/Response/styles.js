@@ -5,7 +5,7 @@ export const HeaderOption = styled.div`
   textarea {
     width: 100%;
     border-radius: 4px;
-    margin-top: -20px;
+    /* margin-top: -40px; */
     height: 200px;
   }
 `;
@@ -18,5 +18,13 @@ export const Text = styled.div`
     :hover {
       background: #eee;
     }
+  }
+`;
+export const OpButon = styled.div`
+  margin-top: 10px;
+  margin-right: 12px;
+
+  button {
+    margin-left: 10px;
   }
 `;
