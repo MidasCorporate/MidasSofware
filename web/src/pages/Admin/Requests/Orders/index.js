@@ -100,9 +100,9 @@ export default function Request() {
         // console.log(event.target.name);
         setStatusOrder('Cancelada');
       }
-      if (event.target.name === 'Finalizar') {
+      if (event.target.name === 'Finalizado') {
         // console.log(event.target.name);
-        setStatusOrder(null);
+        setStatusOrder('Finalizado');
       }
     }
   }
@@ -227,7 +227,8 @@ export default function Request() {
             <Paper>
               <ClickAwayListener onClickAway={handleCloseProfile}>
                 <MenuList role="menu">
-                  {statusOrder !== 'Cancelada' ? (
+                  {statusOrder !== 'Cancelada' &&
+                  statusOrder !== 'Finalizado' ? (
                     <>
                       <MenuItem
                         type="button"
@@ -250,7 +251,8 @@ export default function Request() {
                     Visualizar
                   </MenuItem>
 
-                  {statusOrder === 'Cancelada' ? (
+                  {statusOrder === 'Cancelada' ||
+                  statusOrder === 'Finalizado' ? (
                     ''
                   ) : (
                     <>
