@@ -90,9 +90,17 @@ class OrderRequestController {
     });
 
     const user = await User.findByPk(req.userId);
-    await Notification.create({
+
+    const notification = await Notification.create({
       content: `Novo pedido de compras de ${user.name}`,
     });
+
+    // pessoa responsavel por receber a notificação
+    const ownerSocket = req.connectedUsers[6];
+
+    if (ownerSocket) {
+      req.io.to(ownerSocket).emit('notification', notification);
+    }
 
     return res.json(order);
   }
