@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,9 +46,10 @@ export default function Dashboard() {
   }
 
   function handleSelectSegment(segment) {
+    const { id, name } = segment;
     history.push({
       pathname: '/ordercreate',
-      state: { segment },
+      state: { id, name },
     });
   }
 
