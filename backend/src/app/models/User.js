@@ -28,6 +28,13 @@ class User extends Model {
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
   }
+
+  static associate(models) {
+    this.belongsTo(models.Segment, {
+      foreignKey: 'segment_id',
+      as: 'category',
+    });
+  }
 }
 
 export default User;

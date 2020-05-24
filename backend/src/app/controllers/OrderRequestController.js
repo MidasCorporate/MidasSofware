@@ -2,6 +2,7 @@ import User from '../models/User';
 import Order from '../models/Order';
 // import Product from '../models/Product';
 import File from '../models/File';
+import Segment from '../models/Segment';
 import Notification from '../schemas/Notification';
 
 class OrderRequestController {
@@ -39,7 +40,14 @@ class OrderRequestController {
         {
           model: User,
           as: 'user',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'email'],
+          include: [
+            {
+              model: Segment,
+              as: 'category',
+              attributes: ['id', 'segment'],
+            },
+          ],
         },
         {
           model: File,
@@ -50,6 +58,11 @@ class OrderRequestController {
           model: File,
           as: 'fileResponse',
           attributes: ['id', 'path', 'url'],
+        },
+        {
+          model: Segment,
+          as: 'category',
+          attributes: ['id', 'segment'],
         },
       ],
     });
@@ -72,13 +85,14 @@ class OrderRequestController {
       status,
       request,
       file_req_id,
+      segment_id,
     } = req.body;
 
-    // const product = await Product.findByPk(product_id);
+    const segment = await Segment.findByPk(segment_id);
 
-    // if (!product) {
-    //   return res.status(400).json({ error: 'Product does not exist!' });
-    // }
+    if (!segment) {
+      return res.status(400).json({ error: 'Segment does not exist!' });
+    }
 
     const order = await Order.create({
       user_id,
@@ -87,6 +101,7 @@ class OrderRequestController {
       status,
       request,
       file_req_id,
+      segment_id,
     });
 
     const user = await User.findByPk(req.userId);
@@ -122,12 +137,19 @@ class OrderRequestController {
       status,
       request,
       file_req_id,
+      segment_id,
     } = req.body;
 
     const order = await Order.findByPk(id);
 
     if (!order) {
       return res.status(400).json({ error: 'Order not exists' });
+    }
+
+    const segment = await Segment.findByPk(segment_id);
+
+    if (!segment) {
+      return res.status(400).json({ error: 'Segment does not exist!' });
     }
 
     await order.update({
@@ -137,6 +159,7 @@ class OrderRequestController {
       status,
       request,
       file_req_id,
+      segment_id,
     });
 
     return res.json(order);

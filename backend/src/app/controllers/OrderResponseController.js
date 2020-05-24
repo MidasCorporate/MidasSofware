@@ -2,6 +2,7 @@ import User from '../models/User';
 import Order from '../models/Order';
 // import Product from '../models/Product';
 import File from '../models/File';
+import Segment from '../models/Segment';
 import Notification from '../schemas/Notification';
 
 class OrderResponseController {
@@ -40,6 +41,13 @@ class OrderResponseController {
           model: User,
           as: 'user',
           attributes: ['id', 'name', 'email', 'created_at'],
+          include: [
+            {
+              model: Segment,
+              as: 'category',
+              attributes: ['id', 'segment'],
+            },
+          ],
         },
         {
           model: File,
@@ -50,6 +58,11 @@ class OrderResponseController {
           model: File,
           as: 'fileResponse',
           attributes: ['id', 'path', 'url'],
+        },
+        {
+          model: Segment,
+          as: 'category',
+          attributes: ['id', 'segment'],
         },
       ],
     });
