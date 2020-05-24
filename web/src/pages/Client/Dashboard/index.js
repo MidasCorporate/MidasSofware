@@ -46,7 +46,7 @@ export default function Dashboard() {
 
   function handleSelectSegment(id) {
     history.push({
-      pathname: '/ordersclient',
+      pathname: '/ordercreate',
       state: { id },
     });
   }
