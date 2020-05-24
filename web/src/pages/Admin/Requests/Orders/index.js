@@ -2,9 +2,13 @@
 import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+<<<<<<< HEAD
 // import { Confirm } from 'semantic-ui-react';
+=======
+>>>>>>> a725e9041dde10ea4cea62654841e798a8d150de
 
-// import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
+
 import classNames from 'classnames';
 
 import Poppers from '@material-ui/core/Popper';
@@ -46,6 +50,7 @@ export default function Request() {
     async function loadOrders() {
       const response = await api.get('ordersres');
       const { data } = response;
+
       setOrders(data);
     }
     loadOrders();
@@ -105,6 +110,18 @@ export default function Request() {
         setStatusOrder('Finalizado');
       }
     }
+  }
+
+  function formatDate(date) {
+    const dateFormated = format(new Date(date), 'MM/dd/yyyy');
+    return dateFormated;
+  }
+  function formatFile(file) {
+    if (file !== null) {
+      const fileFormated = file.path.slice(-3);
+      return fileFormated;
+    }
+    return 'Sem Anexo';
   }
 
   // FECHA A CAIXA DE OPÇÕES
@@ -175,10 +192,10 @@ export default function Request() {
                 {orders.map((order) => (
                   <Tr status={order.status} key={order.id}>
                     <td>#{order.id}</td>
-                    <td>25/03/2020</td>
-                    <td>Bruno Luiz</td>
+                    <td>{formatDate(order.created_at)}</td>
+                    <td>{order.user.name}</td>
                     <td>Materiais para construção</td>
-                    <td>PDF</td>
+                    <td>{formatFile(order.fileRequest)}</td>
                     <td>
                       <div>
                         <span>

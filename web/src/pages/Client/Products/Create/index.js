@@ -12,7 +12,7 @@ import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
 import Card from '~/components/Card/Card';
 import CardIcon from '~/components/Card/CardIcon';
-import { Input } from '~/components/Form';
+import { Input, Select } from '~/components/Form';
 import CustomButtons from '~/components/CustomButtons/Button';
 // import Image from './Image';
 
@@ -71,7 +71,7 @@ export default function ProductCreate() {
                   type="text"
                   placeholder="Preço do produto"
                 />
-                <Input name="category" placeholder="Categoria do produto" />
+                <Select name="category" />
               </div>
             </Form>
           </Container>

@@ -1,28 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
+import { Form } from '@unform/web';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { MdAttachFile, MdFormatBold } from 'react-icons/md';
+import { MdFormatBold, MdSend, MdChromeReaderMode } from 'react-icons/md';
+import { Textarea } from '~/components/Form';
 
-import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
 import CardMenu from '~/components/Card/CardMenu';
 import CardIcon from '~/components/Card/CardIcon';
 
-import Button from '~/components/CustomButtons/Button';
+import api from '~/services/api';
 
-import { HeaderOption } from './styles';
+import Button from '~/components/CustomButtons/Button';
+import Image from './Image';
+
+import { HeaderOption, FileOrder } from './styles';
 
 import styles from '~/assets/jss/material-dashboard-react/views/textStyles';
 
 const useStyles = makeStyles(styles);
 
 export default function Request(props) {
-  const { tag, color } = props;
+  const { tag, color, user_id, id, description, urlFile } = props;
   const [infoTagLink, setinfoTagLink] = useState('transparent');
   const [infoTagBold, setinfoTagBold] = useState('transparent');
   const [link, setLink] = useState(false);
+  const [pageInitial, setPageInitial] = useState({});
   const classes = useStyles();
+
+  useEffect(() => {
+    function loadInfoResponse() {
+      const pageInitialDetal = {
+        response: description,
+      };
+      console.log(description);
+      setPageInitial(pageInitialDetal);
+    }
+    loadInfoResponse();
+  }, [tag]);
+
+  async function handleSubmit(data) {
+    const { file_res_id, response } = data;
+    await api.post('ordersres', {
+      file_res_id,
+      response,
+      user_id,
+      id,
+      status: 'Finalizado',
+    });
+  }
+
+  function handleOpenfile() {
+    window.location.href = urlFile.url;
+  }
 
   function handleTagConditionText(e) {
     if (e === 'bold') {
@@ -50,53 +83,90 @@ export default function Request(props) {
   if (tag) {
     return (
       <>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={12}>
-            <CardMenu>
-              <CardIcon color={color}>
-                <h4 className={classes.wordTextTitle}>Responder Solicitação</h4>
-              </CardIcon>
+        <GridItem xs={12} sm={12} md={12}>
+          <CardMenu>
+            <CardIcon color={color}>
+              <h4 className={classes.wordTextTitle}>Responder Solicitação</h4>
+            </CardIcon>
 
-              <HeaderOption>
-                <CardMenu>
-                  <div>
+            <HeaderOption>
+              <CardMenu>
+                <Form initialData={pageInitial} onSubmit={handleSubmit}>
+                  <Button
+                    color="simple"
+                    justIcon
+                    simple={false}
+                    aria-haspopup="true"
+                    className={classes.buttonLink}
+                    onClick={() => handleTagConditionText('bold')}
+                  >
+                    <MdFormatBold className={classes.dropdownItem} />
+                  </Button>
+
+                  <Button
+                    color="simple"
+                    justIcon
+                    simple={false}
+                    aria-haspopup="true"
+                    className={classes.buttonLink}
+                    onClick={() => handleTagConditionText('attachment')}
+                  >
+                    <Image />
+                  </Button>
+                  {description === null ? (
+                    <>
+                      <Button
+                        color="simple"
+                        justIcon
+                        simple={false}
+                        aria-haspopup="true"
+                        className={classes.buttonLink}
+                        type="submit"
+                      >
+                        <MdSend className={classes.dropdownItem} />
+                      </Button>
+                    </>
+                  ) : (
+                    ''
+                  )}
+
+                  <FileOrder tag={urlFile !== null}>
+                    <div>Visualizar Anexo</div>
                     <Button
-                      color={infoTagBold}
+                      color="simple"
                       justIcon
                       simple={false}
                       aria-haspopup="true"
                       className={classes.buttonLink}
-                      onClick={() => handleTagConditionText('bold')}
+                      onClick={handleOpenfile}
                     >
-                      <MdFormatBold className={classes.dropdownItem} />
+                      <MdChromeReaderMode className={classes.dropdownItem} />
                     </Button>
+                  </FileOrder>
 
-                    <Button
-                      color={infoTagLink}
-                      justIcon
-                      simple={false}
-                      aria-haspopup="true"
-                      className={classes.buttonLink}
-                      onClick={() => handleTagConditionText('attachment')}
-                    >
-                      <MdAttachFile className={classes.icons} />
-                    </Button>
-                  </div>
-                </CardMenu>
-                <textarea
-                  className={`${
-                    link ? [classes.wordTextBold] : [classes.wordTextColor]
-                  }`}
-                  rows="10"
-                  cols="40"
-                  maxLength="500"
-                />
-              </HeaderOption>
-            </CardMenu>
-          </GridItem>
-        </GridContainer>
+                  <Textarea
+                    className={`${
+                      link ? [classes.wordTextBold] : [classes.wordTextColor]
+                    }`}
+                    rows="10"
+                    cols="40"
+                    maxLength="500"
+                    name="response"
+                  />
+                </Form>
+              </CardMenu>
+            </HeaderOption>
+          </CardMenu>
+        </GridItem>
       </>
     );
   }
   return <></>;
 }
+Request.propTypes = {
+  tag: PropTypes.bool.isRequired,
+  color: PropTypes.string.isRequired,
+  user_id: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+};

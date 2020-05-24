@@ -7,7 +7,13 @@ import pt from 'date-fns/locale/pt';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
-import { MdArrowBack, MdDone, MdClear, MdAdd } from 'react-icons/md';
+import {
+  MdArrowBack,
+  MdDone,
+  MdClear,
+  MdAdd,
+  MdAttachFile,
+} from 'react-icons/md';
 
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
@@ -21,7 +27,7 @@ import Response from '../Response';
 
 import Button from '~/components/CustomButtons/Button';
 
-import { OpButon, Add } from './styles';
+import { OpButon, Add, FileOrder, Info } from './styles';
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 
 import history from '~/services/history';
@@ -35,6 +41,7 @@ export default function Request(props) {
   const [dateUser, setDateUser] = useState('');
   const [userDetals, setDetalsUser] = useState([]);
   const [situation, setSituation] = useState(false);
+  const [tagFile, setTagFile] = useState(false);
 
   useEffect(() => {
     async function loadUsersOrder() {
@@ -56,6 +63,9 @@ export default function Request(props) {
         formatdateUser,
         "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
       );
+      if (dataOrder.fileRequest !== null) {
+        setTagFile(true);
+      }
 
       setDetalsUser(dataOrder.user);
       setDateUser(formattedDateUser);
@@ -64,6 +74,10 @@ export default function Request(props) {
     }
     loadUsersOrder();
   }, []);
+
+  function openUrl() {
+    window.location.href = orderDetals.fileRequest.url;
+  }
 
   function handleTableOrders() {
     history.push('/requestsorders');
@@ -130,6 +144,19 @@ export default function Request(props) {
       <GridContainer>
         <GridItem xs={12} sm={6} md={5}>
           <Card>
+            <FileOrder tag={tagFile}>
+              <div>Visualizar Anexo</div>
+              <Button
+                className={classes.buttonLink}
+                onClick={openUrl}
+                color="danger"
+                aria-haspopup="true"
+                justIcon
+                round
+              >
+                <MdAttachFile size={30} color="#fff" />
+              </Button>
+            </FileOrder>
             <CardIcon color={Decodifiq(orderDetals)}>
               <h4 className={classes.cardTitleTable}>
                 Informações da Solicitação
@@ -166,6 +193,7 @@ export default function Request(props) {
             </CardBody>
           </Card>
         </GridItem>
+
         {orderDetals.status !== 'Cancelado' ? (
           <>
             <Add>
@@ -176,11 +204,19 @@ export default function Request(props) {
                 aria-label="edit"
                 justIcon
                 round
+                type="button"
               >
                 <MdAdd size={30} color="#fff" />
               </Button>
-              <Response color={Decodifiq(orderDetals)} tag={situation} />
             </Add>
+            <Response
+              color={Decodifiq(orderDetals)}
+              tag={situation}
+              id={orderDetals.id}
+              user_id={userDetals.id}
+              urlFile={orderDetals.fileResponse}
+              description={orderDetals.response}
+            />
           </>
         ) : (
           ''

@@ -29,8 +29,8 @@ export default function CardBody(props) {
 }
 
 CardBody.propTypes = {
-  className: PropTypes.string,
-  plain: PropTypes.bool,
-  profile: PropTypes.bool,
-  children: PropTypes.node,
+  className: PropTypes.string.isRequired,
+  plain: PropTypes.bool.isRequired,
+  profile: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
 };

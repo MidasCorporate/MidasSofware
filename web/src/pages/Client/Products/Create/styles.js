@@ -33,9 +33,12 @@ export const Container = styled.div`
       display: flex;
       justify-content: space-between;
       width: 100%;
+      height: 44px;
+      background: #333;
 
       > input {
         width: 50%;
+        height: 44px;
         margin: 0 2px;
       }
     }
