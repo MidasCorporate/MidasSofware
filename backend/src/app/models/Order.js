@@ -34,6 +34,10 @@ class Order extends Model {
       foreignKey: 'file_res_id',
       as: 'fileResponse',
     });
+    this.belongsTo(models.Segment, {
+      foreignKey: 'segment_id',
+      as: 'category',
+    });
   }
 }
 
