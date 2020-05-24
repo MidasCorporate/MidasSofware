@@ -49,7 +49,8 @@ export default function Footer(props) {
             >
               Midas Corporation
             </a>
-            , fazendo de seus sonhos, realidade.
+            ,
+             Engineering, technology and passion for what you do.
           </span>
         </p>
       </div>

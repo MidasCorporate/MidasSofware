@@ -24,18 +24,19 @@ import {
 import Poppers from '@material-ui/core/Popper';
 
 // @material-ui/icons
-import { Person, Notifications, Dashboard, Search } from '@material-ui/icons';
+import { Person, Notifications, Dashboard } from '@material-ui/icons';
 
 // core components
 import { parseISO, formatDistance } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { signOut } from '~/store/modules/auth/actions';
-import CustomInput from '~/components/CustomInput/CustomInput';
+
 import Button from '~/components/CustomButtons/Button';
 
 import styles from '~/assets/jss/material-dashboard-react/components/headerLinksStyle';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 const useStyles = makeStyles(styles);
 
@@ -145,10 +146,18 @@ export default function AdminNavbarLinks() {
     return '/profileclient';
   }
 
+  function handlePageInitial() {
+    if (profile.admin) {
+      history.push('/dashboardadmin');
+      return;
+    }
+    history.push('/dashboardclient');
+  }
+
   return (
     <div>
       {/* { BARRA DE PESQUISA } */}
-      <div className={classes.searchWrapper}>
+      {/* <div className={classes.searchWrapper}>
         <CustomInput
           formControlProps={{
             className: `${classes.margin} ${classes.search}`,
@@ -163,7 +172,7 @@ export default function AdminNavbarLinks() {
         <Button color="white" aria-label="edit" justIcon round>
           <Search />
         </Button>
-      </div>
+      </div> */}
       {/* {BOTÃO DASHBOARD} */}
 
       {/* <Link to="/dashboardadmin"> */}
@@ -173,6 +182,7 @@ export default function AdminNavbarLinks() {
         simple={!(window.innerWidth > 959)}
         aria-label="Dashboard"
         className={classes.buttonLink}
+        onClick={handlePageInitial}
       >
         <Dashboard className={classes.icons} />
         <Hidden mdUp implementation="css">

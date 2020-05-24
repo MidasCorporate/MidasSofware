@@ -9,7 +9,7 @@ import {
   successColor,
   warningColor,
   dangerColor,
-  whiteColor,
+  // whiteColor,
   grayColor,
   blackColor,
   hexToRgb,
@@ -72,7 +72,7 @@ const sidebarStyle = (theme) => ({
       height: '1px',
       right: '15px',
       width: 'calc(100% - 30px)',
-      backgroundColor: `rgba(${hexToRgb(grayColor[6])}, 0.3)`,
+      backgroundColor: `rgba(${hexToRgb(grayColor[4])}, 0.3)`,
     },
   },
   logoLink: {
@@ -87,7 +87,7 @@ const sidebarStyle = (theme) => ({
     textDecoration: 'none',
     backgroundColor: 'transparent',
     '&,&:hover': {
-      color: whiteColor,
+      color: `rgba(${hexToRgb(grayColor[7])}, 0.7)`,
     },
   },
   logoLinkRTL: {
@@ -124,7 +124,7 @@ const sidebarStyle = (theme) => ({
       height: '100%',
       content: '""',
       display: 'block',
-      background: blackColor,
+      background: `rgba(${hexToRgb(grayColor[4])}, 0)`,
       opacity: '.8',
     },
   },
@@ -142,7 +142,7 @@ const sidebarStyle = (theme) => ({
     display: 'block',
     textDecoration: 'none',
     '&:hover,&:focus,&:visited,&': {
-      color: whiteColor,
+      color: blackColor,
     },
   },
   itemLink: {
@@ -166,7 +166,7 @@ const sidebarStyle = (theme) => ({
     marginRight: '15px',
     textAlign: 'center',
     verticalAlign: 'middle',
-    color: `rgba(${hexToRgb(whiteColor)}, 0.8)`,
+    color: `rgba(${hexToRgb(grayColor[7])}, 0.5)`,
   },
   itemIconRTL: {
     marginRight: '3px',
@@ -178,13 +178,13 @@ const sidebarStyle = (theme) => ({
     margin: '0',
     lineHeight: '30px',
     fontSize: '14px',
-    color: whiteColor,
+    color: blackColor,
   },
   itemTextRTL: {
     textAlign: 'right',
   },
   whiteFont: {
-    color: whiteColor,
+    color: blackColor,
   },
   purple: {
     backgroundColor: primaryColor[0],
@@ -265,13 +265,6 @@ const sidebarStyle = (theme) => ({
     width: '260px',
     zIndex: '4',
     overflowScrolling: 'touch',
-  },
-  activePro: {
-    [theme.breakpoints.up('md')]: {
-      position: 'absolute',
-      width: '100%',
-      bottom: '13px',
-    },
   },
 });
 
