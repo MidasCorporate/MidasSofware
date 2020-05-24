@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
 import { Form } from '@unform/web';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { MdFormatBold, MdSend } from 'react-icons/md';
+import { MdFormatBold, MdSend, MdChromeReaderMode } from 'react-icons/md';
 import { Textarea } from '~/components/Form';
 
 import GridItem from '~/components/Grid/GridItem';
@@ -17,18 +17,30 @@ import api from '~/services/api';
 import Button from '~/components/CustomButtons/Button';
 import Image from './Image';
 
-import { HeaderOption } from './styles';
+import { HeaderOption, FileOrder } from './styles';
 
 import styles from '~/assets/jss/material-dashboard-react/views/textStyles';
 
 const useStyles = makeStyles(styles);
 
 export default function Request(props) {
-  const { tag, color, user_id, id } = props;
+  const { tag, color, user_id, id, description, urlFile } = props;
   const [infoTagLink, setinfoTagLink] = useState('transparent');
   const [infoTagBold, setinfoTagBold] = useState('transparent');
   const [link, setLink] = useState(false);
+  const [pageInitial, setPageInitial] = useState({});
   const classes = useStyles();
+
+  useEffect(() => {
+    function loadInfoResponse() {
+      const pageInitialDetal = {
+        response: description,
+      };
+      console.log(description);
+      setPageInitial(pageInitialDetal);
+    }
+    loadInfoResponse();
+  }, [tag]);
 
   async function handleSubmit(data) {
     const { file_res_id, response } = data;
@@ -39,6 +51,10 @@ export default function Request(props) {
       id,
       status: 'Finalizado',
     });
+  }
+
+  function handleOpenfile() {
+    window.location.href = urlFile.url;
   }
 
   function handleTagConditionText(e) {
@@ -75,7 +91,7 @@ export default function Request(props) {
 
             <HeaderOption>
               <CardMenu>
-                <Form onSubmit={handleSubmit}>
+                <Form initialData={pageInitial} onSubmit={handleSubmit}>
                   <Button
                     color="simple"
                     justIcon
@@ -97,16 +113,36 @@ export default function Request(props) {
                   >
                     <Image />
                   </Button>
-                  <Button
-                    color="simple"
-                    justIcon
-                    simple={false}
-                    aria-haspopup="true"
-                    className={classes.buttonLink}
-                    type="submit"
-                  >
-                    <MdSend className={classes.dropdownItem} />
-                  </Button>
+                  {description === null ? (
+                    <>
+                      <Button
+                        color="simple"
+                        justIcon
+                        simple={false}
+                        aria-haspopup="true"
+                        className={classes.buttonLink}
+                        type="submit"
+                      >
+                        <MdSend className={classes.dropdownItem} />
+                      </Button>
+                    </>
+                  ) : (
+                    ''
+                  )}
+
+                  <FileOrder tag={urlFile !== null}>
+                    <div>Visualizar Anexo</div>
+                    <Button
+                      color="simple"
+                      justIcon
+                      simple={false}
+                      aria-haspopup="true"
+                      className={classes.buttonLink}
+                      onClick={handleOpenfile}
+                    >
+                      <MdChromeReaderMode className={classes.dropdownItem} />
+                    </Button>
+                  </FileOrder>
 
                   <Textarea
                     className={`${
@@ -132,4 +168,5 @@ Request.propTypes = {
   color: PropTypes.string.isRequired,
   user_id: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
 };
