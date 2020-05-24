@@ -2,10 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-<<<<<<< HEAD
 // import { Confirm } from 'semantic-ui-react';
-=======
->>>>>>> a725e9041dde10ea4cea62654841e798a8d150de
 
 import { format } from 'date-fns';
 
