@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin: 10px 12px 10px;
+  margin: 20px auto;
+  text-align: center;
+
+  button {
+    margin: 0 5px;
+  }
 
   strong {
     color: #fff;

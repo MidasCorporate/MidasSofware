@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdDescription } from 'react-icons/md';
 
 // import api from '~/services/api';
 import history from '~/services/history';
@@ -22,7 +22,11 @@ export default function Products() {
   const classes = useStyles();
 
   function handleCreate() {
-    history.push('productcreate');
+    history.push('ordercreate');
+  }
+
+  function handleListBudget() {
+    // history.push();
   }
 
   return (
@@ -30,13 +34,22 @@ export default function Products() {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardIcon color="danger">
-            <h4 className={classes.cardTitleTable}>Gerenciando produtos</h4>
+            <h4 className={classes.cardTitleTable}>Gerenciando orçamentos</h4>
             <p className={classes.cardCategoryTable}>
-              Ultimo produto atualizado há 2 horas
+              Ultimo orçamento atualizado há 2 horas
             </p>
           </CardIcon>
 
           <Container>
+            <CustomButton
+              size={30}
+              color="warning"
+              onClick={handleListBudget}
+              type="button"
+            >
+              <MdDescription size={30} color="#FFF" />
+              <strong>Listar meus orçamentos</strong>
+            </CustomButton>
             <CustomButton
               size={30}
               color="danger"
@@ -44,7 +57,7 @@ export default function Products() {
               type="button"
             >
               <MdAdd size={30} color="#FFF" />
-              <strong>CADASTRAR</strong>
+              <strong>Criar Orçamento</strong>
             </CustomButton>
           </Container>
         </Card>
