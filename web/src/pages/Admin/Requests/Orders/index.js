@@ -18,7 +18,7 @@ import {
   Divider,
 } from '@material-ui/core';
 
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
 import Card from '~/components/Card/Card';
@@ -72,7 +72,7 @@ export default function Request() {
     if (statusOrder === 'Preparar' || statusOrder === 'Finalizar') {
       await api.delete(`ordersreq/${OrderUnit}/Cancelada`);
 
-      toast.dark('Ordem cancelada com sucesso!');
+      toast.success('Ordem cancelada com sucesso!');
     } else {
       toast.warn(`Orderm já está ${statusOrder}`);
     }
@@ -150,7 +150,6 @@ export default function Request() {
       /> */}
 
       <GridContainer>
-        <ToastContainer />
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardIcon color="danger">

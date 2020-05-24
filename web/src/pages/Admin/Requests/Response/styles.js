@@ -31,7 +31,7 @@ export const OpButon = styled.div`
 export const FileOrder = styled.div`
   display: ${(props) => (props.tag ? 'block' : 'none')};
   position: absolute;
-  margin-left: 86px;
+  margin-left: 129px;
   margin-top: -51px;
   div {
     display: none;

@@ -15,6 +15,8 @@ import {
   MdAttachFile,
 } from 'react-icons/md';
 
+import { toast } from 'react-toastify';
+
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
 import Card from '~/components/Card/Card';
@@ -27,7 +29,7 @@ import Response from '../Response';
 
 import Button from '~/components/CustomButtons/Button';
 
-import { OpButon, Add, FileOrder, Info } from './styles';
+import { OpButon, Add, FileOrder } from './styles';
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 
 import history from '~/services/history';
@@ -66,6 +68,9 @@ export default function Request(props) {
       if (dataOrder.fileRequest !== null) {
         setTagFile(true);
       }
+      if (orderDetals.response !== null) {
+        setSituation(!situation);
+      }
 
       setDetalsUser(dataOrder.user);
       setDateUser(formattedDateUser);
@@ -74,6 +79,17 @@ export default function Request(props) {
     }
     loadUsersOrder();
   }, []);
+
+  async function tagleFinished() {
+    await api.delete(`ordersreq/${orderDetals.id}/Finalizado`);
+
+    toast.success('Ordem finalizada com sucesso!');
+  }
+  async function tagleCanceled() {
+    await api.delete(`ordersreq/${orderDetals.id}/Cancelada`);
+
+    toast.success('Ordem cancelada com sucesso!');
+  }
 
   function openUrl() {
     window.location.href = orderDetals.fileRequest.url;
@@ -89,7 +105,7 @@ export default function Request(props) {
 
   const buttonCancel = (
     <Button
-      onClick={handleTableOrders}
+      onClick={tagleCanceled}
       // onClick={() => handleClickProfile(order.id)}
       color="danger"
       className={classes.buttonLink}
@@ -100,13 +116,24 @@ export default function Request(props) {
   );
   const buttonFinished = (
     <Button
-      onClick={handleTableOrders}
+      onClick={tagleFinished}
       // onClick={() => handleClickProfile(order.id)}
       color="success"
       className={classes.buttonLink}
     >
       <MdDone color="#fff" size={30} />
       Atender
+    </Button>
+  );
+  const buttonReturn = (
+    <Button
+      onClick={handleTableOrders}
+      // onClick={() => handleClickProfile(order.id)}
+      color="info"
+      className={classes.buttonLink}
+    >
+      <MdArrowBack color="#fff" size={30} />
+      Voltar
     </Button>
   );
 
@@ -124,18 +151,17 @@ export default function Request(props) {
               </p>
             </CardIcon>
             <OpButon>
-              <Button
-                onClick={handleTableOrders}
-                // onClick={() => handleClickProfile(order.id)}
-                color="info"
-                className={classes.buttonLink}
-              >
-                <MdArrowBack color="#fff" size={30} />
-                Voltar
-              </Button>
-
-              {buttonCancel}
-              {buttonFinished}
+              {buttonReturn}
+              {orderDetals.status === 'Finalizado' ||
+              orderDetals.status === 'Cancelada' ? (
+                ''
+              ) : (
+                <>
+                  {' '}
+                  {buttonCancel}
+                  {buttonFinished}
+                </>
+              )}
             </OpButon>
           </Card>
         </GridItem>
@@ -194,7 +220,7 @@ export default function Request(props) {
           </Card>
         </GridItem>
 
-        {orderDetals.status !== 'Cancelado' ? (
+        {orderDetals.status !== 'Cancelada' ? (
           <>
             <Add>
               <Button
@@ -210,6 +236,7 @@ export default function Request(props) {
               </Button>
             </Add>
             <Response
+              status={orderDetals.status}
               color={Decodifiq(orderDetals)}
               tag={situation}
               id={orderDetals.id}

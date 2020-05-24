@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
@@ -24,11 +25,12 @@ import styles from '~/assets/jss/material-dashboard-react/views/textStyles';
 const useStyles = makeStyles(styles);
 
 export default function Request(props) {
-  const { tag, color, user_id, id, description, urlFile } = props;
+  const { tag, color, user_id, id, description, urlFile, status } = props;
   const [infoTagLink, setinfoTagLink] = useState('transparent');
   const [infoTagBold, setinfoTagBold] = useState('transparent');
   const [link, setLink] = useState(false);
   const [pageInitial, setPageInitial] = useState({});
+  const [tagStatus, setTagStatus] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -36,11 +38,15 @@ export default function Request(props) {
       const pageInitialDetal = {
         response: description,
       };
-      console.log(description);
       setPageInitial(pageInitialDetal);
     }
+
+    if (status === 'Finalizado' || status === 'Cancelada') {
+      setTagStatus(true);
+    }
+
     loadInfoResponse();
-  }, [tag]);
+  }, [props]);
 
   async function handleSubmit(data) {
     const { file_res_id, response } = data;
@@ -52,6 +58,12 @@ export default function Request(props) {
       status: 'Finalizado',
     });
   }
+
+  // function verifiqStatusOrder() {
+  //   if (color === 'success') {
+  //     setTagStatus(false);
+  //   }
+  // }
 
   function handleOpenfile() {
     window.location.href = urlFile.url;
@@ -86,7 +98,11 @@ export default function Request(props) {
         <GridItem xs={12} sm={12} md={12}>
           <CardMenu>
             <CardIcon color={color}>
-              <h4 className={classes.wordTextTitle}>Responder Solicitação</h4>
+              <h4 className={classes.wordTextTitle}>
+                {status === 'Finalizado'
+                  ? 'Sua Resposta'
+                  : 'Responder Solicitação'}
+              </h4>
             </CardIcon>
 
             <HeaderOption>
@@ -102,7 +118,6 @@ export default function Request(props) {
                   >
                     <MdFormatBold className={classes.dropdownItem} />
                   </Button>
-
                   <Button
                     color="simple"
                     justIcon
@@ -110,25 +125,23 @@ export default function Request(props) {
                     aria-haspopup="true"
                     className={classes.buttonLink}
                     onClick={() => handleTagConditionText('attachment')}
+                    disabled={tagStatus}
                   >
                     <Image />
                   </Button>
-                  {description === null ? (
-                    <>
-                      <Button
-                        color="simple"
-                        justIcon
-                        simple={false}
-                        aria-haspopup="true"
-                        className={classes.buttonLink}
-                        type="submit"
-                      >
-                        <MdSend className={classes.dropdownItem} />
-                      </Button>
-                    </>
-                  ) : (
-                    ''
-                  )}
+                  <>
+                    <Button
+                      color="simple"
+                      justIcon
+                      simple={false}
+                      aria-haspopup="true"
+                      className={classes.buttonLink}
+                      type="submit"
+                      disabled={tagStatus}
+                    >
+                      <MdSend className={classes.dropdownItem} />
+                    </Button>
+                  </>
 
                   <FileOrder tag={urlFile !== null}>
                     <div>Visualizar Anexo</div>
@@ -143,7 +156,6 @@ export default function Request(props) {
                       <MdChromeReaderMode className={classes.dropdownItem} />
                     </Button>
                   </FileOrder>
-
                   <Textarea
                     className={`${
                       link ? [classes.wordTextBold] : [classes.wordTextColor]
