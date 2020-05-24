@@ -14,7 +14,7 @@ const customInputStyle = {
   },
   underline: {
     '&:hover:not($disabled):before,&:before': {
-      borderColor: `${grayColor[4]} !important`,
+      borderColor: `transparent !important`,
       borderWidth: '1px !important',
     },
     '&:after': {
@@ -47,7 +47,7 @@ const customInputStyle = {
   },
   feedback: {
     position: 'absolute',
-    top: '18px',
+    top: '5px',
     right: '0',
     zIndex: '2',
     display: 'block',
@@ -56,12 +56,12 @@ const customInputStyle = {
     textAlign: 'center',
     pointerEvents: 'none',
   },
-  marginTop: {
-    marginTop: '16px',
-  },
+  // marginTop: {
+  //   marginTop: '16px',
+  // },
   formControl: {
-    paddingBottom: '10px',
-    margin: '27px 0 0 0',
+    // paddingBottom: '10px',
+    // margin: '27px 0 0 0',
     position: 'relative',
     verticalAlign: 'unset',
   },

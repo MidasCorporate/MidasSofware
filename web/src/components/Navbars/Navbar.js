@@ -3,6 +3,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,15 +17,20 @@ import Button from '~/components/CustomButtons/Button';
 import styles from '~/assets/jss/material-dashboard-react/components/headerStyle';
 import AdminNavbarLinks from './AdminNavbarLinks';
 import RTLNavbarLinks from './RTLNavbarLinks';
+import history from '~/services/history';
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+  const profile = useSelector((state) => state.user.profile);
   const classes = useStyles();
   // PEGA NOME DA WINDOW LOGADA E COLOCA NO BUTTON
-  function makeBrand() {
-    const name = 'Dashboard';
-    return name;
+  function handlePageInitial() {
+    if (profile.admin) {
+      history.push('/dashboardadmin');
+      return;
+    }
+    history.push('/dashboardclient');
   }
   const { color } = props;
   const appBarClasses = classNames({
@@ -35,8 +41,13 @@ export default function Header(props) {
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
-            {makeBrand()}
+          <Button
+            onClick={handlePageInitial}
+            color="transparent"
+            href="#"
+            className={classes.title}
+          >
+            Seja bem vindo de volta {profile.name}!
           </Button>
         </div>
         <Hidden smDown implementation="css">

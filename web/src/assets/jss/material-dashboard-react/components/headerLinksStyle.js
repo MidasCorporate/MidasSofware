@@ -20,6 +20,7 @@ const headerLinksStyle = (theme) => ({
       padding: '0!important',
       width: '60%',
       marginTop: '40px',
+
       '& input': {
         color: whiteColor,
       },

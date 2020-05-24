@@ -14,7 +14,7 @@ const cardIconStyle = {
       borderRadius: '4px',
       backgroundColor: grayColor[0],
       padding: '15px',
-      marginTop: '-20px',
+      marginTop: '-30px',
       marginLeft: '10px',
       marginRight: '15px',
       float: 'left',

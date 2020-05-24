@@ -51,6 +51,40 @@ const dashboardStyle = {
     marginBottom: '0',
     textAlign: 'center',
   },
+  cardCategoryTitleHome: {
+    color: grayColor[2],
+    marginTop: '23px',
+    minHeight: 'auto',
+
+    fontSize: '58px',
+
+    textAlign: 'center',
+    fontWeight: '800',
+    fontFamily: 'Poppins-SemiBold,Helvetica,Arial,sans-serif',
+    marginBottom: '3px',
+    textDecoration: 'none',
+    '& small': {
+      color: grayColor[1],
+      fontWeight: '400',
+      lineHeight: '1',
+    },
+  },
+  cardCategoryTitleHomeError: {
+    color: grayColor[2],
+    marginTop: '23px',
+    minHeight: 'auto',
+    fontSize: '32px',
+    textAlign: 'center',
+    fontWeight: '800',
+    fontFamily: 'Poppins-SemiBold,Helvetica,Arial,sans-serif',
+    marginBottom: '3px',
+    textDecoration: 'none',
+    '& small': {
+      color: grayColor[1],
+      fontWeight: '400',
+      lineHeight: '1',
+    },
+  },
   cardCategoryWhite: {
     color: `rgba(${hexToRgb(whiteColor)},.62)`,
     margin: '0',
