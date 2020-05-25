@@ -70,12 +70,12 @@ export default function Actions({ children }) {
             Editar
           </button>
         </ButtonView>
-        <ButtonView>
+        {/* <ButtonView>
           <button type="button">
             <MdDeleteForever size={20} color="#cb2304" />
             Excluir
           </button>
-        </ButtonView>
+        </ButtonView> */}
       </Content>
     </Container>
   );

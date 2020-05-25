@@ -37,33 +37,47 @@ export default function ReadOrder({
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
           borderRadius: '4px',
-          width: '350px',
-          height: '380px',
+          width: '650px',
+          height: '553px',
         },
       }}
     >
       <ModalContainer>
         <div>
-          <strong>informações da encomenda</strong>
-          <p>
-            {order.street}, {order.number}
-          </p>
-          <p>{order.city}</p>
-          <p>{order.zip_code}</p>
-        </div>
-        <div>
-          <strong>Datas</strong>
+          <strong>Informações do orçamento</strong>
           <span>
-            <strong>retiradas:</strong>
+            <strong>segmento:</strong>
+            <p>{order.category.segment}</p>
+          </span>
+          <span>
+            <strong>data:</strong>
             <p>{startDate}</p>
           </span>
           <span>
-            <strong>entrega:</strong>
-            <p>{endDate}</p>
+            <strong>status:</strong>
+            <p>{order.status}</p>
           </span>
         </div>
-        <strong>Assinatura do destinatário</strong>
-        {/* <img src={signatureImg} alt="assinatura" /> */}
+        <div>
+          <strong>Pedido</strong>
+          <span>
+            <p>{order.request}</p>
+          </span>
+          <span>
+            <strong>arquivo:</strong>
+            <p>{order.fileRequest ? order.fileRequest.url : 'Sem anexo'}</p>
+          </span>
+        </div>
+        <div>
+          <strong>Resposta</strong>
+          <span>
+            <p>{order.response}</p>
+          </span>
+          <span>
+            <strong>arquivo:</strong>
+            <p>{order.fileResponse ? order.fileResponse.url : 'Sem anexo'}</p>
+          </span>
+        </div>
       </ModalContainer>
     </Modal>
   );
