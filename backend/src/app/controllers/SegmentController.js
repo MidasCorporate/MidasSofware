@@ -25,10 +25,11 @@ class SegmentController {
       return res.status(400).json({ error: 'Not found' });
     }
 
-    const { segment } = req.body;
+    const { segment, description } = req.body;
 
     const segmentCreate = await Segment.create({
       segment,
+      description,
     });
 
     return res.json(segmentCreate);
@@ -43,7 +44,7 @@ class SegmentController {
       return res.status(400).json({ error: 'Not found' });
     }
 
-    const { id, segment } = req.body;
+    const { id, segment, description } = req.body;
 
     const segmentUpdate = await Segment.findByPk(id);
 
@@ -53,6 +54,7 @@ class SegmentController {
 
     await segmentUpdate.update({
       segment,
+      description,
     });
 
     return res.json(segmentUpdate);
