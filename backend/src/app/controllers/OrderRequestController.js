@@ -15,7 +15,7 @@ class OrderRequestController {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
-    const { user_id } = req.body;
+    const { user_id } = req.query;
 
     const order = await Order.findAll({
       where: { user_id },

@@ -3,13 +3,13 @@ import Segment from '../models/Segment';
 
 class SegmentController {
   async index(req, res) {
-    const isMidas = await User.findOne({
-      where: { id: req.userId, admin: true },
-    });
+    // const isMidas = await User.findOne({
+    //   where: { id: req.userId, admin: true },
+    // });
 
-    if (!isMidas) {
-      return res.status(400).json({ error: 'Not found' });
-    }
+    // if (!isMidas) {
+    //   return res.status(400).json({ error: 'Not found' });
+    // }
 
     const segment = await Segment.findAll();
 
