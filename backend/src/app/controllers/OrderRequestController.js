@@ -8,14 +8,17 @@ import Notification from '../schemas/Notification';
 class OrderRequestController {
   async index(req, res) {
     const isClient = await User.findOne({
-      where: { id: req.userId },
+      where: { id: req.userId, admin: false },
     });
 
     if (!isClient) {
       return res.status(400).json({ error: 'You are not is client' });
     }
 
+    const { user_id } = req.body;
+
     const order = await Order.findAll({
+      where: { user_id },
       attributes: [
         'id',
         'amount',

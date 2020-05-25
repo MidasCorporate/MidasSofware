@@ -8,14 +8,24 @@ import Notification from '../schemas/Notification';
 class OrderResponseController {
   async index(req, res) {
     const isClient = await User.findOne({
-      where: { id: req.userId },
+      where: { id: req.userId, admin: true },
     });
 
     if (!isClient) {
-      return res.status(400).json({ error: 'You are not is client' });
+      return res.status(400).json({ error: 'You are not is admin' });
+    }
+    const { segment_id } = req.query;
+
+    const validationSigment = await Segment.findOne({
+      where: { id: segment_id },
+    });
+
+    if (!validationSigment) {
+      return res.status(400).json({ error: 'Sigment dont exist' });
     }
 
     const order = await Order.findAll({
+      where: { segment_id },
       attributes: [
         'id',
         'amount',
