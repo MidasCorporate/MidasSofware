@@ -23,10 +23,12 @@ import { Container, Actions } from './styles';
 
 const useStyles = makeStyles(styles);
 
-export default function ProductCreate() {
+export default function ProductCreate({ location }) {
   const [segments, setSegments] = useState([]);
   const classes = useStyles();
   const profile = useSelector((state) => state.user.profile);
+
+  // const { id, name } = location.state;
 
   useEffect(() => {
     async function loadSegments() {

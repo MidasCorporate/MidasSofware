@@ -1,10 +1,12 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { MdAdd, MdDescription } from 'react-icons/md';
 
-// import api from '~/services/api';
+import api from '~/services/api';
 import history from '~/services/history';
 
 import GridContainer from '~/components/Grid/GridContainer';
@@ -12,21 +14,33 @@ import GridItem from '~/components/Grid/GridItem';
 import Card from '~/components/Card/Card';
 import CardIcon from '~/components/Card/CardIcon';
 import CustomButton from '~/components/CustomButtons/Button';
+import Actions from './Actions';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
-import { Container } from './styles';
+import { Create, Container } from './styles';
 
 const useStyles = makeStyles(styles);
 
 export default function Products() {
+  const [orders, setOrders] = useState([]);
+  const { id } = useSelector((state) => state.user.profile);
   const classes = useStyles();
+
+  useEffect(() => {
+    async function loadOrders() {
+      const response = await api.get(`ordersreq?user_id=${id}`);
+      console.log(response.data);
+      setOrders(response.data);
+    }
+    loadOrders();
+  }, []);
 
   function handleCreate() {
     history.push('ordercreate');
   }
 
-  function handleListBudget() {
-    // history.push();
+  function formatDate(date) {
+    return format(new Date(date), 'dd/MM/yyyy');
   }
 
   return (
@@ -40,16 +54,7 @@ export default function Products() {
             </p>
           </CardIcon>
 
-          <Container>
-            <CustomButton
-              size={30}
-              color="warning"
-              onClick={handleListBudget}
-              type="button"
-            >
-              <MdDescription size={30} color="#FFF" />
-              <strong>Listar meus orçamentos</strong>
-            </CustomButton>
+          <Create>
             <CustomButton
               size={30}
               color="danger"
@@ -59,6 +64,33 @@ export default function Products() {
               <MdAdd size={30} color="#FFF" />
               <strong>Criar Orçamento</strong>
             </CustomButton>
+          </Create>
+
+          <Container>
+            <table>
+              <thead>
+                <tr>
+                  <th>Resposta</th>
+                  <th>Data</th>
+                  <th>Segmento</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order.id}>
+                    <td>{order.response}</td>
+                    <td>{formatDate(order.created_at)}</td>
+                    <td>{order.category.segment}</td>
+                    <td>{order.status}</td>
+                    <td>
+                      <Actions>{order}</Actions>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Container>
         </Card>
       </GridItem>
