@@ -64,11 +64,7 @@ export default function Sidebar(props) {
       <Link to="/ordersclient">
         <ListItem button className={classes.itemLink}>
           <MdStore className={classes.itemIcon} />
-<<<<<<< HEAD
-          <Text>SOLICITAÇÕES</Text>
-=======
           <Text>ORÇAMENTOS</Text>
->>>>>>> 34325c390ad0e78034442f69cd1112b8f33d4464
         </ListItem>
       </Link>
 

@@ -15,10 +15,6 @@ export function* signIn({ payload }) {
       password,
     });
 
-<<<<<<< HEAD
-    // console.tron.log(response.data);
-=======
->>>>>>> 34325c390ad0e78034442f69cd1112b8f33d4464
     const { token, user } = response.data;
 
     // VALIDAÇÃO PARA TROCAR AS DASHBOARDS
