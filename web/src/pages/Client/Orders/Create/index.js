@@ -23,10 +23,12 @@ import { Container, Actions } from './styles';
 
 const useStyles = makeStyles(styles);
 
-export default function ProductCreate() {
+export default function ProductCreate({ location }) {
   const [segments, setSegments] = useState([]);
   const classes = useStyles();
   const profile = useSelector((state) => state.user.profile);
+
+  // const { id, name } = location.state;
 
   useEffect(() => {
     async function loadSegments() {
@@ -89,7 +91,11 @@ export default function ProductCreate() {
               <Input name="name" placeholder="Nome completo" />
               <Input name="email" placeholder="E-mail" />
               <div className="form-div-1">
-                <Input name="amount" type="number" placeholder="Quantidade" />
+                <Input
+                  name="amount"
+                  type="number"
+                  placeholder="Total de produtos"
+                />
                 <Select
                   name="category"
                   // placeholder="Categoria"

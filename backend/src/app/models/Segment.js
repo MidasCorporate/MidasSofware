@@ -5,6 +5,7 @@ class Segment extends Model {
     super.init(
       {
         segment: Sequelize.STRING,
+        description: Sequelize.STRING,
       },
       {
         sequelize,
