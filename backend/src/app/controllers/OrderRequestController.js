@@ -114,7 +114,8 @@ class OrderRequestController {
     });
 
     // pessoa responsavel por receber a notificação
-    const ownerSocket = req.connectedUsers[6];
+
+    const ownerSocket = req.connectedUsers[segment_id];
 
     if (ownerSocket) {
       req.io.to(ownerSocket).emit('notification', notification);
