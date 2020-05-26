@@ -8,6 +8,7 @@ import {
   MdEdit,
   MdDeleteForever,
   MdMoreHoriz,
+  MdNewReleases,
 } from 'react-icons/md';
 
 import api from '~/services/api';
@@ -53,23 +54,23 @@ export default function Actions({ children }) {
 
       <ButtonActions>
         <button type="button" onClick={handleToggleVisible}>
-          <MdMoreHoriz size={20} color="#666" />
+          <MdNewReleases size={20} color="#666" />
         </button>
       </ButtonActions>
 
       <Content visible={visible}>
         <ButtonView>
           <button type="button" onClick={openModal}>
-            <MdRemoveRedEye size={20} color="#7159c1" />
+            <MdRemoveRedEye size={20} color="#ef4336" />
             Visualizar
           </button>
         </ButtonView>
-        <ButtonView>
+        {/* <ButtonView>
           <button type="button">
             <MdEdit size={20} color="#4D85EE" />
             Editar
           </button>
-        </ButtonView>
+        </ButtonView> */}
         {/* <ButtonView>
           <button type="button">
             <MdDeleteForever size={20} color="#cb2304" />

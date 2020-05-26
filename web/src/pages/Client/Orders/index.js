@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { MdAdd, MdDescription } from 'react-icons/md';
+import { MdAdd, MdFiberManualRecord } from 'react-icons/md';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -17,7 +17,7 @@ import CustomButton from '~/components/CustomButtons/Button';
 import Actions from './Actions';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
-import { Create, Container } from './styles';
+import { Create, Container, Tr } from './styles';
 
 const useStyles = makeStyles(styles);
 
@@ -29,7 +29,6 @@ export default function Products() {
   useEffect(() => {
     async function loadOrders() {
       const response = await api.get(`ordersreq?user_id=${id}`);
-      console.log(response.data);
       setOrders(response.data);
     }
     loadOrders();
@@ -79,15 +78,21 @@ export default function Products() {
               </thead>
               <tbody>
                 {orders.map((order) => (
-                  <tr key={order.id}>
+                  <Tr status={order.status} key={order.id}>
                     <td>{order.response}</td>
                     <td>{formatDate(order.created_at)}</td>
                     <td>{order.category.segment}</td>
-                    <td>{order.status}</td>
+                    <td>
+                      <div className="div-status">
+                        <span>
+                          <MdFiberManualRecord size={10} /> {order.status}
+                        </span>
+                      </div>
+                    </td>
                     <td>
                       <Actions>{order}</Actions>
                     </td>
-                  </tr>
+                  </Tr>
                 ))}
               </tbody>
             </table>

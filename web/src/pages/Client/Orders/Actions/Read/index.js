@@ -5,14 +5,7 @@ import { ModalContainer } from './styles';
 
 // import signatureImg from '~/assets/signature.png';
 
-export default function ReadOrder({
-  isOpen,
-  closeModal,
-  order,
-  startDate,
-  endDate,
-  signature,
-}) {
+export default function ReadOrder({ isOpen, closeModal, order, startDate }) {
   return (
     <Modal
       isOpen={isOpen}
@@ -65,17 +58,29 @@ export default function ReadOrder({
           </span>
           <span>
             <strong>arquivo:</strong>
-            <p>{order.fileRequest ? order.fileRequest.url : 'Sem anexo'}</p>
+            <p>
+              {order.fileRequest ? (
+                <a href={order.fileRequest.url}>{order.fileRequest.url}</a>
+              ) : (
+                'Sem anexo'
+              )}
+            </p>
           </span>
         </div>
         <div>
-          <strong>Resposta</strong>
+          <strong>Respostas</strong>
           <span>
             <p>{order.response}</p>
           </span>
           <span>
             <strong>arquivo:</strong>
-            <p>{order.fileResponse ? order.fileResponse.url : 'Sem anexo'}</p>
+            <p>
+              {order.fileResponse ? (
+                <a href={order.fileResponse.url}>{order.fileResponse.url}</a>
+              ) : (
+                'Sem anexo'
+              )}
+            </p>
           </span>
         </div>
       </ModalContainer>

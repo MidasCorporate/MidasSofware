@@ -15,12 +15,12 @@ export const ButtonActions = styled.span`
 export const Content = styled.div`
   position: absolute;
   width: 125px;
-  left: calc(69.7% - 60px);
-  margin-top: 25px;
+  left: calc(71.4% - 60px);
+  margin-top: 16px;
   margin-left: -25px;
-  width: 150px;
-  height: 120px;
-  background: #fff;
+  /* width: 150px; */
+  height: 50px;
+  background: #333;
   border-radius: 4px;
   padding: 15px 5px;
   display: ${(props) => (props.visible ? 'block' : 'none')};
@@ -33,7 +33,7 @@ export const Content = styled.div`
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-bottom: 20px solid #fff;
+    border-bottom: 20px solid #333;
   }
 `;
 
@@ -47,8 +47,8 @@ export const ButtonView = styled.div`
   svg {
     display: flex;
     align-items: flex-start;
-    margin-right: 5px;
-    margin-left: 20px;
+    margin-right: 7px;
+    margin-left: 10px;
   }
   & + div {
     border-top: 1px solid #eee;
@@ -60,12 +60,12 @@ export const ButtonView = styled.div`
     width: 100%;
     background: none;
     border: none;
-    color: #999999;
+    color: #eee;
     font-weight: bold;
     align-items: center;
     transition: color 0.6s;
     &:hover {
-      color: ${darken(0.3, '#999999')};
+      color: ${darken(0.3, '#eee')};
     }
   }
 `;

@@ -39,22 +39,6 @@ export const Container = styled.div`
       background: rgba(255, 255, 255, 0.2);
       margin: 10px 0 20px;
     }
-
-    /* button {
-      margin: 15px 0 0;
-      height: 44px;
-      background: #cb2304;
-      font-weight: bold;
-      color: #eee;
-      border: 0;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: background 0.5s;
-
-      &:hover {
-        background: ${darken(0.1, '#cb2304')};
-      }
-    } */
   }
 `;
 

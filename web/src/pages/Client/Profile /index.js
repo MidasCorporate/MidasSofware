@@ -2,6 +2,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
+import { MdUpdate } from 'react-icons/md';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { updateProfileRequest } from '~/store/modules/user/actions';
@@ -41,7 +42,7 @@ export default function Profile() {
             <Form initialData={profile} onSubmit={handleSubmit}>
               <Action>
                 <CustomButton type="submit" size={43} color="success">
-                  {/* <MdArrowBack size={30} color="#fff" /> */}
+                  <MdUpdate size={30} color="#fff" />
                   Atualizar
                 </CustomButton>
               </Action>

@@ -91,7 +91,11 @@ export default function ProductCreate({ location }) {
               <Input name="name" placeholder="Nome completo" />
               <Input name="email" placeholder="E-mail" />
               <div className="form-div-1">
-                <Input name="amount" type="number" placeholder="Quantidade" />
+                <Input
+                  name="amount"
+                  type="number"
+                  placeholder="Total de produtos"
+                />
                 <Select
                   name="category"
                   // placeholder="Categoria"

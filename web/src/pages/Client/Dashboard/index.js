@@ -180,7 +180,7 @@ export default function Dashboard() {
               success={filterSeg.length !== 0}
               error={filterSeg.length === 0}
               inputProps={{
-                placeholder: 'Procure pelos seguimentos de sua cidade',
+                placeholder: 'Procure pelos segmentos de sua cidade',
                 inputProps: {
                   'aria-label': 'Search',
                 },
@@ -223,7 +223,7 @@ export default function Dashboard() {
           <GridItem xs={12} sm={12} md={12}>
             <CardHeader color="danger">
               <p className={classes.cardCategoryTitleHomeError}>
-                Seguimento não encontrado
+                Segmento não encontrado
               </p>
               <p className={classes.cardCategoryTitleHome}>
                 <GiGriffinSymbol size={50} />
