@@ -3,14 +3,13 @@ import mongoose from 'mongoose';
 
 import User from '../app/models/User';
 import File from '../app/models/File';
-import Product from '../app/models/Product';
-import Order from '../app/models/Order';
-import Stock from '../app/models/Stock';
+import RequestBudget from '../app/models/RequestBudget';
+import ResponseBudget from '../app/models/ResponseBudget';
 import Segment from '../app/models/Segment';
 
 import databaseConfig from '../config/database';
 
-const models = [User, File, Product, Order, Stock, Segment];
+const models = [User, File, RequestBudget, Segment, ResponseBudget];
 
 class Database {
   constructor() {

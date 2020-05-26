@@ -1,13 +1,12 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Order extends Model {
+class RequestBudget extends Model {
   static init(sequelize) {
     super.init(
       {
         amount: Sequelize.INTEGER,
         status: Sequelize.STRING,
         request: Sequelize.STRING,
-        response: Sequelize.STRING,
       },
       {
         sequelize,
@@ -18,21 +17,13 @@ class Order extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Product, {
-      foreignKey: 'product_id',
-      as: 'products',
-    });
     this.belongsTo(models.User, {
-      foreignKey: 'user_id',
-      as: 'user',
+      foreignKey: 'client_id',
+      as: 'client',
     });
     this.belongsTo(models.File, {
       foreignKey: 'file_req_id',
       as: 'fileRequest',
-    });
-    this.belongsTo(models.File, {
-      foreignKey: 'file_res_id',
-      as: 'fileResponse',
     });
     this.belongsTo(models.Segment, {
       foreignKey: 'segment_id',
@@ -41,4 +32,4 @@ class Order extends Model {
   }
 }
 
-export default Order;
+export default RequestBudget;

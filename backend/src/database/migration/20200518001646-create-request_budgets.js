@@ -1,21 +1,36 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('stocks', {
+    return queryInterface.createTable('request_budgets', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      product_id: {
+      client_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'products', key: 'id' },
+        references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
+      file_req_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'files', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
+      },
+      request: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       amount: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       created_at: {
@@ -30,6 +45,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('stocks');
+    return queryInterface.dropTable('request_budgets');
   },
 };
