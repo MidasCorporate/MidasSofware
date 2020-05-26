@@ -33,7 +33,7 @@ class OrderRequestController {
         {
           model: Segment,
           as: 'category',
-          attributes: ['id', 'segment'],
+          attributes: ['id', 'segment', 'description', 'img'],
         },
       ],
     });

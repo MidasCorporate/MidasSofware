@@ -3,17 +3,17 @@ import Segment from '../models/Segment';
 
 class SegmentController {
   async index(req, res) {
-    // const isMidas = await User.findOne({
-    //   where: { id: req.userId, admin: true },
-    // });
+    const isMidas = await User.findOne({
+      where: { id: req.userId, admin: true },
+    });
 
-    // if (!isMidas) {
-    //   return res.status(400).json({ error: 'Not found' });
-    // }
+    if (!isMidas) {
+      return res.status(401).json({ error: 'You not are administrador' });
+    }
 
-    const segment = await Segment.findAll();
+    const segments = await Segment.findAll();
 
-    return res.json(segment);
+    return res.json(segments);
   }
 
   async store(req, res) {
@@ -22,14 +22,15 @@ class SegmentController {
     });
 
     if (!isMidas) {
-      return res.status(400).json({ error: 'Not found' });
+      return res.status(401).json({ error: 'You not are administrador' });
     }
 
-    const { segment, description } = req.body;
+    const { segment, description, img } = req.body;
 
     const segmentCreate = await Segment.create({
       segment,
       description,
+      img,
     });
 
     return res.json(segmentCreate);
@@ -41,12 +42,12 @@ class SegmentController {
     });
 
     if (!isMidas) {
-      return res.status(400).json({ error: 'Not found' });
+      return res.status(401).json({ error: 'You not are administrador' });
     }
 
-    const { id, segment, description } = req.body;
+    const { segment_id, segment, description, img } = req.body;
 
-    const segmentUpdate = await Segment.findByPk(id);
+    const segmentUpdate = await Segment.findByPk(segment_id);
 
     if (!segmentUpdate) {
       return res.status(400).json({ error: 'Sigment not exists' });
@@ -55,6 +56,7 @@ class SegmentController {
     await segmentUpdate.update({
       segment,
       description,
+      img,
     });
 
     return res.json(segmentUpdate);
@@ -66,20 +68,20 @@ class SegmentController {
     });
 
     if (!isMidas) {
-      return res.status(400).json({ error: 'Not found' });
+      return res.status(401).json({ error: 'You not are administrador' });
     }
 
-    const { id } = req.params;
+    const { segment_id } = req.params;
 
-    const segment = await Segment.findByPk(id);
+    const haveSegment = await Segment.findByPk(segment_id);
 
-    if (!segment) {
+    if (!haveSegment) {
       return res.status(400).json({ error: 'Sigment not exists' });
     }
 
-    await segment.destroy();
+    await haveSegment.destroy();
 
-    return res.json(segment);
+    return res.json(haveSegment);
   }
 }
 

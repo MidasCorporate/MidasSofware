@@ -6,6 +6,7 @@ class Segment extends Model {
       {
         segment: Sequelize.STRING,
         description: Sequelize.STRING,
+        img: Sequelize.STRING,
       },
       {
         sequelize,
