@@ -59,6 +59,8 @@ export default function Dashboard() {
     const liv = 'Livrarias';
     const oti = 'Óticas';
     const red = 'Rede Alimenticias';
+    const cli = 'Clinicas';
+    const mec = 'Mecanicas';
     const segmentos = [
       {
         id: 1,
@@ -93,13 +95,13 @@ export default function Dashboard() {
       },
       {
         id: 6,
-        name: liv,
+        name: cli,
         img: <GiOpenBook color="#fff" size={45} />,
         description: 'Livrarias, bancas de jornais e papelarias',
       },
       {
         id: 7,
-        name: oti,
+        name: mec,
         img: <GiBleedingEye color="#fff" size={45} />,
         description: 'Empresas especializadas em visão, como oticas e clinicas',
       },
@@ -168,7 +170,7 @@ export default function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <CardHeader color="danger">
-            <p className={classes.cardCategoryTitleHome}>Somos a patricidade</p>
+            <p className={classes.cardCategoryTitleHome}>Somos a praticidade</p>
           </CardHeader>
           <CardSearch>
             <CustomInput
@@ -194,7 +196,7 @@ export default function Dashboard() {
         <>
           <GridContainer>
             {filterSeg.map((segment) => (
-              <GridItem xs={12} sm={6} md={3}>
+              <GridItem key={segment.id} xs={12} sm={6} md={3}>
                 <Card>
                   <ButtonSelectSegment
                     onClick={() => handleSelectSegment(segment)}

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 // import { Confirm } from 'semantic-ui-react';
@@ -41,11 +42,11 @@ export default function Request() {
   const [orders, setOrders] = useState([]);
   const [OrderUnit, setOrderUnit] = useState(0);
   const [statusOrder, setStatusOrder] = useState(null);
-  // const [openConfirm, setOpenConfirm] = useState(false);
+  const { segment_id } = useSelector((state) => state.user.profile);
 
   useEffect(() => {
     async function loadOrders() {
-      const response = await api.get('ordersres');
+      const response = await api.get(`ordersres?segment_id=${segment_id}`);
       const { data } = response;
 
       setOrders(data);

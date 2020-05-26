@@ -15,7 +15,7 @@ export function* signIn({ payload }) {
       password,
     });
 
-    console.tron.log(response.data);
+    // console.tron.log(response.data);
     const { token, user } = response.data;
 
     // VALIDAÇÃO PARA TROCAR AS DASHBOARDS

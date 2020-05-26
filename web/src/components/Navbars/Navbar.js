@@ -16,7 +16,7 @@ import Menu from '@material-ui/icons/Menu';
 import Button from '~/components/CustomButtons/Button';
 import styles from '~/assets/jss/material-dashboard-react/components/headerStyle';
 import AdminNavbarLinks from './AdminNavbarLinks';
-import RTLNavbarLinks from './RTLNavbarLinks';
+
 import history from '~/services/history';
 
 const useStyles = makeStyles(styles);
@@ -47,11 +47,11 @@ export default function Header(props) {
             href="#"
             className={classes.title}
           >
-            Seja bem vindo de volta {profile.name}!
+            Seja bem vindo de volta {profile.name}
           </Button>
         </div>
         <Hidden smDown implementation="css">
-          {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
+          <AdminNavbarLinks />
         </Hidden>
         {/* {BOTÃO ABRE SIDEBAR} */}
         <Hidden smDown implementation="css">

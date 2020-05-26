@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-// import ChartistGraph from 'react-chartist';
+import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,13 +39,15 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
   const [orders, setOrders] = useState([]);
+  const { segment_id } = useSelector((state) => state.user.profile);
+
   // const [products, setProducts] = useState([]);
   // const [stock, setStock] = useState([]);
   // const [users, setUsers] = useState([]);
 
   useEffect(() => {
     async function loadOrders() {
-      const response = await api.get('ordersres');
+      const response = await api.get(`ordersres?segment_id=${segment_id}`);
       const { data } = response;
       setOrders(data);
     }

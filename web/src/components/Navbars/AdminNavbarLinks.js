@@ -53,10 +53,10 @@ export default function AdminNavbarLinks() {
     () =>
       socketio('http://localhost:3333', {
         query: {
-          user_id: profile.id,
+          user_id: profile.segment_id,
         },
       }),
-    [profile.id]
+    [profile.segment_id]
   );
 
   useEffect(() => {

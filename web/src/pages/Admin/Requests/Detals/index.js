@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { parseISO, formatDistance, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -44,12 +45,13 @@ export default function Request(props) {
   const [userDetals, setDetalsUser] = useState([]);
   const [situation, setSituation] = useState(false);
   const [tagFile, setTagFile] = useState(false);
+  const { segment_id } = useSelector((state) => state.user.profile);
 
   useEffect(() => {
     async function loadUsersOrder() {
       const { match } = props;
       const orderId = parseInt(decodeURIComponent(match.params.id), 10);
-      const response = await api.get('ordersres');
+      const response = await api.get(`ordersres?segment_id=${segment_id}`);
       const dataOrder = response.data.find((order) => order.id === orderId);
       const dateDetalsOrder = formatDistance(
         parseISO(dataOrder.created_at),
