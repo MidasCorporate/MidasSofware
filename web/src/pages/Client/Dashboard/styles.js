@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Constainer = styled.div`
-  display: flex;
-  align-items: center;
+  img {
+    width: 45px;
+  }
 `;
 export const ButtonSelectSegment = styled.button`
   margin: none;

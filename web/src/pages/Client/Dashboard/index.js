@@ -24,9 +24,10 @@ import CardFooter from '~/components/Card/CardFooter';
 
 import CustomInput from '~/components/CustomInput/CustomInput';
 
-import { ButtonSelectSegment } from './styles';
+import { ButtonSelectSegment, Constainer } from './styles';
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 
+import api from '~/services/api';
 import history from '~/services/history';
 
 const useStyles = makeStyles(styles);
@@ -36,6 +37,18 @@ export default function Dashboard() {
   const [sgm, setSgm] = useState([]);
   const [filterSeg, setFilter] = useState([]);
   const [temp, setTemp] = useState(true);
+  const [segmentsFile, setSegmentFile] = useState([]);
+
+  useEffect(() => {
+    async function loadCardSegments() {
+      const response = await api.get('segments');
+      const { data } = response;
+
+      console.log(data);
+      setSegmentFile(data);
+    }
+    loadCardSegments();
+  }, []);
 
   function handleChange(e) {
     const filterFinish = sgm.filter(function (segment) {
@@ -62,10 +75,9 @@ export default function Dashboard() {
     setTemp(false);
   }
 
-  const placeholder = ['place1', 'place2', 'place3', 'place3'];
   const placeholderExampleGrid = (
     <Card test>
-      {placeholder.map((place) => (
+      {segmentsFile.map((place) => (
         <Grid columns={4} stackable>
           <Grid.Column>
             <Segment raised>
@@ -246,7 +258,7 @@ export default function Dashboard() {
     setFilter(segmentos);
   }, []);
   return (
-    <div>
+    <Constainer>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <CardHeader color="danger">
@@ -280,15 +292,17 @@ export default function Dashboard() {
           {filterSeg.length !== 0 ? (
             <>
               <GridContainer>
-                {filterSeg.map((segment) => (
+                {segmentsFile.map((segment) => (
                   <GridItem key={segment.id} xs={12} sm={6} md={3}>
                     <Card>
                       <ButtonSelectSegment
                         onClick={() => handleSelectSegment(segment)}
                       >
                         <CardHeader color="danger">
-                          <CardIcon color="danger">{segment.img}</CardIcon>
-                          <p className={classes.cardTitle}>{segment.name}</p>
+                          <CardIcon color="danger">
+                            <img src={segment.img} alt="book" />
+                          </CardIcon>
+                          <p className={classes.cardTitle}>{segment.segment}</p>
                           <p className={classes.cardCategoryMoney}>
                             {segment.description}
                           </p>
@@ -321,6 +335,6 @@ export default function Dashboard() {
           )}
         </>
       )}
-    </div>
+    </Constainer>
   );
 }
