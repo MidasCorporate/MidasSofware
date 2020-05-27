@@ -23,7 +23,7 @@ class OrderRequestController {
         {
           model: User,
           as: 'client',
-          attributes: ['id', 'name', 'email'],
+          attributes: ['id', 'name', 'email', 'created_at'],
         },
         {
           model: File,

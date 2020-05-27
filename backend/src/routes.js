@@ -9,6 +9,7 @@ import RequestBudgetController from './app/controllers/RequestBudgetController';
 import ResponseBudgetController from './app/controllers/ResponseBudgetController';
 import NotificationController from './app/controllers/NotificationController';
 import SegmentController from './app/controllers/SegmentController';
+import RequestBudgetFilterController from './app/controllers/RequestBudgetFilterController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -24,6 +25,8 @@ routes.get('/users', UserController.index);
 routes.put('/users', UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
+
+routes.get('/ordersreq', RequestBudgetFilterController.index);
 
 routes.get('/ordersreq', RequestBudgetController.index);
 routes.post('/ordersreq', RequestBudgetController.store);
