@@ -1,28 +1,26 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+// import { darken } from 'polished';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  position: relative;
+`;
 
-export const ButtonActions = styled.span`
-  align-self: center;
-  justify-content: center;
-  button {
-    border: 0;
-    background: none;
-  }
+export const ButtonActions = styled.button`
+  border: 0;
+  background: none;
+  position: relative;
 `;
 
 export const Content = styled.div`
   position: absolute;
   width: 125px;
-  left: calc(71.4% - 60px);
-  margin-top: 16px;
-  margin-left: -25px;
-  /* width: 150px; */
-  height: 50px;
+  left: calc(50% - 62.5px);
+  top: calc(100% + 16px);
+  height: 35px;
   background: #333;
   border-radius: 4px;
-  padding: 15px 5px;
+  padding: 8px 5px;
+
   display: ${(props) => (props.visible ? 'block' : 'none')};
   &::before {
     content: '';
@@ -38,34 +36,24 @@ export const Content = styled.div`
 `;
 
 export const ButtonView = styled.div`
-  div {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  justify-content: center;
+
   svg {
     display: flex;
-    align-items: flex-start;
-    margin-right: 7px;
-    margin-left: 10px;
+    margin-right: 5px;
   }
-  & + div {
-    border-top: 1px solid #eee;
-    margin-top: 5px;
-    padding-top: 5px;
-  }
+
   button {
     display: flex;
-    width: 100%;
     background: none;
     border: none;
-    color: #eee;
+    color: #fff;
     font-weight: bold;
     align-items: center;
     transition: color 0.6s;
     &:hover {
-      color: ${darken(0.3, '#eee')};
+      color: #ef4336;
     }
   }
 `;

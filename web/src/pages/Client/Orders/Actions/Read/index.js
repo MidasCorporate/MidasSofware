@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
-import { ModalContainer } from './styles';
+import { ModalContainer, Info, Budget, Responses, Content } from './styles';
 
+import api from '~/services/api';
 // import signatureImg from '~/assets/signature.png';
 
 export default function ReadOrder({ isOpen, closeModal, order, startDate }) {
+  const [responses, setResponses] = useState([]);
+
+  useEffect(() => {
+    async function loadResponses() {
+      const response = await api.get(`ordersres?request_id=${order.id}`);
+
+      setResponses(response.data);
+    }
+    loadResponses();
+  }, []);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -36,53 +48,61 @@ export default function ReadOrder({ isOpen, closeModal, order, startDate }) {
       }}
     >
       <ModalContainer>
-        <div>
-          <strong>Informações do orçamento</strong>
+        <Info>
+          <div>
+            <strong>Informações do orçamento</strong>
+          </div>
           <span>
-            <strong>segmento:</strong>
+            <strong>Segmento:</strong>
             <p>{order.category.segment}</p>
           </span>
           <span>
-            <strong>data:</strong>
+            <strong>Data:</strong>
             <p>{startDate}</p>
           </span>
-          <span>
-            <strong>status:</strong>
-            <p>{order.status}</p>
-          </span>
-        </div>
-        <div>
-          <strong>Pedido</strong>
-          <span>
-            <p>{order.request}</p>
-          </span>
+        </Info>
+        <Budget>
+          <div>
+            <strong>Orçamento:</strong>
+          </div>
+          <p>{order.request}</p>
           <span>
             <strong>arquivo:</strong>
-            <p>
-              {order.fileRequest ? (
-                <a href={order.fileRequest.url}>{order.fileRequest.url}</a>
-              ) : (
-                'Sem anexo'
-              )}
-            </p>
+            {order.fileRequest ? (
+              <a href={order.fileRequest.url}>{order.fileRequest.url}</a>
+            ) : (
+              'Sem anexo'
+            )}
           </span>
-        </div>
-        <div>
-          <strong>Respostas</strong>
-          <span>
-            <p>{order.response}</p>
-          </span>
-          <span>
-            <strong>arquivo:</strong>
-            <p>
-              {order.fileResponse ? (
-                <a href={order.fileResponse.url}>{order.fileResponse.url}</a>
-              ) : (
-                'Sem anexo'
-              )}
-            </p>
-          </span>
-        </div>
+        </Budget>
+        <Responses>
+          <div className="div-res">
+            <strong>Resposta(s):</strong>
+          </div>
+          {responses.map((res) => (
+            <Content key={res.id}>
+              <span>
+                <p>{res.response}</p>
+              </span>
+              <span>
+                <p>
+                  {res.fileResponse ? (
+                    <>
+                      <strong>arquivo:</strong>
+                      <a href={res.fileResponse.url}>{res.fileResponse.url}</a>
+                    </>
+                  ) : (
+                    ''
+                  )}
+                </p>
+              </span>
+              <div>
+                <strong>Empresa:</strong>
+                <p>Midas Inc.</p>
+              </div>
+            </Content>
+          ))}
+        </Responses>
       </ModalContainer>
     </Modal>
   );
