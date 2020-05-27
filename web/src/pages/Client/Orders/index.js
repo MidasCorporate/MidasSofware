@@ -81,6 +81,7 @@ export default function Products() {
                   <Tr status={order.status} key={order.id}>
                     <td>{order.response}</td>
                     <td>{formatDate(order.created_at)}</td>
+
                     <td>{order.category.segment}</td>
                     <td>
                       <div className="div-status">

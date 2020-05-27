@@ -25,7 +25,15 @@ import styles from '~/assets/jss/material-dashboard-react/views/textStyles';
 const useStyles = makeStyles(styles);
 
 export default function Request(props) {
-  const { tag, color, user_id, id, description, urlFile, status } = props;
+  const {
+    tag,
+    color,
+    admin_id,
+    request_id,
+    description,
+    urlFile,
+    status,
+  } = props;
   const [infoTagLink, setinfoTagLink] = useState('transparent');
   const [infoTagBold, setinfoTagBold] = useState('transparent');
   const [link, setLink] = useState(false);
@@ -34,6 +42,9 @@ export default function Request(props) {
   const classes = useStyles();
 
   useEffect(() => {
+    async function loadResponseExist() {
+      const response = await api.get();
+    }
     function loadInfoResponse() {
       const pageInitialDetal = {
         response: description,
@@ -49,13 +60,14 @@ export default function Request(props) {
   }, [props]);
 
   async function handleSubmit(data) {
+    console.log(admin_id);
     const { file_res_id, response } = data;
     await api.post('ordersres', {
       file_res_id,
-      response,
-      user_id,
-      id,
+      request_id,
+      admin_id,
       status: 'Finalizado',
+      response,
     });
   }
 

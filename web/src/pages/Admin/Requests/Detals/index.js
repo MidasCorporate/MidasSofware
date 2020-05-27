@@ -45,14 +45,17 @@ export default function Request(props) {
   const [userDetals, setDetalsUser] = useState([]);
   const [situation, setSituation] = useState(false);
   const [tagFile, setTagFile] = useState(false);
-  const { segment_id } = useSelector((state) => state.user.profile);
+  const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
     async function loadUsersOrder() {
       const { match } = props;
       const orderId = parseInt(decodeURIComponent(match.params.id), 10);
-      const response = await api.get(`ordersres?segment_id=${segment_id}`);
+      const response = await api.get(
+        `ordersreq?segment_id=${profile.segment_id}`
+      );
       const dataOrder = response.data.find((order) => order.id === orderId);
+
       const dateDetalsOrder = formatDistance(
         parseISO(dataOrder.created_at),
         new Date(),
@@ -61,12 +64,12 @@ export default function Request(props) {
           locale: pt,
         }
       );
-      const formatdateUser = parseISO(dataOrder.user.created_at);
+      // const formatdateUser = parseISO(dataOrder.client.created_at);
 
-      const formattedDateUser = format(
-        formatdateUser,
-        "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
-      );
+      // const formattedDateUser = format(
+      //   formatdateUser,
+      //   "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
+      // );
       if (dataOrder.fileRequest !== null) {
         setTagFile(true);
       }
@@ -74,8 +77,8 @@ export default function Request(props) {
         setSituation(!situation);
       }
 
-      setDetalsUser(dataOrder.user);
-      setDateUser(formattedDateUser);
+      setDetalsUser(dataOrder.client);
+      // setDateUser(formattedDateUser);
       setDateOrder(dateDetalsOrder);
       setOrderDetals(dataOrder);
     }
@@ -88,7 +91,7 @@ export default function Request(props) {
     toast.success('Ordem finalizada com sucesso!');
   }
   async function tagleCanceled() {
-    await api.delete(`ordersreq/${orderDetals.id}/Cancelada`);
+    await api.delete(`ordersreq/${profile.segment_id.id}/Cancelada`);
 
     toast.success('Ordem cancelada com sucesso!');
   }
@@ -241,9 +244,9 @@ export default function Request(props) {
               status={orderDetals.status}
               color={Decodifiq(orderDetals)}
               tag={situation}
-              id={orderDetals.id}
-              user_id={userDetals.id}
-              urlFile={orderDetals.fileResponse}
+              request_id={orderDetals.id}
+              admin_id={profile.id}
+              urlFile={orderDetals.fileRequest}
               description={orderDetals.response}
             />
           </>

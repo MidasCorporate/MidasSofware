@@ -46,16 +46,16 @@ export default function Request(props) {
   //   loadInfoResponse();
   // }, [props]);
 
-  async function handleSubmit(data) {
-    // const { file_res_id, response } = data;
-    // await api.post('ordersres', {
-    //   file_res_id,
-    //   response,
-    //   user_id,
-    //   id,
-    //   status: 'Finalizado',
-    // });
-  }
+  // async function handleSubmit(data) {
+  //   const { file_res_id, response } = data;
+  //   await api.post('ordersres', {
+  //     file_res_id,
+  //     response,
+  //     user_id,
+  //     id,
+  //     status: 'Finalizado',
+  //   });
+  // }
 
   // function verifiqStatusOrder() {
   //   if (color === 'success') {

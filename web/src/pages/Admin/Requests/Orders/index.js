@@ -46,7 +46,7 @@ export default function Request() {
 
   useEffect(() => {
     async function loadOrders() {
-      const response = await api.get(`ordersres?segment_id=${segment_id}`);
+      const response = await api.get(`ordersreq?segment_id=${segment_id}`);
       const { data } = response;
 
       setOrders(data);
@@ -190,7 +190,7 @@ export default function Request() {
                   <Tr status={order.status} key={order.id}>
                     <td>#{order.id}</td>
                     <td>{formatDate(order.created_at)}</td>
-                    <td>{order.user.name}</td>
+                    <td>{order.client.name}</td>
                     <td>Materiais para construção</td>
                     <td>{formatFile(order.fileRequest)}</td>
                     <td>
