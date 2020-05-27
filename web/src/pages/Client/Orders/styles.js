@@ -16,7 +16,7 @@ export const Create = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: 30px 120px;
+  padding: 30px 100px;
   margin: auto;
 
   table {

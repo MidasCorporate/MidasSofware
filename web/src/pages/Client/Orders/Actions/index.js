@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
 import { format, parseISO, isValid } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { toast } from 'react-toastify';
 
-import {
-  MdRemoveRedEye,
-  MdEdit,
-  MdDeleteForever,
-  MdMoreHoriz,
-  MdNewReleases,
-} from 'react-icons/md';
+import { MdRemoveRedEye, MdNewReleases } from 'react-icons/md';
 
-import api from '~/services/api';
-import history from '~/services/history';
 import ReadOrder from './Read';
 
 import { Container, Content, ButtonActions, ButtonView } from './styles';
@@ -21,9 +12,8 @@ export default function Actions({ children }) {
   const [visible, setVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
 
-  const { id, request, created_at, response, status } = children;
+  const { created_at } = children;
 
   function openModal() {
     setIsOpen(true);
@@ -52,10 +42,8 @@ export default function Actions({ children }) {
         isOpen={isOpen}
       />
 
-      <ButtonActions>
-        <button type="button" onClick={handleToggleVisible}>
-          <MdNewReleases size={20} color="#666" />
-        </button>
+      <ButtonActions type="button" onClick={handleToggleVisible}>
+        <MdNewReleases size={20} color="#666" />
       </ButtonActions>
 
       <Content visible={visible}>
@@ -65,18 +53,6 @@ export default function Actions({ children }) {
             Visualizar
           </button>
         </ButtonView>
-        {/* <ButtonView>
-          <button type="button">
-            <MdEdit size={20} color="#4D85EE" />
-            Editar
-          </button>
-        </ButtonView> */}
-        {/* <ButtonView>
-          <button type="button">
-            <MdDeleteForever size={20} color="#cb2304" />
-            Excluir
-          </button>
-        </ButtonView> */}
       </Content>
     </Container>
   );

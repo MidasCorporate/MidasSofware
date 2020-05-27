@@ -50,7 +50,7 @@ export default function ProductCreate({ location }) {
   async function handleSubmit(data) {
     const { file_req_id, amount, category, request } = data;
     await api.post('ordersreq', {
-      user_id: profile.id,
+      client_id: profile.id,
       file_req_id,
       amount,
       status: 'Aguardando',

@@ -15,6 +15,7 @@ import Card from '~/components/Card/Card';
 import CardIcon from '~/components/Card/CardIcon';
 import CustomButton from '~/components/CustomButtons/Button';
 import Actions from './Actions';
+import Response from './Response';
 
 import styles from '~/assets/jss/material-dashboard-react/views/dashboardStyle';
 import { Create, Container, Tr } from './styles';
@@ -28,7 +29,7 @@ export default function Products() {
 
   useEffect(() => {
     async function loadOrders() {
-      const response = await api.get(`ordersreq?user_id=${id}`);
+      const response = await api.get(`budgetfilter?client_id=${id}`);
       setOrders(response.data);
     }
     loadOrders();
@@ -69,7 +70,7 @@ export default function Products() {
             <table>
               <thead>
                 <tr>
-                  <th>Resposta</th>
+                  <th>Resposta(s)</th>
                   <th>Data</th>
                   <th>Segmento</th>
                   <th>Status</th>
@@ -79,7 +80,9 @@ export default function Products() {
               <tbody>
                 {orders.map((order) => (
                   <Tr status={order.status} key={order.id}>
-                    <td>{order.response}</td>
+                    <td>
+                      <Response>{order}</Response>
+                    </td>
                     <td>{formatDate(order.created_at)}</td>
 
                     <td>{order.category.segment}</td>
