@@ -1,5 +1,6 @@
 /* eslint-disable func-names */
 import React, { useState, useEffect } from 'react';
+import { Grid, Placeholder, Segment } from 'semantic-ui-react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -34,6 +35,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const [sgm, setSgm] = useState([]);
   const [filterSeg, setFilter] = useState([]);
+  const [temp, setTemp] = useState(true);
 
   function handleChange(e) {
     const filterFinish = sgm.filter(function (segment) {
@@ -52,6 +54,84 @@ export default function Dashboard() {
       state: { id, name },
     });
   }
+
+  // eslint-disable-next-line no-use-before-define
+  setTimeout(setPLaceholder, 3000);
+
+  function setPLaceholder() {
+    setTemp(false);
+  }
+
+  const placeholder = ['place1', 'place2', 'place3', 'place3'];
+  const placeholderExampleGrid = (
+    <Card test>
+      {placeholder.map((place) => (
+        <Grid columns={4} stackable>
+          <Grid.Column>
+            <Segment raised>
+              <Placeholder>
+                <Placeholder.Header image style={{ height: 45 }}>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Header>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line length="medium" />
+                  <Placeholder.Line length="short" />
+                </Placeholder.Paragraph>
+              </Placeholder>
+            </Segment>
+          </Grid.Column>
+
+          <Grid.Column>
+            <Segment raised>
+              <Placeholder>
+                <Placeholder.Header image style={{ height: 45 }}>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Header>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line length="medium" />
+                  <Placeholder.Line length="short" />
+                </Placeholder.Paragraph>
+              </Placeholder>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment raised>
+              <Placeholder>
+                <Placeholder.Header image style={{ height: 45 }}>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Header>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line length="medium" />
+                  <Placeholder.Line length="short" />
+                </Placeholder.Paragraph>
+              </Placeholder>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment raised>
+              <Placeholder>
+                <Placeholder.Header image style={{ height: 45 }}>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Header>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line length="medium" />
+                  <Placeholder.Line length="short" />
+                </Placeholder.Paragraph>
+              </Placeholder>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+      ))}
+    </Card>
+  );
 
   useEffect(() => {
     const mat = 'Materiais para construção';
@@ -191,48 +271,55 @@ export default function Dashboard() {
           </CardSearch>
         </GridItem>
       </GridContainer>
-
-      {filterSeg.length !== 0 ? (
+      {temp ? (
         <>
-          <GridContainer>
-            {filterSeg.map((segment) => (
-              <GridItem key={segment.id} xs={12} sm={6} md={3}>
-                <Card>
-                  <ButtonSelectSegment
-                    onClick={() => handleSelectSegment(segment)}
-                  >
-                    <CardHeader color="danger">
-                      <CardIcon color="danger">{segment.img}</CardIcon>
-                      <p className={classes.cardTitle}>{segment.name}</p>
-                      <p className={classes.cardCategoryMoney}>
-                        {segment.description}
-                      </p>
-                    </CardHeader>
-                  </ButtonSelectSegment>
-                  <CardFooter stats>
-                    <div className={classes.stats}>
-                      <GiInfo color="#999" size={30} />
-                      <span>Atualizações conforme cadastro</span>
-                    </div>
-                  </CardFooter>
-                </Card>
-              </GridItem>
-            ))}
-          </GridContainer>
+          <GridContainer>{placeholderExampleGrid}</GridContainer>
         </>
       ) : (
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={12}>
-            <CardHeader color="danger">
-              <p className={classes.cardCategoryTitleHomeError}>
-                Segmento não encontrado
-              </p>
-              <p className={classes.cardCategoryTitleHome}>
-                <GiGriffinSymbol size={50} />
-              </p>
-            </CardHeader>
-          </GridItem>
-        </GridContainer>
+        <>
+          {filterSeg.length !== 0 ? (
+            <>
+              <GridContainer>
+                {filterSeg.map((segment) => (
+                  <GridItem key={segment.id} xs={12} sm={6} md={3}>
+                    <Card>
+                      <ButtonSelectSegment
+                        onClick={() => handleSelectSegment(segment)}
+                      >
+                        <CardHeader color="danger">
+                          <CardIcon color="danger">{segment.img}</CardIcon>
+                          <p className={classes.cardTitle}>{segment.name}</p>
+                          <p className={classes.cardCategoryMoney}>
+                            {segment.description}
+                          </p>
+                        </CardHeader>
+                      </ButtonSelectSegment>
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <GiInfo color="#999" size={30} />
+                          <span>Atualizações conforme cadastro</span>
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </GridItem>
+                ))}
+              </GridContainer>
+            </>
+          ) : (
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={12}>
+                <CardHeader color="danger">
+                  <p className={classes.cardCategoryTitleHomeError}>
+                    Segmento não encontrado
+                  </p>
+                  <p className={classes.cardCategoryTitleHome}>
+                    <GiGriffinSymbol size={50} />
+                  </p>
+                </CardHeader>
+              </GridItem>
+            </GridContainer>
+          )}
+        </>
       )}
     </div>
   );

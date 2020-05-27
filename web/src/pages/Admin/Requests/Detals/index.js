@@ -246,8 +246,6 @@ export default function Request(props) {
               tag={situation}
               request_id={orderDetals.id}
               admin_id={profile.id}
-              urlFile={orderDetals.fileRequest}
-              description={orderDetals.response}
             />
           </>
         ) : (

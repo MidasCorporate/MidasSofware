@@ -16,9 +16,10 @@ const useStyles = makeStyles(styles);
 
 export default function Card(props) {
   const classes = useStyles();
-  const { className, children, plain, profile, chart, ...rest } = props;
+  const { className, children, plain, profile, chart, test, ...rest } = props;
   const cardClasses = classNames({
     [classes.card]: true,
+    [classes.cardPlaceholder]: test,
     [classes.cardDash]: true,
     [classes.cardPlain]: plain,
     [classes.cardProfile]: profile,

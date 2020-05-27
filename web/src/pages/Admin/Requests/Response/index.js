@@ -25,42 +25,34 @@ import styles from '~/assets/jss/material-dashboard-react/views/textStyles';
 const useStyles = makeStyles(styles);
 
 export default function Request(props) {
-  const {
-    tag,
-    color,
-    admin_id,
-    request_id,
-    description,
-    urlFile,
-    status,
-  } = props;
+  const { tag, color, admin_id, request_id, status } = props;
   const [infoTagLink, setinfoTagLink] = useState('transparent');
   const [infoTagBold, setinfoTagBold] = useState('transparent');
   const [link, setLink] = useState(false);
-  const [pageInitial, setPageInitial] = useState({});
+  const [pageInitial, setPageInitial] = useState([]);
   const [tagStatus, setTagStatus] = useState(false);
+  // const [responses, setResponses] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
     async function loadResponseExist() {
-      const response = await api.get();
-    }
-    function loadInfoResponse() {
-      const pageInitialDetal = {
-        response: description,
-      };
-      setPageInitial(pageInitialDetal);
+      const response = await api.get(`ordersres?request_id=${request_id}`);
+      const { data } = response;
+
+      if (data[0].response !== '') {
+        const pageInitialDetal = {
+          response: data[0].response,
+          url: data[0].fileResponse.url,
+        };
+        setPageInitial(pageInitialDetal);
+        setTagStatus(true);
+      }
     }
 
-    if (status === 'Finalizado' || status === 'Cancelada') {
-      setTagStatus(true);
-    }
-
-    loadInfoResponse();
-  }, [props]);
+    loadResponseExist();
+  }, [request_id]);
 
   async function handleSubmit(data) {
-    console.log(admin_id);
     const { file_res_id, response } = data;
     await api.post('ordersres', {
       file_res_id,
@@ -78,7 +70,7 @@ export default function Request(props) {
   // }
 
   function handleOpenfile() {
-    window.location.href = urlFile.url;
+    window.location.href = pageInitial.url;
   }
 
   function handleTagConditionText(e) {
@@ -155,7 +147,7 @@ export default function Request(props) {
                     </Button>
                   </>
 
-                  <FileOrder tag={urlFile !== null}>
+                  <FileOrder tag={pageInitial.url !== null}>
                     <div>Visualizar Anexo</div>
                     <Button
                       color="simple"
@@ -190,7 +182,5 @@ export default function Request(props) {
 Request.propTypes = {
   tag: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
-  user_id: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
+  request_id: PropTypes.number.isRequired,
 };
