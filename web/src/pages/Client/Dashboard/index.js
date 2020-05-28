@@ -4,15 +4,7 @@ import { Grid, Placeholder, Segment } from 'semantic-ui-react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import {
-  GiDigDug,
-  GiOverdose,
-  GiOpenBook,
-  GiBleedingEye,
-  GiNoseSide,
-  GiGriffinSymbol,
-  GiInfo,
-} from 'react-icons/gi';
+import { GiGriffinSymbol, GiInfo } from 'react-icons/gi';
 
 import GridContainer from '~/components/Grid/GridContainer';
 import GridItem from '~/components/Grid/GridItem';
@@ -21,6 +13,7 @@ import CardSearch from '~/components/Card/CardSearch';
 import CardHeader from '~/components/Card/CardHeader';
 import CardIcon from '~/components/Card/CardIcon';
 import CardFooter from '~/components/Card/CardFooter';
+import placeholderExampleGrid from '~/components/Placeholder/Placeholder';
 
 import CustomInput from '~/components/CustomInput/CustomInput';
 
@@ -70,193 +63,12 @@ export default function Dashboard() {
   }
 
   // eslint-disable-next-line no-use-before-define
-  setTimeout(setPLaceholder, 3000);
+  setTimeout(setPLaceholder, 2500);
 
   function setPLaceholder() {
     setTemp(false);
   }
-  const placehold = [4];
-  const placeholderExampleGrid = (
-    <Card test>
-      {placehold.map((place) => (
-        <Grid columns={4} stackable>
-          <Grid.Column>
-            <Segment raised>
-              <Placeholder>
-                <Placeholder.Header image style={{ height: 45 }}>
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                </Placeholder.Header>
-                <Placeholder.Paragraph>
-                  <Placeholder.Line length="medium" />
-                  <Placeholder.Line length="short" />
-                </Placeholder.Paragraph>
-              </Placeholder>
-            </Segment>
-          </Grid.Column>
 
-          <Grid.Column>
-            <Segment raised>
-              <Placeholder>
-                <Placeholder.Header image style={{ height: 45 }}>
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                </Placeholder.Header>
-                <Placeholder.Paragraph>
-                  <Placeholder.Line length="medium" />
-                  <Placeholder.Line length="short" />
-                </Placeholder.Paragraph>
-              </Placeholder>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment raised>
-              <Placeholder>
-                <Placeholder.Header image style={{ height: 45 }}>
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                </Placeholder.Header>
-                <Placeholder.Paragraph>
-                  <Placeholder.Line length="medium" />
-                  <Placeholder.Line length="short" />
-                </Placeholder.Paragraph>
-              </Placeholder>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment raised>
-              <Placeholder>
-                <Placeholder.Header image style={{ height: 45 }}>
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                </Placeholder.Header>
-                <Placeholder.Paragraph>
-                  <Placeholder.Line length="medium" />
-                  <Placeholder.Line length="short" />
-                </Placeholder.Paragraph>
-              </Placeholder>
-            </Segment>
-          </Grid.Column>
-        </Grid>
-      ))}
-    </Card>
-  );
-
-  useEffect(() => {
-    const mat = 'Materiais para construção';
-    const farm = 'Farmácias';
-    const liv = 'Livrarias';
-    const oti = 'Óticas';
-    const red = 'Rede Alimenticias';
-    const cli = 'Clinicas';
-    const mec = 'Mecanicas';
-    const segmentos = [
-      {
-        id: 1,
-        name: mat,
-        img: <GiDigDug color="#fff" size={45} />,
-        description:
-          'Empresas relacionadas a materiais de construção, como casa de tintas.',
-      },
-      {
-        id: 2,
-        name: farm,
-        img: <GiOverdose color="#fff" size={45} />,
-        description: 'Drogarias, Farmacias naturais e empresas de cósmeticos',
-      },
-      {
-        id: 3,
-        name: liv,
-        img: <GiOpenBook color="#fff" size={45} />,
-        description: 'Livrarias, bancas de jornais e papelarias',
-      },
-      {
-        id: 4,
-        name: oti,
-        img: <GiBleedingEye color="#fff" size={45} />,
-        description: 'Empresas especializadas em visão, como oticas e clinicas',
-      },
-      {
-        id: 5,
-        name: red,
-        img: <GiNoseSide color="#fff" size={45} />,
-        description: 'Todas os restaurantes e lojas de bebidas e alimento',
-      },
-      {
-        id: 6,
-        name: cli,
-        img: <GiOpenBook color="#fff" size={45} />,
-        description: 'Livrarias, bancas de jornais e papelarias',
-      },
-      {
-        id: 7,
-        name: mec,
-        img: <GiBleedingEye color="#fff" size={45} />,
-        description: 'Empresas especializadas em visão, como oticas e clinicas',
-      },
-      {
-        id: 8,
-        name: red,
-        img: <GiNoseSide color="#fff" size={45} />,
-        description: 'Todas os restaurantes e lojas de bebidas e alimento',
-      },
-      {
-        id: 10,
-        name: mat,
-        img: <GiDigDug color="#fff" size={45} />,
-        description:
-          'Empresas relacionadas a materiais de construção, como casa de tintas.',
-      },
-      {
-        id: 11,
-        name: farm,
-        img: <GiOverdose color="#fff" size={45} />,
-        description: 'Drogarias, Farmacias naturais e empresas de cósmeticos',
-      },
-      {
-        id: 12,
-        name: liv,
-        img: <GiOpenBook color="#fff" size={45} />,
-        description: 'Livrarias, bancas de jornais e papelarias',
-      },
-      {
-        id: 13,
-        name: oti,
-        img: <GiBleedingEye color="#fff" size={45} />,
-        description: 'Empresas especializadas em visão, como oticas e clinicas',
-      },
-      {
-        id: 19,
-        name: red,
-        img: <GiNoseSide color="#fff" size={45} />,
-        description: 'Todas os restaurantes e lojas de bebidas e alimento',
-      },
-      {
-        id: 14,
-        name: liv,
-        img: <GiOpenBook color="#fff" size={45} />,
-        description: 'Livrarias, bancas de jornais e papelarias',
-      },
-      {
-        id: 15,
-        name: oti,
-        img: <GiBleedingEye color="#fff" size={45} />,
-        description: 'Empresas especializadas em visão, como oticas e clinicas',
-      },
-      {
-        id: 16,
-        name: red,
-        img: <GiNoseSide color="#fff" size={45} />,
-        description: 'Todas os restaurantes e lojas de bebidas e alimento',
-      },
-    ];
-
-    setSgm(segmentos);
-  }, []);
   return (
     <Constainer>
       <GridContainer>
@@ -300,7 +112,9 @@ export default function Dashboard() {
                       >
                         <CardHeader color="danger">
                           <CardIcon color="danger">
-                            <img src={segment.img} alt="book" />
+                            <span className="material-icons" color="#fff">
+                              {segment.img}
+                            </span>
                           </CardIcon>
                           <p className={classes.cardTitle}>{segment.segment}</p>
                           <p className={classes.cardCategoryMoney}>

@@ -39,6 +39,7 @@ const cardStyle = {
     background: 'transparent',
     width: '100%',
     position: 'relative',
+    // flexDirection: 'row',
     // display: 'flex',
     // flexDirection: 'column',
     minWidth: '0',

@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
 export const Constainer = styled.div`
-  img {
+  /* img {
     width: 45px;
+  } */
+  .material-icons {
+    color: rgba(255, 555, 255, 0.9);
+    font-size: 45px;
+    margin: none;
   }
 `;
 export const ButtonSelectSegment = styled.button`

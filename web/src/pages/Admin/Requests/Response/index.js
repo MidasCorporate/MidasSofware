@@ -38,8 +38,8 @@ export default function Request(props) {
     async function loadResponseExist() {
       const response = await api.get(`ordersres?request_id=${request_id}`);
       const { data } = response;
-
-      if (data[0].response !== '') {
+      console.log(data);
+      if (data.lenght === 0) {
         const pageInitialDetal = {
           response: data[0].response,
           url: data[0].fileResponse.url,
