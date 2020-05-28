@@ -26,7 +26,7 @@ routes.put('/users', UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
-routes.get('/requestfilter', RequestBudgetFilterController.index);
+routes.get('/budgetfilter', RequestBudgetFilterController.index);
 
 routes.get('/ordersreq', RequestBudgetController.index);
 routes.post('/ordersreq', RequestBudgetController.store);

@@ -21,7 +21,7 @@ class OrderResponseController {
     });
 
     if (!haveRequest) {
-      return res.status(400).json({ error: 'Sigment dont exist' });
+      return res.status(400).json({ error: 'Request budget are not exist' });
     }
 
     const order = await ResponseBudget.findAll({
