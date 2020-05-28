@@ -20,6 +20,7 @@ export const Content = styled.div`
   background: #333;
   border-radius: 4px;
   padding: 8px 5px;
+  z-index: 2;
 
   display: ${(props) => (props.visible ? 'block' : 'none')};
   &::before {
